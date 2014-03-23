@@ -34,6 +34,18 @@
     return self;
 }
 
+/**
+ for internal use only. State *must* be in the valid format -- 4x4 mutable array of NSNumbers.
+ */
+-(id) initWithExistingState: (NSMutableArray*) state
+{
+    if (self = [super init]) {
+        
+        _cellColumns = state;
+    }
+    
+    return self;
+}
 -(void) makeNewGame
 {
     
@@ -247,11 +259,35 @@ NSUInteger randomNewValue() {
     return NO;
 }
 
-//TODO: implement
 -(BOOL) validMoveStillExists
 {
+    __block BOOL validMoveExists = NO;
     
-    return YES;
+    [self enumerateCellsWithBlock: ^(NSUInteger xIndex, NSUInteger yIndex, NSNumber *currNumber) {
+        
+        if (currNumber.integerValue == emptyValue) {
+            
+            validMoveExists = YES;
+        }
+        
+        if (xIndex) {
+            
+            if (currNumber.integerValue == [self valueForSquareAtX: xIndex - 1 y: yIndex]) {
+                
+                validMoveExists = YES;
+            }
+        }
+        
+        if (yIndex) {
+            
+            if (currNumber.integerValue == [self valueForSquareAtX: xIndex y: yIndex - 1]) {
+                
+                validMoveExists = YES;
+            }
+        }
+    }];
+    
+    return validMoveExists;
 }
 
 @end

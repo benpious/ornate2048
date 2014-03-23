@@ -8,11 +8,26 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface CSSShaderProgram : NSObject
 
-@property (assign, readonly) GLuint* uniforms;
-@property (assign, readonly) GLuint numUniforms;
-@property (assign, readonly) GLuint* attributes;
-@property (assign, readonly) GLuint numAttributes;
+@property (weak, readonly) EAGLContext* context;
+@property (strong, readonly) NSArray* uniforms;
+@property (strong, readonly) NSArray* attributes;
 
+/**
+ The shader's openGL ES name.
+ */
+@property (assign, readonly) GLuint glESName;
+-(void) makeShaderActive;
+/**
+ Creates a shader program in the context by loading <name>.vsh and <name>.fsh from the main bundle.
+ Both are assumed to be in UTF8 encoding.
+ */
+-(id) initWithName: (NSString*) name context: (EAGLContext*) context;;
+/**
+ Creates a shader program in the context by loading <vertexShader>.vsh and <fragShader>.fsh from the main bundle.
+ Both are assumed to be in UTF8 encoding.
+ */
+-(id) initWithVertexShader: (NSString*) vertexShader fragShader: (NSString*) fragShader context: (EAGLContext*) context;
 @end

@@ -7,46 +7,67 @@
 //
 
 #import "CSSAsset.h"
+#import "CSSShaderProgram.h"
 
 @interface CSSAsset()
 
+@property (weak, readwrite) EAGLContext* context;
 @property (assign) GLuint vaoID;
-@property (assign) GLuint vboID;
 @property (assign) GLsizei numVertices;
-
+@property (strong) CSSShaderProgram* shaderProgram;
 @end
 
 @implementation CSSAsset
 
--(id) initWithFileLocation: (NSURL*) location context: (EAGLContext*) context
+-(id) initWithTriangleGeometry: (GLfloat*) geometry numFloats: (GLsizei) numFloats context: (EAGLContext*) context ShaderProgram: (CSSShaderProgram*) shaderProgram vaoSetupFunction: (void(^)(CSSShaderProgram* program)) programSetupBlock;
 {
-    if (self = [super init]) {
+    if (self = [self initWithContext: context]) {
         
-        
+        self.numVertices = numFloats/3;
+        self.shaderProgram = shaderProgram;
+        glBindVertexArrayOES(self.vaoID);
+        programSetupBlock(shaderProgram);
+        glBindVertexArrayOES(0);
     }
     
     return self;
 }
 
--(id) init
+-(id) initWithContext: (EAGLContext*) context
 {
     if (self = [super init]) {
         
+        [EAGLContext setCurrentContext: context];
+        self.context = context;
         
+        GLuint vao = 0;
+        glGenVertexArraysOES(1, &vao);
+        self.vaoID = vao;
     }
     
     return self;
 }
+
+-(void) dealloc
+{
+    
+    [EAGLContext setCurrentContext: self.context];
+    GLuint vao = self.vaoID;
+    glDeleteVertexArraysOES(1, &vao);
+}
+
 
 
 -(void) prepareToDraw
 {
     
+    [self.shaderProgram makeShaderActive];
     glBindVertexArrayOES(self.vaoID);
 }
 
 -(void) draw
 {
+    
     glDrawArrays(GL_TRIANGLES, 0, self.numVertices);
     glBindVertexArrayOES(0);
 }

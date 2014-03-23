@@ -7,10 +7,26 @@
 //
 
 #import <Foundation/Foundation.h>
+#define BUFFER_OFFSET(i) ((char *)NULL + (i))
+@class CSSShaderProgram;
+
 @interface CSSAsset : NSObject
 
--(id) initWithFileLocation: (NSURL*) location context: (EAGLContext*) context;
+@property (weak, readonly) EAGLContext* context;
+
+/**
+ Initialize with all the components necessary to draw the asset. Geometry is assumed to have a size equal to number of floats. 
+ The VAO setup function is called with the VAO bound -- perform all necessary operations to set up the VAO here, including 
+ getting the program name for attributes and uniforms that will need to be updated later.
+ */
+-(id) initWithTriangleGeometry: (GLfloat*) geometry numFloats: (GLsizei) numFloats context: (EAGLContext*) context ShaderProgram: (CSSShaderProgram*) shaderProgram vaoSetupFunction: (void(^)(CSSShaderProgram* program)) programSetupBlock;
+/**
+ Sets the shader program and VAO of the asset to be active.
+ */
 -(void) prepareToDraw;
+/**
+ Makes the actual draw call. After the draw call has completed, unbinds the VAO.
+ */
 -(void) draw;
 
 @end

@@ -9,11 +9,12 @@
 #import <UIKit/UIKit.h>
 
 /**
- 
- 
+    A view with an OpenGL context.
  */
 @interface CSSGLESView : UIView
 
+@property NSMutableArray* assets;
 @property (strong, readonly) EAGLContext* glESContext;
+-(void) drawFrame: (CADisplayLink*) displayLink;
 
 @end
