@@ -10,4 +10,7 @@
 
 @interface CSSEngine ()
 -(void) slideRowRight: (NSMutableArray*) row;
+-(void) slideRowLeft: (NSMutableArray*) row;
+-(id) initWithExistingState: (NSMutableArray*) state;
+@property NSArray* cellColumns;
 @end

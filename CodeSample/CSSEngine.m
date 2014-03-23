@@ -55,9 +55,9 @@
                           [NSNumber numberWithInteger: emptyValue]];
     
     self.cellColumns = @[ [emptyRow copy],
-                         [emptyRow copy],
-                         [emptyRow copy],
-                         [emptyRow copy]];
+                          [emptyRow copy],
+                          [emptyRow copy],
+                          [emptyRow copy]];
     
     NSUInteger firstCellToFillX =  getRandomCoordComponent();
     NSUInteger firstCellToFillY = getRandomCoordComponent();
@@ -73,7 +73,7 @@
     [self placeCellWithValue: randomNewValue()
                            x: secondCellToFillX
                            y: secondCellToFillY];
-
+    
 }
 
 -(void) placeNewTile
@@ -130,23 +130,122 @@ NSUInteger randomNewValue() {
     self.cellColumns[x][y] = [NSNumber numberWithInteger: value];
 }
 
--(void) slideUp
+-(void) slideDown
 {
     //transpose cells to the right
+    __block NSMutableArray* transposedCells = [NSMutableArray arrayWithArray:@[[NSMutableArray array],
+                                                                               [NSMutableArray array],
+                                                                               [NSMutableArray array],
+                                                                               [NSMutableArray array]]];
     
-    //slidetoright
+    
+    [self enumerateCellsWithBlock:^(NSUInteger xIndex, NSUInteger yIndex, NSNumber *currNumber) {
+        
+        transposedCells[yIndex][xIndex] = currNumber;
+    }];
+    
+    //slide to the right
+    for (NSMutableArray* currRow in transposedCells) {
+        
+        [self slideRowRight: currRow];
+    }
     
     //transpose back
+    NSMutableArray* alreadyTransformed = [NSMutableArray array];
+    
+    for (NSUInteger y = 0; y < transposedCells.count; y++) {
+        
+        for (NSUInteger x = 0; x < [transposedCells[y] count]; x++) {
+            
+            BOOL skipAlreadyTransformed = NO;
+            for (NSArray* currPair in alreadyTransformed) {
+                
+                NSUInteger currElementX =  [currPair[0] integerValue];
+                NSUInteger currElementY =  [currPair[1] integerValue];
+                
+                if ((currElementX == x && currElementY == y) || (currElementY == x && currElementX == y)) {
+                    
+                    skipAlreadyTransformed = YES;
+                }
+            }
+            
+            if (!skipAlreadyTransformed) {
+                
+                NSNumber* temp = transposedCells[y][x];
+                transposedCells[y][x] = transposedCells[x][y];
+                transposedCells[x][y] = temp;
+                [alreadyTransformed addObject: @[[NSNumber numberWithInteger: x], [NSNumber numberWithInteger: y]]];
+            }
+        }
+    }
+    
+    for (NSUInteger i = 0; i < transposedCells.count; i++) {
+        
+        NSArray* currRow = [NSArray arrayWithArray: transposedCells[i]];
+        transposedCells[i] = currRow;
+    }
+    
+    self.cellColumns = [NSArray arrayWithArray: transposedCells];
 }
 
 
--(void) slideDown
+
+-(void) slideUp
 {
-    //transpose cells to the left
+    //transpose cells to the right
+    __block NSMutableArray* transposedCells = [NSMutableArray arrayWithArray:@[[NSMutableArray array],
+                                                                               [NSMutableArray array],
+                                                                               [NSMutableArray array],
+                                                                               [NSMutableArray array]]];
     
-    //slide to left
+    
+    [self enumerateCellsWithBlock:^(NSUInteger xIndex, NSUInteger yIndex, NSNumber *currNumber) {
+        
+        transposedCells[yIndex][xIndex] = currNumber;
+    }];
+    
+    //slide to the right
+    for (NSMutableArray* currRow in transposedCells) {
+        
+        [self slideRowLeft: currRow];
+    }
     
     //transpose back
+    NSMutableArray* alreadyTransformed = [NSMutableArray array];
+    
+    for (NSUInteger y = 0; y < transposedCells.count; y++) {
+        
+        for (NSUInteger x = 0; x < [transposedCells[y] count]; x++) {
+            
+            BOOL skipAlreadyTransformed = NO;
+            for (NSArray* currPair in alreadyTransformed) {
+                
+                NSUInteger currElementX =  [currPair[0] integerValue];
+                NSUInteger currElementY =  [currPair[1] integerValue];
+                
+                if ((currElementX == x && currElementY == y) || (currElementY == x && currElementX == y)) {
+                    
+                    skipAlreadyTransformed = YES;
+                }
+            }
+            
+            if (!skipAlreadyTransformed) {
+                
+                NSNumber* temp = transposedCells[y][x];
+                transposedCells[y][x] = transposedCells[x][y];
+                transposedCells[x][y] = temp;
+                [alreadyTransformed addObject: @[[NSNumber numberWithInteger: x], [NSNumber numberWithInteger: y]]];
+            }
+        }
+    }
+    
+    for (NSUInteger i = 0; i < transposedCells.count; i++) {
+        
+        NSArray* currRow = [NSArray arrayWithArray: transposedCells[i]];
+        transposedCells[i] = currRow;
+    }
+    
+    self.cellColumns = [NSArray arrayWithArray: transposedCells];
 }
 
 -(void) slideRight
@@ -161,65 +260,57 @@ NSUInteger randomNewValue() {
 -(void) slideRowRight: (NSMutableArray*) row
 {
     
-    for (NSUInteger i = 0; i < row.count; i++) {
+    for (NSUInteger i = row.count - 1; i < row.count; i--) {
         
-        [self slideCellIndex: i toIndex: i + 1 row: row];
+        [self slideCellAtIndex: i withIncrement: 1 row: row];
     }
 }
 
--(void) slideCellIndex: (NSUInteger) index toIndex: (NSInteger) nextIndex row: (NSMutableArray*) row
+-(void) slideCellAtIndex: (NSUInteger) index withIncrement: (NSInteger) increment row: (NSMutableArray*) row
 {
+    NSUInteger cellToMoveIntegerValue = [row[index] integerValue];
     
-    if (index > row.count) {
+    if (cellToMoveIntegerValue == emptyValue) {
         
         return;
     }
     
-    if (nextIndex > row.count || nextIndex < 0) {
-        
-        return;
-    }
+    NSUInteger lastValidSquare = index;
     
-    if (nextIndex < row.count && nextIndex > 0) {
+    
+    for (NSUInteger i = index + increment; i < row.count; i+= increment) {
         
-        NSUInteger nextIndexValue = [row[nextIndex] integerValue];
-        NSUInteger currIndexValue = [row[index] integerValue];
+        NSUInteger currCellIntegerValue = [row[i] integerValue];
         
-        //Case One: next cell is empty, current cell is not empty
-        if (nextIndexValue == emptyValue) {
+        if (currCellIntegerValue == emptyValue) {
             
-            //if both are equal, no sense in switching them, recurses infinitely
-            if (currIndexValue != emptyValue) {
+            //if we're on the last cell in the row we should break now
+            
+            if (i + increment >= row.count) {
                 
-                row[nextIndex] = row[index];
                 row[index] = [NSNumber numberWithInteger: emptyValue];
-                
-                [self slideCellIndex: nextIndex - (nextIndex > index ? 1 : -1)
-                             toIndex: nextIndex
-                                 row: row];
+                row[lastValidSquare + increment] = [NSNumber numberWithInteger: cellToMoveIntegerValue];
+                break;
             }
+            
+            lastValidSquare += increment;
         }
         
-        //Case Two: cells are equal to each other, combine them
-        else if (nextIndexValue == currIndexValue) {
+        else if (currCellIntegerValue == cellToMoveIntegerValue) {
             
-            row[nextIndex] = [NSNumber numberWithInteger: currIndexValue * amountToMultiplyBy];
             row[index] = [NSNumber numberWithInteger: emptyValue];
-            [self slideCellIndex: nextIndex - (nextIndex > index ? 1 : -1)
-                         toIndex: nextIndex
-                             row: row];
+            row[i] = [NSNumber numberWithInteger: cellToMoveIntegerValue * amountToMultiplyBy];
+            break;
         }
         
-        //Case Three: Current Cell is empty value, next value is not
-        else if (currIndexValue == emptyValue && nextIndexValue != emptyValue) {
+        else if (currCellIntegerValue != cellToMoveIntegerValue) {
             
-            [self slideCellIndex: index - (nextIndex > index ? 1 : -1)
-                         toIndex: index
-                             row: row];
+            row[index] = [NSNumber numberWithInteger: emptyValue];
+            row[lastValidSquare] = [NSNumber numberWithInteger: cellToMoveIntegerValue];
+            break;
         }
     }
 }
-
 
 -(NSUInteger) valueForSquareAtX:(NSUInteger)x y:(NSUInteger)y
 {
@@ -234,11 +325,11 @@ NSUInteger randomNewValue() {
     }
 }
 
--(void) slideRowLeft: (NSMutableArray*) currRow
+-(void) slideRowLeft: (NSMutableArray*) row
 {
-    for (NSUInteger i = currRow.count; i > 0; i--) {
+    for (NSUInteger i = 0; i < row.count; i++) {
         
-        [self slideCellIndex: i toIndex: i - 1 row: currRow];
+        [self slideCellAtIndex: i withIncrement: -1 row: row];
     }
 }
 
