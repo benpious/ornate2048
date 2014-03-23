@@ -19,6 +19,13 @@
 		3B2AFCB318DCCA7900B5E824 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2AFC9B18DCCA7800B5E824 /* UIKit.framework */; };
 		3B2AFCBB18DCCA7900B5E824 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3B2AFCB918DCCA7900B5E824 /* InfoPlist.strings */; };
 		3B2AFCBD18DCCA7900B5E824 /* CodeSampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B2AFCBC18DCCA7900B5E824 /* CodeSampleTests.m */; };
+		3B2AFCC718DCCB2000B5E824 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2AFCC618DCCB2000B5E824 /* GLKit.framework */; };
+		3B2AFCD018DCE41700B5E824 /* CSSGLESView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B2AFCCF18DCE41700B5E824 /* CSSGLESView.m */; };
+		3B2AFCD318DCE54500B5E824 /* CSSAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B2AFCD218DCE54500B5E824 /* CSSAsset.m */; };
+		3B2AFCDE18DCEA9F00B5E824 /* CSSRigidBodyTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B2AFCDD18DCEA9F00B5E824 /* CSSRigidBodyTransform.m */; };
+		3B2AFCE118DCEC6200B5E824 /* CSSShaderProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B2AFCE018DCEC6200B5E824 /* CSSShaderProgram.m */; };
+		3B2AFCE718DD16CA00B5E824 /* CSSEnvironmentVariables.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B2AFCE618DD16CA00B5E824 /* CSSEnvironmentVariables.m */; };
+		3B6B5D2B18DE3F12000260DF /* CSSEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6B5D2A18DE3F12000260DF /* CSSEngine.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +55,20 @@
 		3B2AFCB818DCCA7900B5E824 /* CodeSampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CodeSampleTests-Info.plist"; sourceTree = "<group>"; };
 		3B2AFCBA18DCCA7900B5E824 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3B2AFCBC18DCCA7900B5E824 /* CodeSampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CodeSampleTests.m; sourceTree = "<group>"; };
+		3B2AFCC618DCCB2000B5E824 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		3B2AFCCE18DCE41700B5E824 /* CSSGLESView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSSGLESView.h; path = ../CSSGLESView.h; sourceTree = "<group>"; };
+		3B2AFCCF18DCE41700B5E824 /* CSSGLESView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSSGLESView.m; path = ../CSSGLESView.m; sourceTree = "<group>"; };
+		3B2AFCD118DCE54500B5E824 /* CSSAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSAsset.h; sourceTree = "<group>"; };
+		3B2AFCD218DCE54500B5E824 /* CSSAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSAsset.m; sourceTree = "<group>"; };
+		3B2AFCDC18DCEA9F00B5E824 /* CSSRigidBodyTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSRigidBodyTransform.h; sourceTree = "<group>"; };
+		3B2AFCDD18DCEA9F00B5E824 /* CSSRigidBodyTransform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSRigidBodyTransform.m; sourceTree = "<group>"; };
+		3B2AFCDF18DCEC6200B5E824 /* CSSShaderProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSShaderProgram.h; sourceTree = "<group>"; };
+		3B2AFCE018DCEC6200B5E824 /* CSSShaderProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSShaderProgram.m; sourceTree = "<group>"; };
+		3B2AFCE518DD16CA00B5E824 /* CSSEnvironmentVariables.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSEnvironmentVariables.h; sourceTree = "<group>"; };
+		3B2AFCE618DD16CA00B5E824 /* CSSEnvironmentVariables.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSEnvironmentVariables.m; sourceTree = "<group>"; };
+		3B6B5D2918DE3F12000260DF /* CSSEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSEngine.h; sourceTree = "<group>"; };
+		3B6B5D2A18DE3F12000260DF /* CSSEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSEngine.m; sourceTree = "<group>"; };
+		3B868DED18DE4DA90091DF25 /* CSSEngine_internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSSEngine_internal.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B2AFCC718DCCB2000B5E824 /* GLKit.framework in Frameworks */,
 				3B2AFC9A18DCCA7800B5E824 /* CoreGraphics.framework in Frameworks */,
 				3B2AFC9C18DCCA7800B5E824 /* UIKit.framework in Frameworks */,
 				3B2AFC9818DCCA7800B5E824 /* Foundation.framework in Frameworks */,
@@ -96,6 +118,7 @@
 		3B2AFC9618DCCA7800B5E824 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3B2AFCC618DCCB2000B5E824 /* GLKit.framework */,
 				3B2AFC9718DCCA7800B5E824 /* Foundation.framework */,
 				3B2AFC9918DCCA7800B5E824 /* CoreGraphics.framework */,
 				3B2AFC9B18DCCA7800B5E824 /* UIKit.framework */,
@@ -109,6 +132,9 @@
 			children = (
 				3B2AFCA618DCCA7800B5E824 /* CSSAppDelegate.h */,
 				3B2AFCA718DCCA7800B5E824 /* CSSAppDelegate.m */,
+				3B6B5D2918DE3F12000260DF /* CSSEngine.h */,
+				3B6B5D2A18DE3F12000260DF /* CSSEngine.m */,
+				3B2AFCD418DCE9FE00B5E824 /* OpenGL */,
 				3B2AFCA918DCCA7800B5E824 /* Images.xcassets */,
 				3B2AFC9E18DCCA7800B5E824 /* Supporting Files */,
 			);
@@ -130,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				3B2AFCBC18DCCA7900B5E824 /* CodeSampleTests.m */,
+				3B868DED18DE4DA90091DF25 /* CSSEngine_internal.h */,
 				3B2AFCB718DCCA7900B5E824 /* Supporting Files */,
 			);
 			path = CodeSampleTests;
@@ -142,6 +169,23 @@
 				3B2AFCB918DCCA7900B5E824 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3B2AFCD418DCE9FE00B5E824 /* OpenGL */ = {
+			isa = PBXGroup;
+			children = (
+				3B2AFCCE18DCE41700B5E824 /* CSSGLESView.h */,
+				3B2AFCCF18DCE41700B5E824 /* CSSGLESView.m */,
+				3B2AFCDF18DCEC6200B5E824 /* CSSShaderProgram.h */,
+				3B2AFCE018DCEC6200B5E824 /* CSSShaderProgram.m */,
+				3B2AFCE518DD16CA00B5E824 /* CSSEnvironmentVariables.h */,
+				3B2AFCE618DD16CA00B5E824 /* CSSEnvironmentVariables.m */,
+				3B2AFCD118DCE54500B5E824 /* CSSAsset.h */,
+				3B2AFCD218DCE54500B5E824 /* CSSAsset.m */,
+				3B2AFCDC18DCEA9F00B5E824 /* CSSRigidBodyTransform.h */,
+				3B2AFCDD18DCEA9F00B5E824 /* CSSRigidBodyTransform.m */,
+			);
+			name = OpenGL;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,6 +286,12 @@
 			files = (
 				3B2AFCA818DCCA7800B5E824 /* CSSAppDelegate.m in Sources */,
 				3B2AFCA418DCCA7800B5E824 /* main.m in Sources */,
+				3B2AFCDE18DCEA9F00B5E824 /* CSSRigidBodyTransform.m in Sources */,
+				3B2AFCE118DCEC6200B5E824 /* CSSShaderProgram.m in Sources */,
+				3B2AFCD318DCE54500B5E824 /* CSSAsset.m in Sources */,
+				3B6B5D2B18DE3F12000260DF /* CSSEngine.m in Sources */,
+				3B2AFCE718DD16CA00B5E824 /* CSSEnvironmentVariables.m in Sources */,
+				3B2AFCD018DCE41700B5E824 /* CSSGLESView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,6 +490,7 @@
 				3B2AFCC218DCCA7900B5E824 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3B2AFCC318DCCA7900B5E824 /* Build configuration list for PBXNativeTarget "CodeSampleTests" */ = {
 			isa = XCConfigurationList;
@@ -448,6 +499,7 @@
 				3B2AFCC518DCCA7900B5E824 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
