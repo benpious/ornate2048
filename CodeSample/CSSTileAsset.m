@@ -9,7 +9,6 @@
 #import "CSSTileAsset.h"
 #import "CSSShaderProgram.h"
 #import "CSSShaderProgramObject.h"
-#import <GLKit/GLKit.h>
 #import "CSSAsset_internal.h"
 
 const NSUInteger tileStepSize = .4;
@@ -19,7 +18,7 @@ const NSUInteger tileStepSize = .4;
     GLuint vertices;
     GLuint color;
     GLuint modelViewProjectionMatrixUniform;
-    GLuint texture;
+    GLuint textureUniform;
 }
 
 @property (assign) GLsizei numVertices;
@@ -30,19 +29,20 @@ const NSUInteger tileStepSize = .4;
 
 -(id) initWithContext: (EAGLContext*) context
 {
-    GLfloat geometryArray[18] = {0.5, 0.0, 0.0,
-        0.5, 0.5, 0.0,
-        0.0, 0.5, 0.0,
-        0.5, 0.0, 0.0,
-        0.0, 0.5, 0.0,
-        0.5, 0.5, 0.0};
+    GLfloat geometryArray[18] = {0.2, 0.0, 0.0,
+        0.2, 0.2, 0.0,
+        0.0, 0.2, 0.0,
+        0.2, 0.0, 0.0,
+        0.0, 0.2, 0.0,
+        0.2, 0.2, 0.0};
     
     GLfloat* geometry = &(geometryArray[0]);
     
     if (self = [super initWithContext: context
                         ShaderProgram: [[CSSShaderProgram alloc] initWithName: @"tileShader"
                                                                       context: context]]) {
-                            printError();
+                            
+                            glUseProgram(self.shaderProgram.glESName);
                             //get attribs
                             /*
                              attribute vec4 position;
@@ -59,23 +59,20 @@ const NSUInteger tileStepSize = .4;
                             
                             CSSShaderProgramObject* colorObject = self.shaderProgram.attributes[@"assetColor"];
                             color = colorObject.glName;
-                            glVertexAttrib3f(color, 1.0, 1.0, 1.0);
+                            glVertexAttrib3f(color, 0.5, 0.5, 0.5);
                             
                             //get uniforms
                             /*
                              uniform mat4 modelViewProjectionMatrix;
                              uniform sampler2D texture;
                              */
-                            printError();
                             CSSShaderProgramObject* matrixObject = self.shaderProgram.uniforms[@"modelViewProjectionMatrix"];
                             modelViewProjectionMatrixUniform = matrixObject.glName;
                             glUniformMatrix4fv(modelViewProjectionMatrixUniform, 1, GL_FALSE, self.modelViewMatrix.m);
-                            printError();
                             
                             CSSShaderProgramObject* textureObject = self.shaderProgram.uniforms[@"texture"];
-                            texture = textureObject.glName;
+                            textureUniform = textureObject.glName;
                             glBindVertexArrayOES(0);
-                            printError();
                         }
     
     return self;
@@ -108,6 +105,17 @@ const NSUInteger tileStepSize = .4;
     [super prepareToDraw];
     
     //update uniforms
+}
+
+
+-(void) prepareToDrawWithTransformation: (GLKMatrix4) transformation texture: (GLuint) texture
+{
+ 
+    [self prepareToDraw];
+    
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glUniform1i(textureUniform, 0);
+    glUniformMatrix4fv(modelViewProjectionMatrixUniform, 1, GL_FALSE, transformation.m);
 }
 
 -(void) draw

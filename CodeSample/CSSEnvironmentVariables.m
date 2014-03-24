@@ -14,6 +14,7 @@
 -(GLKMatrix4) modelViewProjectionMatrix
 {
     
-    return GLKMatrix4Multiply(self.transformationMatrix, self.transformationMatrix);
+    return GLKMatrix4Multiply(self.projectionMatrix, self.transformationMatrix);
 }
+
 @end

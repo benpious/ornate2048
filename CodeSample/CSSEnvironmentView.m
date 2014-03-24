@@ -8,7 +8,10 @@
 
 #import "CSSEnvironmentView.h"
 #import "CSSAsset.h"
-
+#import "CSSEnvironmentVariables.h"
+//test
+#import "CSSTileAsset.h"
+//test
 @interface CSSEnvironmentView()
 {
     GLuint viewFrameBuffer;
@@ -29,31 +32,7 @@
 {
     if (self = [super initWithFrame: frame]) {
         
-        //set up background asset
-        
-        //set up texture render target for drawing asset into
-        // Generate IDs for a framebuffer object and a color renderbuffer
-        /*
-        glGenFramebuffers(1, &blurFrameBuffer);
-        glBindFramebuffer(GL_FRAMEBUFFER, blurFrameBuffer);
-        
-        glGenRenderbuffers(1, &blurRenderBuffer);
-        glBindRenderbuffer(GL_RENDERBUFFER, blurRenderBuffer);
-        
-        glRenderbufferStorage(GL_RENDERBUFFER, GL_RGBA4, width, height);
-        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, blurRenderBuffer);
-        glGenTextures(1, &blurTexture);
-        glBindTexture(GL_TEXTURE_2D, blurTexture);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, width, height, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_SHORT, NULL);
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, blurFrameBuffer, 0);
-        
-        GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
-        
-        if(status != GL_FRAMEBUFFER_COMPLETE) {
-            
-            NSLog(@"failed to make complete framebuffer object %x for shadow mapping", status);
-        }
-        */
+        GLenum status;
         
         //set up actual render target
         
@@ -79,16 +58,60 @@
         glBindRenderbuffer(GL_RENDERBUFFER, depthRenderBuffer);
         glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, width, height);
         glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthRenderBuffer);
-        GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+        status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+        
+        if(status != GL_FRAMEBUFFER_COMPLETE) {
+            
+            NSLog(@"failed to make complete framebuffer object %x", status);
+        }
+
+        //set up background asset
+        
+        //set up texture render target for drawing asset into
+        // Generate IDs for a framebuffer object and a color renderbuffer
+        
+        glGenFramebuffers(1, &blurFrameBuffer);
+        glBindFramebuffer(GL_FRAMEBUFFER, blurFrameBuffer);
+        
+        /*
+        glGenRenderbuffers(1, &blurRenderBuffer);
+        glBindRenderbuffer(GL_RENDERBUFFER, blurRenderBuffer);
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_RGBA4, width, height);
+        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, blurRenderBuffer);
+        */
+        
+        GLuint depthRenderbuffer;
+        glGenRenderbuffers(1, &depthRenderbuffer);
+        glBindRenderbuffer(GL_RENDERBUFFER, depthRenderbuffer);
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, width, height);
+        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthRenderbuffer);
+
+        glGenTextures(1, &blurTexture);
+        glBindTexture(GL_TEXTURE_2D, blurTexture);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, blurTexture, 0);
+        
+        status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
         
         if(status != GL_FRAMEBUFFER_COMPLETE) {
             
             NSLog(@"failed to make complete framebuffer object %x", status);
         }
         
+        
         glEnable(GL_DEPTH_TEST);
         glViewport(0.0, 0.0, width, height);
-        glClearColor(0.0f, 0.0f, 0.75f, 1.0f);
+        glClearColor(0.5f, 0.75f, 0.75f, 1.0f);
+        
+        self.environmentVars = [[CSSEnvironmentVariables alloc] init];
+        self.environmentVars.transformationMatrix = GLKMatrix4MakeLookAt(0.0, 0.0, 2.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+        self.environmentVars.projectionMatrix = GLKMatrix4MakePerspective(0.610865238, 1024/768, 0.01, 100);
+        
     }
     
     return self;
@@ -100,6 +123,14 @@
     [EAGLContext setCurrentContext: self.glESContext];
     [super drawFrame: displayLink];
     //draw background asset to texture
+    
+    glBindFramebuffer(GL_FRAMEBUFFER, blurFrameBuffer);
+//    glBindRenderbuffer(GL_RENDERBUFFER, blurTexture);
+    
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    [self.backgroundAsset prepareToDraw];
+    [self.backgroundAsset draw];
     
     //blur background asset and set up texture access
     
@@ -116,6 +147,11 @@
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     for (CSSAsset* currAsset in self.assets) {
+        
+        if ([currAsset isKindOfClass: [CSSTileAsset class]]) {
+            
+            [((CSSTileAsset*)currAsset) prepareToDrawWithTransformation: self.environmentVars.modelViewProjectionMatrix texture: blurTexture];
+        }
         
         [currAsset prepareToDraw];
         [currAsset draw];

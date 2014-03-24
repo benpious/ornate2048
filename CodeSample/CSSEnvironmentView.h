@@ -7,7 +7,17 @@
 //
 
 #import "CSSGLESView.h"
+@class CSSEnvironmentVariables;
 
+@class CSSAsset;
 @interface CSSEnvironmentView : CSSGLESView
+/**
+ This asset is drawn before the others into a texture
+ */
+@property CSSAsset* backgroundAsset;
+/**
+    
+ */
+@property CSSEnvironmentVariables* environmentVars;
 
 @end

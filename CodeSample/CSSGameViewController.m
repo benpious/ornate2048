@@ -19,10 +19,12 @@
         
         CSSEnvironmentView* environmentView = [[CSSEnvironmentView alloc] initWithFrame: [UIScreen mainScreen].bounds];
         CSSBackgroundAsset* backgroundAsset = [[CSSBackgroundAsset alloc] initBackgroundAssetWithContext: environmentView.glESContext];
-//        CSSTileAsset* tileAsset = [[CSSTileAsset alloc] initWithContext: environmentView.glESContext];
+        CSSTileAsset* tileAsset = [[CSSTileAsset alloc] initWithContext: environmentView.glESContext];
 //        CSSBasicAsset* basicAsset = [[CSSBasicAsset alloc] initWithContext: environmentView.glESContext];
-        [environmentView.assets addObject: backgroundAsset];
-//        [environmentView.assets addObject: tileAsset];
+        environmentView.backgroundAsset = backgroundAsset;
+        
+//        environmentView.backgroundAsset = basicAsset;
+        [environmentView.assets addObject: tileAsset];
 //        [environmentView.assets addObject: basicAsset];
         
         self.view = environmentView;

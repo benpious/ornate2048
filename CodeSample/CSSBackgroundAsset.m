@@ -38,7 +38,6 @@
                     ShaderProgram: [[CSSShaderProgram alloc] initWithName: @"WaveShader"
                                                                   context: context]]) {
                         
-                        
                         waveAmplitude = 2.5;
                         wavePeriod = .6;
                         wavePos = GLKVector2Make(-1.0, 0.0);

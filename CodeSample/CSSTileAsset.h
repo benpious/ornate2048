@@ -7,11 +7,12 @@
 //
 
 #import "CSSAsset.h"
+#import <GLKit/GLKit.h>
 
 const NSUInteger tileStepSize;
 
 @interface CSSTileAsset : CSSAsset
 
 -(id) initWithContext: (EAGLContext*) context;
-
+-(void) prepareToDrawWithTransformation: (GLKMatrix4) transformation texture: (GLuint) texture;
 @end
