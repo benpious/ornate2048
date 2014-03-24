@@ -8,31 +8,90 @@
 
 #import "CSSTileAsset.h"
 #import "CSSShaderProgram.h"
+#import "CSSShaderProgramObject.h"
+#import <GLKit/GLKit.h>
+#import "CSSAsset_internal.h"
+
+const NSUInteger tileStepSize = .4;
+
+@interface CSSTileAsset()
+{
+    GLuint vertices;
+    GLuint color;
+    GLuint modelViewProjectionMatrixUniform;
+    GLuint texture;
+}
+
+@property (assign) GLsizei numVertices;
+@property (assign) GLKMatrix4 modelViewMatrix;
+
+@end
 @implementation CSSTileAsset
 -(id) initWithContext: (EAGLContext*) context
 {
-    GLfloat* geometry;
+    GLfloat geometryArray[18] = {0.1, 0.0, 0.0,
+                                 0.1, 0.1, 0.0,
+                                 0.0, 0.1, 0.0,
+                                 0.1, 0.0, 0.0,
+                                 0.0, 0.1, 0.0,
+                                 0.1, 0.1, 0.0};
     
-    if (self = [super initWithTriangleGeometry: geometry
-                                     numFloats: 3 * 6
-                                       context: context
-                                 ShaderProgram:  [[CSSShaderProgram alloc] initWithName: @"tileShader"
-                                                                                context: context]
-                              vaoSetupFunction:^(CSSShaderProgram *program) {
-  
-                                  //get attribs
-                                  
-                                  //get uniforms
-                                  
-                                  //save location of transformation matrix for later use
-//        GLuint vertexAttrib = 
+    GLfloat* geometry = &(geometryArray[0]);
+    
+    self = [super initWithContext: context
+                    ShaderProgram: [[CSSShaderProgram alloc] initWithName: @"tileShader"
+                                                                  context: context]
+                 vaoSetupFunction: ^(CSSShaderProgram *program) {
+                     
+                     //get attribs
+                     /*
+                      attribute vec4 position;
+                      attribute vec3 assetColor;
+                      */
+                     CSSShaderProgramObject* vertObject = program.attributes[@"position"];
+                     glGenBuffers(1, &vertices);
+                     glBindBuffer(GL_ARRAY_BUFFER, vertices);
+                     glBufferData(GL_ARRAY_BUFFER, self.numVertices, geometry, GL_STATIC_DRAW);
+                     glVertexAttribPointer(vertObject.glName, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
+                     
+                     CSSShaderProgramObject* colorObject = program.attributes[@"assetColor"];
+                     color = colorObject.glName;
+                     glVertexAttrib3f(color, 1.0, 1.0, 1.0);
+                     
+                     //get uniforms
+                     /*
+                      uniform mat4 modelViewProjectionMatrix;
+                      uniform sampler2D texture;
+                      */
+                     CSSShaderProgramObject* matrixObject = program.uniforms[@"modelViewProjectionMatrix"];
+                     modelViewProjectionMatrixUniform = matrixObject.glName;
+                     glUniformMatrix4fv(modelViewProjectionMatrixUniform, 1, GL_FALSE, self.modelViewMatrix.m);
+                     
+                     CSSShaderProgramObject* textureObject = program.uniforms[@"texture"];
+                     texture = textureObject.glName;
+                 }];
+    
+    return self;
+}
+
+-(id) initTileAtLocationX: (GLuint) x y: (GLuint) y color: (GLfloat*) colorValues context: (EAGLContext*) context
+{
+    if (self = [self initWithContext: context]) {
         
-    }]) {
-        
-        
+        glBindVertexArrayOES(self.vaoID);
+        self.modelViewMatrix = GLKMatrix4MakeTranslation(x * tileStepSize, y * tileStepSize, 0);
+        glUniformMatrix4fv(modelViewProjectionMatrixUniform, 1, GL_FALSE, self.modelViewMatrix.m);
+        glVertexAttrib3fv(color, colorValues);
+        glBindVertexArrayOES(0);
     }
     
     return self;
+}
+
+-(void)  dealloc
+{
+    [EAGLContext setCurrentContext: self.context];
+    glDeleteBuffers(1, &vertices);
 }
 
 -(void) prepareToDraw
@@ -42,4 +101,11 @@
     
     //update uniforms
 }
+
+-(void) draw
+{
+    glDrawArrays(GL_TRIANGLES, 0, self.numVertices);
+    [super draw];
+}
+
 @end

@@ -8,6 +8,8 @@
 
 #import "CSSAsset.h"
 
+const NSUInteger tileStepSize;
+
 @interface CSSTileAsset : CSSAsset
 
 @end

@@ -12,5 +12,5 @@
  Displays the main game. 
  */
 @interface CSSGameViewController : UIViewController
-
+@property CADisplayLink* displayLink;
 @end

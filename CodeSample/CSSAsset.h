@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
+#define printError() NSLog(@"CurrentGlError: %d at line %d", glGetError(), __LINE__)
 @class CSSShaderProgram;
 
 @interface CSSAsset : NSObject
@@ -19,7 +20,7 @@
  The VAO setup function is called with the VAO bound -- perform all necessary operations to set up the VAO here, including 
  getting the program name for attributes and uniforms that will need to be updated later.
  */
--(id) initWithTriangleGeometry: (GLfloat*) geometry numFloats: (GLsizei) numFloats context: (EAGLContext*) context ShaderProgram: (CSSShaderProgram*) shaderProgram vaoSetupFunction: (void(^)(CSSShaderProgram* program)) programSetupBlock;
+-(id) initWithContext: (EAGLContext*) context ShaderProgram: (CSSShaderProgram*) shaderProgram vaoSetupFunction: (void(^)(CSSShaderProgram* program)) programSetupBlock;
 /**
  Sets the shader program and VAO of the asset to be active.
  */

@@ -12,8 +12,8 @@
 @interface CSSShaderProgram()
 
 @property (readwrite) GLuint glESName;
-@property (strong, readwrite) NSArray* uniforms;
-@property (strong, readwrite) NSArray* attributes;
+@property (strong, readwrite) NSDictionary* uniforms;
+@property (strong, readwrite) NSDictionary* attributes;
 
 @end
 
@@ -77,8 +77,6 @@
     // Bind attribute locations.
     // This needs to be done prior to linking.
     
-    [self bindAttributeLocations];
-    
     // Link program.
     if (![self linkProgram: self.glESName]) {
         NSLog(@"Failed to link program: %d", self.glESName);
@@ -100,6 +98,8 @@
         return NO;
     }
     
+    [self bindAttributeLocations];
+
     [self setUniformLocations];
     
     // Release vertex and fragment shaders.
@@ -120,9 +120,10 @@
 -(void) setUniformLocations
 {
     
-    NSMutableArray* uniforms = [NSMutableArray array];
-    GLint numUniforms;
-    glGetProgramiv(self.glESName, GL_ACTIVE_ATTRIBUTES, &numUniforms);
+    NSMutableDictionary* uniforms = [NSMutableDictionary dictionary];
+    GLint numUniforms = 0;
+    glGetProgramiv(self.glESName, GL_ACTIVE_UNIFORMS, &numUniforms);
+    
     for (GLint i = 0; i < numUniforms; i++) {
         
         GLsizei length = 0;
@@ -139,19 +140,21 @@
                                                                                    glName: glName
                                                                        attributeOrUniform: uniform
                                                                                    glType: type];
-        [uniforms addObject: currObject];
+        [uniforms setObject: currObject forKey: nameString];
         free(name);
     }
     
-    self.uniforms = [NSArray arrayWithArray: uniforms];
+    self.uniforms = [NSDictionary dictionaryWithDictionary: uniforms];
 }
 
 -(void) bindAttributeLocations
 {
  
-    NSMutableArray* attributes = [NSMutableArray array];
-    GLint numAttributes;
+    NSMutableDictionary* attributes = [NSMutableDictionary dictionary];
+    GLint numAttributes = 0;
+    
     glGetProgramiv(self.glESName, GL_ACTIVE_ATTRIBUTES, &numAttributes);
+    
     for (GLint i = 0; i < numAttributes; i++) {
         
         GLsizei length = 0;
@@ -168,11 +171,11 @@
                                                                                    glName: glName
                                                                        attributeOrUniform: attribute
                                                                                    glType: type];
-        [attributes addObject: currObject];
+        [attributes setObject: currObject forKey: nameString];
         free(name);
     }
     
-    self.attributes = [NSArray arrayWithArray: attributes];
+    self.attributes = [NSDictionary dictionaryWithDictionary: attributes];
 }
 
 - (BOOL)compileShader:(GLuint *)shader type:(GLenum)type file:(NSString *)file

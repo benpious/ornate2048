@@ -13,17 +13,15 @@
 
 @property (weak, readwrite) EAGLContext* context;
 @property (assign) GLuint vaoID;
-@property (assign) GLsizei numVertices;
 @property (strong) CSSShaderProgram* shaderProgram;
 @end
 
 @implementation CSSAsset
 
--(id) initWithTriangleGeometry: (GLfloat*) geometry numFloats: (GLsizei) numFloats context: (EAGLContext*) context ShaderProgram: (CSSShaderProgram*) shaderProgram vaoSetupFunction: (void(^)(CSSShaderProgram* program)) programSetupBlock;
+-(id) initWithContext: (EAGLContext*) context ShaderProgram: (CSSShaderProgram*) shaderProgram vaoSetupFunction: (void(^)(CSSShaderProgram* program)) programSetupBlock
 {
     if (self = [self initWithContext: context]) {
         
-        self.numVertices = numFloats/3;
         self.shaderProgram = shaderProgram;
         glBindVertexArrayOES(self.vaoID);
         programSetupBlock(shaderProgram);
@@ -68,8 +66,8 @@
 -(void) draw
 {
     
-    glDrawArrays(GL_TRIANGLES, 0, self.numVertices);
     glBindVertexArrayOES(0);
+    printError();
 }
 
 @end

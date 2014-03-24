@@ -42,11 +42,7 @@
 
 -(void) drawFrame: (CADisplayLink*) displayLink
 {
-    for (CSSAsset* currAsset in self.assets) {
-        
-        [currAsset prepareToDraw];
-        [currAsset draw];
-    }
+    
 }
 
 @end

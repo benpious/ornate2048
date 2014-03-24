@@ -11,14 +11,16 @@
 		3B1DDBD918DF51BE00115C4B /* CSSEnvironmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B1DDBD818DF51BE00115C4B /* CSSEnvironmentView.m */; };
 		3B1DDBDF18DF52FD00115C4B /* CSSGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B1DDBDE18DF52FD00115C4B /* CSSGameViewController.m */; };
 		3B1DDBE218DF533800115C4B /* CSSMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B1DDBE118DF533800115C4B /* CSSMainViewController.m */; };
-		3B1DDBE518DF53B100115C4B /* tileVertexShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B1DDBE418DF53B100115C4B /* tileVertexShader.vsh */; };
-		3B1DDBE718DF53B800115C4B /* tileVertexShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B1DDBE618DF53B800115C4B /* tileVertexShader.fsh */; };
+		3B1DDBE518DF53B100115C4B /* tileShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B1DDBE418DF53B100115C4B /* tileShader.vsh */; };
+		3B1DDBE718DF53B800115C4B /* tileShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B1DDBE618DF53B800115C4B /* tileShader.fsh */; };
 		3B1DDBE918DF53C400115C4B /* backgroundVertexShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B1DDBE818DF53C400115C4B /* backgroundVertexShader.vsh */; };
 		3B1DDBEB18DF53CE00115C4B /* backgroundFragmentShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B1DDBEA18DF53CE00115C4B /* backgroundFragmentShader.fsh */; };
 		3B1DDBED18DF53F500115C4B /* blurShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B1DDBEC18DF53F500115C4B /* blurShader.vsh */; };
 		3B1DDBEF18DF53FD00115C4B /* blurshader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B1DDBEE18DF53FD00115C4B /* blurshader.fsh */; };
 		3B1DDBF218DF6AD000115C4B /* CSSTileAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B1DDBF118DF6AD000115C4B /* CSSTileAsset.m */; };
 		3B1DDBF618DF6CC100115C4B /* CSSBackgroundAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B1DDBF518DF6CC100115C4B /* CSSBackgroundAsset.m */; };
+		3B1DDBFA18DF918100115C4B /* WaveShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B1DDBF818DF918100115C4B /* WaveShader.fsh */; };
+		3B1DDBFB18DF918100115C4B /* WaveShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B1DDBF918DF918100115C4B /* WaveShader.vsh */; };
 		3B2AFC9818DCCA7800B5E824 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2AFC9718DCCA7800B5E824 /* Foundation.framework */; };
 		3B2AFC9A18DCCA7800B5E824 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2AFC9918DCCA7800B5E824 /* CoreGraphics.framework */; };
 		3B2AFC9C18DCCA7800B5E824 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2AFC9B18DCCA7800B5E824 /* UIKit.framework */; };
@@ -59,8 +61,8 @@
 		3B1DDBDE18DF52FD00115C4B /* CSSGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSGameViewController.m; sourceTree = "<group>"; };
 		3B1DDBE018DF533800115C4B /* CSSMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSMainViewController.h; sourceTree = "<group>"; };
 		3B1DDBE118DF533800115C4B /* CSSMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSMainViewController.m; sourceTree = "<group>"; };
-		3B1DDBE418DF53B100115C4B /* tileVertexShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = tileVertexShader.vsh; sourceTree = "<group>"; };
-		3B1DDBE618DF53B800115C4B /* tileVertexShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = tileVertexShader.fsh; sourceTree = "<group>"; };
+		3B1DDBE418DF53B100115C4B /* tileShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = tileShader.vsh; sourceTree = "<group>"; };
+		3B1DDBE618DF53B800115C4B /* tileShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = tileShader.fsh; sourceTree = "<group>"; };
 		3B1DDBE818DF53C400115C4B /* backgroundVertexShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = backgroundVertexShader.vsh; sourceTree = "<group>"; };
 		3B1DDBEA18DF53CE00115C4B /* backgroundFragmentShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = backgroundFragmentShader.fsh; sourceTree = "<group>"; };
 		3B1DDBEC18DF53F500115C4B /* blurShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = blurShader.vsh; sourceTree = "<group>"; };
@@ -69,6 +71,9 @@
 		3B1DDBF118DF6AD000115C4B /* CSSTileAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSTileAsset.m; sourceTree = "<group>"; };
 		3B1DDBF418DF6CC100115C4B /* CSSBackgroundAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSBackgroundAsset.h; sourceTree = "<group>"; };
 		3B1DDBF518DF6CC100115C4B /* CSSBackgroundAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSBackgroundAsset.m; sourceTree = "<group>"; };
+		3B1DDBF718DF8C7C00115C4B /* CSSAsset_internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSSAsset_internal.h; sourceTree = "<group>"; };
+		3B1DDBF818DF918100115C4B /* WaveShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = WaveShader.fsh; sourceTree = "<group>"; };
+		3B1DDBF918DF918100115C4B /* WaveShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = WaveShader.vsh; sourceTree = "<group>"; };
 		3B2AFC9418DCCA7800B5E824 /* CodeSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodeSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B2AFC9718DCCA7800B5E824 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3B2AFC9918DCCA7800B5E824 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -130,8 +135,10 @@
 		3B1DDBE318DF539E00115C4B /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
-				3B1DDBE418DF53B100115C4B /* tileVertexShader.vsh */,
-				3B1DDBE618DF53B800115C4B /* tileVertexShader.fsh */,
+				3B1DDBF818DF918100115C4B /* WaveShader.fsh */,
+				3B1DDBF918DF918100115C4B /* WaveShader.vsh */,
+				3B1DDBE418DF53B100115C4B /* tileShader.vsh */,
+				3B1DDBE618DF53B800115C4B /* tileShader.fsh */,
 				3B1DDBE818DF53C400115C4B /* backgroundVertexShader.vsh */,
 				3B1DDBEA18DF53CE00115C4B /* backgroundFragmentShader.fsh */,
 				3B1DDBEC18DF53F500115C4B /* blurShader.vsh */,
@@ -145,6 +152,7 @@
 			children = (
 				3B1DDBF018DF6AD000115C4B /* CSSTileAsset.h */,
 				3B1DDBF118DF6AD000115C4B /* CSSTileAsset.m */,
+				3B1DDBF718DF8C7C00115C4B /* CSSAsset_internal.h */,
 				3B1DDBF418DF6CC100115C4B /* CSSBackgroundAsset.h */,
 				3B1DDBF518DF6CC100115C4B /* CSSBackgroundAsset.m */,
 			);
@@ -334,9 +342,11 @@
 				3B1DDBEF18DF53FD00115C4B /* blurshader.fsh in Resources */,
 				3B2AFCAA18DCCA7800B5E824 /* Images.xcassets in Resources */,
 				3B1DDBEB18DF53CE00115C4B /* backgroundFragmentShader.fsh in Resources */,
-				3B1DDBE718DF53B800115C4B /* tileVertexShader.fsh in Resources */,
+				3B1DDBE718DF53B800115C4B /* tileShader.fsh in Resources */,
+				3B1DDBFB18DF918100115C4B /* WaveShader.vsh in Resources */,
 				3B1DDBE918DF53C400115C4B /* backgroundVertexShader.vsh in Resources */,
-				3B1DDBE518DF53B100115C4B /* tileVertexShader.vsh in Resources */,
+				3B1DDBE518DF53B100115C4B /* tileShader.vsh in Resources */,
+				3B1DDBFA18DF918100115C4B /* WaveShader.fsh in Resources */,
 				3B1DDBED18DF53F500115C4B /* blurShader.vsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

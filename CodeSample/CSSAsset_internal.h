@@ -1,5 +1,5 @@
 //
-//  CSSBackgroundAsset.h
+//  CSSAsset_internal.h
 //  CodeSample
 //
 //  Created by Benjamin Pious on 3/23/14.
@@ -8,8 +8,6 @@
 
 #import "CSSAsset.h"
 
-@interface CSSBackgroundAsset : CSSAsset
-
--(id) initBackgroundAssetWithContext: (EAGLContext*) context;
-
+@interface CSSAsset ()
+@property (assign, readonly) GLuint vaoID;
 @end
