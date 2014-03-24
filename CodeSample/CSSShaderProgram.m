@@ -79,9 +79,6 @@
     // Attach fragment shader to program.
     glAttachShader(self.glESName, fragShader);
     
-    // Bind attribute locations.
-    // This needs to be done prior to linking.
-    
     // Link program.
     if (![self linkProgram: self.glESName]) {
         NSLog(@"Failed to link program: %d", self.glESName);
@@ -128,17 +125,17 @@
     NSMutableDictionary* uniforms = [NSMutableDictionary dictionary];
     GLint numUniforms = 0;
     glGetProgramiv(self.glESName, GL_ACTIVE_UNIFORMS, &numUniforms);
-//    NSLog(@"%d", numUniforms);
+
     for (GLint i = 0; i < numUniforms; i++) {
         
         GLsizei length = 0;
-        GLsizei bufferSize = 20;
+        GLsizei bufferSize = 30;
         GLchar* name = malloc(bufferSize);
         GLenum type = 0;
         GLint size = 0;
         glGetActiveUniform(self.glESName, i, bufferSize, &length, &size, &type, name);
         
-        GLint glName = glGetUniformLocation(self.glESName, name);
+        GLuint glName = glGetUniformLocation(self.glESName, name);
         //this might be incorrect; TODO: find a platform agnostic way of getting string encoding
         NSString* nameString = [NSString stringWithCString: name encoding: NSUTF8StringEncoding];
         CSSShaderProgramObject* currObject = [[CSSShaderProgramObject alloc] initWithName: nameString
@@ -159,11 +156,11 @@
     GLint numAttributes = 0;
     
     glGetProgramiv(self.glESName, GL_ACTIVE_ATTRIBUTES, &numAttributes);
-//    NSLog(@"%d", numAttributes);
+
     for (GLint i = 0; i < numAttributes; i++) {
         
         GLsizei length = 0;
-        GLsizei bufferSize = 20;
+        GLsizei bufferSize = 30;
         GLchar* name = malloc(bufferSize);
         GLenum type = 0;
         GLint size = 0;

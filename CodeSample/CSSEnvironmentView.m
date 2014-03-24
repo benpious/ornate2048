@@ -16,8 +16,11 @@
     GLuint depthRenderBuffer;
     GLint width;
     GLint height;
+    
+    GLuint blurFrameBuffer;
+    GLuint blurRenderBuffer;
+    GLuint blurTexture;
 }
-
 
 @end
 
@@ -29,8 +32,28 @@
         //set up background asset
         
         //set up texture render target for drawing asset into
+        // Generate IDs for a framebuffer object and a color renderbuffer
+        /*
+        glGenFramebuffers(1, &blurFrameBuffer);
+        glBindFramebuffer(GL_FRAMEBUFFER, blurFrameBuffer);
         
-        //set up render target for blurred texture
+        glGenRenderbuffers(1, &blurRenderBuffer);
+        glBindRenderbuffer(GL_RENDERBUFFER, blurRenderBuffer);
+        
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_RGBA4, width, height);
+        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, blurRenderBuffer);
+        glGenTextures(1, &blurTexture);
+        glBindTexture(GL_TEXTURE_2D, blurTexture);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, width, height, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_SHORT, NULL);
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, blurFrameBuffer, 0);
+        
+        GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+        
+        if(status != GL_FRAMEBUFFER_COMPLETE) {
+            
+            NSLog(@"failed to make complete framebuffer object %x for shadow mapping", status);
+        }
+        */
         
         //set up actual render target
         
@@ -65,7 +88,7 @@
         
         glEnable(GL_DEPTH_TEST);
         glViewport(0.0, 0.0, width, height);
-        glClearColor(0.0, 0.75f, 0.75f, 1.0f);
+        glClearColor(0.0f, 0.0f, 0.75f, 1.0f);
     }
     
     return self;

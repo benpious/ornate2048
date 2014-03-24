@@ -18,6 +18,11 @@
     GLuint waveAmplitudeUniform;
     GLuint modelViewProjectMatrixUniform;
     GLuint numVertices;
+    GLuint wavePeriodUniform;
+    
+    float waveAmplitude;
+    float wavePeriod;
+    GLKVector2 wavePos;
 }
 
 
@@ -33,6 +38,10 @@
                     ShaderProgram: [[CSSShaderProgram alloc] initWithName: @"WaveShader"
                                                                   context: context]]) {
                         
+                        
+                        waveAmplitude = 2.5;
+                        wavePeriod = .6;
+                        wavePos = GLKVector2Make(-1.0, 0.0);
                         /*
                          attribute vec3 position;
                          uniform vec2 wavePos;
@@ -40,7 +49,6 @@
                          uniform float wavePeriod;
                          uniform mat4 modelViewProjectMatrix;   (more than 20 chars)
                          */
-                        
                         glBindVertexArrayOES(self.vaoID);
                         CSSShaderProgramObject* vertexObject = self.shaderProgram.attributes[@"position"];
                         GLfloat* latticeGeometry = makeLattice(10, 10);
@@ -48,21 +56,20 @@
                         glGenBuffers(1, &vertices);
                         glBindBuffer(GL_ARRAY_BUFFER, vertices);
                         glBufferData(GL_ARRAY_BUFFER, numVertices * sizeof(GLfloat) * 3, latticeGeometry, GL_STATIC_DRAW);
-                        glEnableVertexAttribArray(vertices);
-                        glVertexAttribPointer(vertexObject.glName, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
                         free(latticeGeometry);
-                        
+                        glEnableVertexAttribArray(vertexObject.glName);
+                        glVertexAttribPointer(vertexObject.glName, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
                         CSSShaderProgramObject* wavePosObject = self.shaderProgram.uniforms[@"wavePos"];
                         wavePosUniform = wavePosObject.glName;
-                        glUniform2f(wavePosUniform, 0.0, 0.0);
                         
                         CSSShaderProgramObject* waveAmplitudeObject = self.shaderProgram.uniforms[@"waveAmplitude"];
                         waveAmplitudeUniform = waveAmplitudeObject.glName;
-                        glUniform1f(waveAmplitudeUniform, 1.0);
                         
-                        CSSShaderProgramObject* modelViewProjectionMatrixObject = self.shaderProgram.uniforms[@"modelViewProjectMat"];
+                        CSSShaderProgramObject* wavePeriodObject = self.shaderProgram.uniforms[@"wavePeriod"];
+                        wavePeriodUniform = wavePeriodObject.glName;
+                        
+                        CSSShaderProgramObject* modelViewProjectionMatrixObject = self.shaderProgram.uniforms[@"modelViewProjectMatrix"];
                         modelViewProjectMatrixUniform = modelViewProjectionMatrixObject.glName;
-                        glUniformMatrix4fv(modelViewProjectMatrixUniform, 1, GL_FALSE, GLKMatrix4Identity.m);
                         glBindVertexArrayOES(0);
                     }
 
@@ -81,8 +88,8 @@ GLfloat* makeLattice(size_t height, size_t width) {
     
     GLfloat latticeCellHeight = 0.2;
     GLfloat latticeCellWidth = 0.2;
-    GLfloat xOffSet = 0.5;
-    GLfloat yOffset = 0.5;
+    GLfloat xOffSet = 1.0;
+    GLfloat yOffset = 1.0;
     
     //6 = number of verts in a lattice cell, 3 is number of coords in a vertex
     unsigned int numFloatsPerLattice = 18;
@@ -103,6 +110,11 @@ GLfloat* makeLattice(size_t height, size_t width) {
             geometry[i * width * numFloatsPerLattice + j * numFloatsPerLattice + 4] = latticeCellWidth * ((j) % width  + 1) - yOffset;
             geometry[i * width * numFloatsPerLattice + j * numFloatsPerLattice + 5] = 0.0;
             
+            //bottom right
+            geometry[i * width * numFloatsPerLattice + j * numFloatsPerLattice + 15] = latticeCellHeight * (i + 1) - xOffSet;
+            geometry[i * width * numFloatsPerLattice + j * numFloatsPerLattice + 16] = latticeCellWidth * ((j) % width + 1) - yOffset;
+            geometry[i * width * numFloatsPerLattice + j * numFloatsPerLattice + 17] = 0.0;
+
             //top left
             geometry[i * width * numFloatsPerLattice + j * numFloatsPerLattice + 6] = latticeCellHeight * i - xOffSet;
             geometry[i * width * numFloatsPerLattice + j * numFloatsPerLattice + 7] = latticeCellWidth * (j % width) - yOffset;
@@ -117,22 +129,35 @@ GLfloat* makeLattice(size_t height, size_t width) {
             geometry[i * width * numFloatsPerLattice + j * numFloatsPerLattice + 12] = latticeCellHeight * i - xOffSet;
             geometry[i * width * numFloatsPerLattice + j * numFloatsPerLattice + 13] = latticeCellWidth * (j % width) - yOffset;
             geometry[i * width * numFloatsPerLattice + j * numFloatsPerLattice + 14] = 0.0;
-            
-            
-            //bottom right
-            geometry[i * width * numFloatsPerLattice + j * numFloatsPerLattice + 15] = latticeCellHeight * (i + 1) - xOffSet;
-            geometry[i * width * numFloatsPerLattice + j * numFloatsPerLattice + 16] = latticeCellWidth * ((j) % width + 1) - yOffset;
-            geometry[i * width * numFloatsPerLattice + j * numFloatsPerLattice + 17] = 0.0;
         }
     }
     
     return geometry;
 }
 
+-(void) prepareToDraw
+{
+    [super prepareToDraw];
+    
+    wavePos.x += .1;
+    
+    if (wavePos.x > 2.0) {
+        
+        wavePos.x = -1.0;
+    }
+
+    glUniform2f(wavePosUniform, wavePos.x, wavePos.y);
+    glUniform1f(waveAmplitudeUniform, waveAmplitude);
+    glUniform1f(wavePeriodUniform, wavePeriod);
+    GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(0.610865238, 1024/768, 0.01, 100);
+    glUniformMatrix4fv(modelViewProjectMatrixUniform, 1, GL_FALSE, GLKMatrix4Multiply(projectionMatrix, GLKMatrix4MakeLookAt(0.0, 0.0, 2.0, 0.0,0.0, 0.0, 0.0, 1.0, 0.0)).m);
+}
+
 -(void) draw
 {
-    glUniformMatrix4fv(modelViewProjectMatrixUniform, 1, GL_FALSE, GLKMatrix4MakeLookAt(0.0, 0.0, 2.0, 0.0,0.0, 0.0, 0.0, 1.0, 0.0).m);
-    glDrawArrays(GL_LINES, 0, numVertices);
+    
+    glDrawArrays(GL_TRIANGLES, 0, numVertices);
     [super draw];
 }
+
 @end

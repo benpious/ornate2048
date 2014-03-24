@@ -30,29 +30,30 @@ const NSUInteger tileStepSize = .4;
 
 -(id) initWithContext: (EAGLContext*) context
 {
-    GLfloat geometryArray[18] = {0.1, 0.0, 0.0,
-        0.1, 0.1, 0.0,
-        0.0, 0.1, 0.0,
-        0.1, 0.0, 0.0,
-        0.0, 0.1, 0.0,
-        0.1, 0.1, 0.0};
+    GLfloat geometryArray[18] = {0.5, 0.0, 0.0,
+        0.5, 0.5, 0.0,
+        0.0, 0.5, 0.0,
+        0.5, 0.0, 0.0,
+        0.0, 0.5, 0.0,
+        0.5, 0.5, 0.0};
     
     GLfloat* geometry = &(geometryArray[0]);
     
     if (self = [super initWithContext: context
                         ShaderProgram: [[CSSShaderProgram alloc] initWithName: @"tileShader"
                                                                       context: context]]) {
-                            
+                            printError();
                             //get attribs
                             /*
                              attribute vec4 position;
                              attribute vec3 assetColor;
                              */
+                            self.numVertices = 18;
                             glBindVertexArrayOES(self.vaoID);
                             CSSShaderProgramObject* vertObject = self.shaderProgram.attributes[@"position"];
                             glGenBuffers(1, &vertices);
                             glBindBuffer(GL_ARRAY_BUFFER, vertices);
-                            glBufferData(GL_ARRAY_BUFFER, self.numVertices, geometry, GL_STATIC_DRAW);
+                            glBufferData(GL_ARRAY_BUFFER, self.numVertices * 3 * sizeof(GLfloat), geometry, GL_STATIC_DRAW);
                             glEnableVertexAttribArray(vertObject.glName);
                             glVertexAttribPointer(vertObject.glName, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
                             
@@ -65,13 +66,16 @@ const NSUInteger tileStepSize = .4;
                              uniform mat4 modelViewProjectionMatrix;
                              uniform sampler2D texture;
                              */
+                            printError();
                             CSSShaderProgramObject* matrixObject = self.shaderProgram.uniforms[@"modelViewProjectionMatrix"];
                             modelViewProjectionMatrixUniform = matrixObject.glName;
                             glUniformMatrix4fv(modelViewProjectionMatrixUniform, 1, GL_FALSE, self.modelViewMatrix.m);
+                            printError();
                             
                             CSSShaderProgramObject* textureObject = self.shaderProgram.uniforms[@"texture"];
                             texture = textureObject.glName;
                             glBindVertexArrayOES(0);
+                            printError();
                         }
     
     return self;

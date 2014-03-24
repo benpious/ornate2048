@@ -144,8 +144,8 @@
 			children = (
 				3BCC94EC18DFDBF900A2A7A5 /* Basic.vsh */,
 				3BCC94EE18DFDC0100A2A7A5 /* Basic.fsh */,
-				3B1DDBF818DF918100115C4B /* WaveShader.fsh */,
 				3B1DDBF918DF918100115C4B /* WaveShader.vsh */,
+				3B1DDBF818DF918100115C4B /* WaveShader.fsh */,
 				3B1DDBE418DF53B100115C4B /* tileShader.vsh */,
 				3B1DDBE618DF53B800115C4B /* tileShader.fsh */,
 				3B1DDBE818DF53C400115C4B /* backgroundVertexShader.vsh */,
