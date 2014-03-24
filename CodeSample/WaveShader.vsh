@@ -18,4 +18,5 @@ void main() {
     newPosition.z = 0.1 * ((wavePeriod - dist(position.xy, wavePos))/wavePeriod) * waveAmplitude;
     
     gl_Position = modelViewProjectMatrix * vec4(newPosition, 1.0);
+//    gl_Position = vec4(position, 1.0);
 }

@@ -1,5 +1,5 @@
 //
-//  CSSTileAsset.h
+//  CSSBasicAsset.h
 //  CodeSample
 //
 //  Created by Benjamin Pious on 3/23/14.
@@ -8,10 +8,6 @@
 
 #import "CSSAsset.h"
 
-const NSUInteger tileStepSize;
-
-@interface CSSTileAsset : CSSAsset
-
--(id) initWithContext: (EAGLContext*) context;
-
+@interface CSSBasicAsset : CSSAsset
+-(id) initWithContext:(EAGLContext *)context;
 @end

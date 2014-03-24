@@ -14,13 +14,13 @@
 @interface CSSAsset : NSObject
 
 @property (weak, readonly) EAGLContext* context;
-
+@property (strong, readonly) CSSShaderProgram* shaderProgram;
 /**
  Initialize with all the components necessary to draw the asset. Geometry is assumed to have a size equal to number of floats. 
  The VAO setup function is called with the VAO bound -- perform all necessary operations to set up the VAO here, including 
  getting the program name for attributes and uniforms that will need to be updated later.
  */
--(id) initWithContext: (EAGLContext*) context ShaderProgram: (CSSShaderProgram*) shaderProgram vaoSetupFunction: (void(^)(CSSShaderProgram* program)) programSetupBlock;
+-(id) initWithContext: (EAGLContext*) context ShaderProgram: (CSSShaderProgram*) shaderProgram;
 /**
  Sets the shader program and VAO of the asset to be active.
  */

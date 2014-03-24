@@ -17,9 +17,10 @@
     GLuint wavePosUniform;
     GLuint waveAmplitudeUniform;
     GLuint modelViewProjectMatrixUniform;
+    GLuint numVertices;
 }
 
-@property (assign) GLuint numVertices;
+
 
 @end
 
@@ -27,43 +28,45 @@
 
 -(id) initBackgroundAssetWithContext: (EAGLContext*) context
 {
-    
-    self = [super initWithContext: context
+
+    if (self = [super initWithContext: context
                     ShaderProgram: [[CSSShaderProgram alloc] initWithName: @"WaveShader"
-                                                                  context: context]
-                                                        vaoSetupFunction: ^(CSSShaderProgram *program) {
-                                                            
-                                                            /*
-                                                             attribute vec3 position;
-                                                             uniform vec2 wavePos;
-                                                             uniform float waveAmplitude;
-                                                             uniform float wavePeriod;
-                                                             uniform mat4 modelViewProjectMatrix;
-                                                             */
-                                                            
-                                                            GLfloat* latticeGeometry = makeLattice(10, 10);
-                                                            self.numVertices = 100 * 6;
-                                                            CSSShaderProgramObject* vertexObject = program.attributes[@"position"];
-                                                            glGenBuffers(1, &vertices);
-                                                            glBindBuffer(GL_ARRAY_BUFFER, vertices);
-                                                            glBufferData(GL_ARRAY_BUFFER, self.numVertices, latticeGeometry, GL_STATIC_DRAW);
-                                                            glEnableVertexAttribArray(vertices);
-                                                            glVertexAttribPointer(vertexObject.glName, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
-                                                            free(latticeGeometry);
-                                                            
-                                                            CSSShaderProgramObject* wavePosObject = program.uniforms[@"wavePos"];
-                                                            wavePosUniform = wavePosObject.glName;
-                                                            glUniform2f(wavePosUniform, 0.0, 0.0);
-                                                            
-                                                            CSSShaderProgramObject* waveAmplitudeObject = program.uniforms[@"waveAmplitude"];
-                                                            waveAmplitudeUniform = waveAmplitudeObject.glName;
-                                                            glUniform1f(waveAmplitudeUniform, 1.0);
-                                                            
-                                                            CSSShaderProgramObject* modelViewProjectionMatrixObject = program.uniforms[@"modelViewProjectMatrix"];
-                                                            waveAmplitudeUniform = modelViewProjectionMatrixObject.glName;
-                                                            glUniformMatrix4fv(modelViewProjectMatrixUniform, 1, GL_FALSE, GLKMatrix4Identity.m);
-                                                        }];
-    
+                                                                  context: context]]) {
+                        
+                        /*
+                         attribute vec3 position;
+                         uniform vec2 wavePos;
+                         uniform float waveAmplitude;
+                         uniform float wavePeriod;
+                         uniform mat4 modelViewProjectMatrix;   (more than 20 chars)
+                         */
+                        
+                        glBindVertexArrayOES(self.vaoID);
+                        CSSShaderProgramObject* vertexObject = self.shaderProgram.attributes[@"position"];
+                        GLfloat* latticeGeometry = makeLattice(10, 10);
+                        numVertices = 100 * 6;
+                        glGenBuffers(1, &vertices);
+                        glBindBuffer(GL_ARRAY_BUFFER, vertices);
+                        glBufferData(GL_ARRAY_BUFFER, numVertices * sizeof(GLfloat) * 3, latticeGeometry, GL_STATIC_DRAW);
+                        glEnableVertexAttribArray(vertices);
+                        glVertexAttribPointer(vertexObject.glName, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
+                        free(latticeGeometry);
+                        
+                        CSSShaderProgramObject* wavePosObject = self.shaderProgram.uniforms[@"wavePos"];
+                        wavePosUniform = wavePosObject.glName;
+                        glUniform2f(wavePosUniform, 0.0, 0.0);
+                        
+                        CSSShaderProgramObject* waveAmplitudeObject = self.shaderProgram.uniforms[@"waveAmplitude"];
+                        waveAmplitudeUniform = waveAmplitudeObject.glName;
+                        glUniform1f(waveAmplitudeUniform, 1.0);
+                        
+                        CSSShaderProgramObject* modelViewProjectionMatrixObject = self.shaderProgram.uniforms[@"modelViewProjectMat"];
+                        modelViewProjectMatrixUniform = modelViewProjectionMatrixObject.glName;
+                        glUniformMatrix4fv(modelViewProjectMatrixUniform, 1, GL_FALSE, GLKMatrix4Identity.m);
+                        glBindVertexArrayOES(0);
+                    }
+
+
     return self;
 }
 
@@ -128,8 +131,8 @@ GLfloat* makeLattice(size_t height, size_t width) {
 
 -(void) draw
 {
-    
-    glDrawArrays(GL_LINES, 0, self.numVertices);
+    glUniformMatrix4fv(modelViewProjectMatrixUniform, 1, GL_FALSE, GLKMatrix4MakeLookAt(0.0, 0.0, 2.0, 0.0,0.0, 0.0, 0.0, 1.0, 0.0).m);
+    glDrawArrays(GL_LINES, 0, numVertices);
     [super draw];
 }
 @end

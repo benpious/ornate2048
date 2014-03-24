@@ -44,7 +44,7 @@
         glGenRenderbuffers(1, &colorRenderBuffer);
         glBindRenderbuffer(GL_RENDERBUFFER, colorRenderBuffer);
         
-        [self.glESContext renderbufferStorage:GL_RENDERBUFFER fromDrawable: myEAGLLayer];
+        [self.glESContext renderbufferStorage: GL_RENDERBUFFER fromDrawable: myEAGLLayer];
         
         glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, colorRenderBuffer);
         
@@ -65,8 +65,7 @@
         
         glEnable(GL_DEPTH_TEST);
         glViewport(0.0, 0.0, width, height);
-        glClearColor(0.75f, 0.75f, 0.75f, 1.0f);
-
+        glClearColor(0.0, 0.75f, 0.75f, 1.0f);
     }
     
     return self;
@@ -74,6 +73,8 @@
 
 -(void) drawFrame:(CADisplayLink *)displayLink
 {
+    
+    [EAGLContext setCurrentContext: self.glESContext];
     [super drawFrame: displayLink];
     //draw background asset to texture
     

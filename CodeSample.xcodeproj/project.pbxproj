@@ -40,6 +40,9 @@
 		3B2AFCE118DCEC6200B5E824 /* CSSShaderProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B2AFCE018DCEC6200B5E824 /* CSSShaderProgram.m */; };
 		3B2AFCE718DD16CA00B5E824 /* CSSEnvironmentVariables.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B2AFCE618DD16CA00B5E824 /* CSSEnvironmentVariables.m */; };
 		3B6B5D2B18DE3F12000260DF /* CSSEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6B5D2A18DE3F12000260DF /* CSSEngine.m */; };
+		3BCC94EB18DFD9F900A2A7A5 /* CSSBasicAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCC94EA18DFD9F900A2A7A5 /* CSSBasicAsset.m */; };
+		3BCC94ED18DFDBF900A2A7A5 /* Basic.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3BCC94EC18DFDBF900A2A7A5 /* Basic.vsh */; };
+		3BCC94EF18DFDC0100A2A7A5 /* Basic.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3BCC94EE18DFDC0100A2A7A5 /* Basic.fsh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +108,10 @@
 		3B6B5D2A18DE3F12000260DF /* CSSEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSEngine.m; sourceTree = "<group>"; };
 		3B868DED18DE4DA90091DF25 /* CSSEngine_internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSSEngine_internal.h; sourceTree = "<group>"; };
 		3B868DEE18DE73B40091DF25 /* CSSEngineTileMovementDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSSEngineTileMovementDelegate.h; sourceTree = "<group>"; };
+		3BCC94E918DFD9F900A2A7A5 /* CSSBasicAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSBasicAsset.h; sourceTree = "<group>"; };
+		3BCC94EA18DFD9F900A2A7A5 /* CSSBasicAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSBasicAsset.m; sourceTree = "<group>"; };
+		3BCC94EC18DFDBF900A2A7A5 /* Basic.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Basic.vsh; sourceTree = "<group>"; };
+		3BCC94EE18DFDC0100A2A7A5 /* Basic.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Basic.fsh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +142,8 @@
 		3B1DDBE318DF539E00115C4B /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				3BCC94EC18DFDBF900A2A7A5 /* Basic.vsh */,
+				3BCC94EE18DFDC0100A2A7A5 /* Basic.fsh */,
 				3B1DDBF818DF918100115C4B /* WaveShader.fsh */,
 				3B1DDBF918DF918100115C4B /* WaveShader.vsh */,
 				3B1DDBE418DF53B100115C4B /* tileShader.vsh */,
@@ -252,6 +261,8 @@
 				3B2AFCE018DCEC6200B5E824 /* CSSShaderProgram.m */,
 				3B2AFCE518DD16CA00B5E824 /* CSSEnvironmentVariables.h */,
 				3B2AFCE618DD16CA00B5E824 /* CSSEnvironmentVariables.m */,
+				3BCC94E918DFD9F900A2A7A5 /* CSSBasicAsset.h */,
+				3BCC94EA18DFD9F900A2A7A5 /* CSSBasicAsset.m */,
 				3B2AFCD118DCE54500B5E824 /* CSSAsset.h */,
 				3B2AFCD218DCE54500B5E824 /* CSSAsset.m */,
 				3B1DDBF318DF6CB100115C4B /* Asset Subclasses */,
@@ -310,6 +321,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = benpious;
 				TargetAttributes = {
+					3B2AFC9318DCCA7800B5E824 = {
+						DevelopmentTeam = QQNEXZ273S;
+					};
 					3B2AFCAE18DCCA7900B5E824 = {
 						TestTargetID = 3B2AFC9318DCCA7800B5E824;
 					};
@@ -338,6 +352,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BCC94ED18DFDBF900A2A7A5 /* Basic.vsh in Resources */,
 				3B2AFCA218DCCA7800B5E824 /* InfoPlist.strings in Resources */,
 				3B1DDBEF18DF53FD00115C4B /* blurshader.fsh in Resources */,
 				3B2AFCAA18DCCA7800B5E824 /* Images.xcassets in Resources */,
@@ -347,6 +362,7 @@
 				3B1DDBE918DF53C400115C4B /* backgroundVertexShader.vsh in Resources */,
 				3B1DDBE518DF53B100115C4B /* tileShader.vsh in Resources */,
 				3B1DDBFA18DF918100115C4B /* WaveShader.fsh in Resources */,
+				3BCC94EF18DFDC0100A2A7A5 /* Basic.fsh in Resources */,
 				3B1DDBED18DF53F500115C4B /* blurShader.vsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -378,6 +394,7 @@
 				3B2AFCE718DD16CA00B5E824 /* CSSEnvironmentVariables.m in Sources */,
 				3B1DDBD918DF51BE00115C4B /* CSSEnvironmentView.m in Sources */,
 				3B2AFCD018DCE41700B5E824 /* CSSGLESView.m in Sources */,
+				3BCC94EB18DFD9F900A2A7A5 /* CSSBasicAsset.m in Sources */,
 				3B1DDBE218DF533800115C4B /* CSSMainViewController.m in Sources */,
 				3B1DDBF218DF6AD000115C4B /* CSSTileAsset.m in Sources */,
 			);
@@ -498,10 +515,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CodeSample/CodeSample-Prefix.pch";
 				INFOPLIST_FILE = "CodeSample/CodeSample-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -511,10 +531,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CodeSample/CodeSample-Prefix.pch";
 				INFOPLIST_FILE = "CodeSample/CodeSample-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

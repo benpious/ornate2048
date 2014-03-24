@@ -9,17 +9,24 @@
 #import "CSSGameViewController.h"
 #import "CSSEnvironmentView.h"
 #import "CSSBackgroundAsset.h"
+#import "CSSTileAsset.h"
+#import "CSSBasicAsset.h"
 
 @implementation CSSGameViewController
 -(id) init
 {
     if (self = [super init]) {
         
-        CSSEnvironmentView* environmentView = [[CSSEnvironmentView alloc] initWithFrame: CGRectMake(0, 0, 200, 200)];
+        CSSEnvironmentView* environmentView = [[CSSEnvironmentView alloc] initWithFrame: [UIScreen mainScreen].bounds];
         
-        CSSBackgroundAsset* backgroundAsset = [[CSSBackgroundAsset alloc] initBackgroundAssetWithContext: environmentView.glESContext];
+//        CSSBackgroundAsset* backgroundAsset = [[CSSBackgroundAsset alloc] initBackgroundAssetWithContext: environmentView.glESContext];
         
-        [environmentView.assets addObject: backgroundAsset];
+//        CSSTileAsset* tileAsset = [[CSSTileAsset alloc] initWithContext: environmentView.glESContext];
+        
+        CSSBasicAsset* basicAsset = [[CSSBasicAsset alloc] initWithContext: environmentView.glESContext];
+//        [environmentView.assets addObject: backgroundAsset];
+//        [environmentView.assets addObject: tileAsset];
+        [environmentView.assets addObject: basicAsset];
         
         self.view = environmentView;
         
@@ -33,7 +40,7 @@
 {
     [super viewDidAppear: animated];
     self.displayLink = [CADisplayLink displayLinkWithTarget: self.view selector: @selector(drawFrame:)];
-    [self.displayLink addToRunLoop: [NSRunLoop mainRunLoop] forMode: NSRunLoopCommonModes];
+    [self.displayLink addToRunLoop: [NSRunLoop mainRunLoop] forMode: NSDefaultRunLoopMode];
 }
 
 -(void) viewDidDisappear:(BOOL)animated

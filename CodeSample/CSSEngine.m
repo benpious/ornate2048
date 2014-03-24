@@ -86,7 +86,7 @@
         [emptyCells addObject: [[___Point alloc] initWithX: xIndex y: yIndex ]];
     }];
     
-    ___Point* pointToPlaceAt = emptyCells[arc4random_uniform(emptyCells.count)];
+    ___Point* pointToPlaceAt = emptyCells[arc4random_uniform((uint32_t)emptyCells.count)];
     [self placeCellWithValue: randomNewValue()
                            x: pointToPlaceAt.x
                            y: pointToPlaceAt.y];

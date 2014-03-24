@@ -11,7 +11,7 @@
 
 @interface CSSShaderProgram : NSObject
 
-@property (weak, readonly) EAGLContext* context;
+@property (strong, readonly) EAGLContext* context;
 @property (strong, readonly) NSDictionary* uniforms;
 @property (strong, readonly) NSDictionary* attributes;
 

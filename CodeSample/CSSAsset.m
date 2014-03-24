@@ -13,25 +13,22 @@
 
 @property (weak, readwrite) EAGLContext* context;
 @property (assign) GLuint vaoID;
-@property (strong) CSSShaderProgram* shaderProgram;
+@property (strong, readwrite) CSSShaderProgram* shaderProgram;
 @end
 
 @implementation CSSAsset
 
--(id) initWithContext: (EAGLContext*) context ShaderProgram: (CSSShaderProgram*) shaderProgram vaoSetupFunction: (void(^)(CSSShaderProgram* program)) programSetupBlock
+-(id) initWithContext: (EAGLContext*) context ShaderProgram: (CSSShaderProgram*) shaderProgram
 {
-    if (self = [self initWithContext: context]) {
+    if (self = [self _initWithContext: context]) {
         
         self.shaderProgram = shaderProgram;
-        glBindVertexArrayOES(self.vaoID);
-        programSetupBlock(shaderProgram);
-        glBindVertexArrayOES(0);
     }
     
     return self;
 }
 
--(id) initWithContext: (EAGLContext*) context
+-(id) _initWithContext: (EAGLContext*) context
 {
     if (self = [super init]) {
         
@@ -58,7 +55,7 @@
 
 -(void) prepareToDraw
 {
-    
+    [EAGLContext setCurrentContext: self.context];
     [self.shaderProgram makeShaderActive];
     glBindVertexArrayOES(self.vaoID);
 }
@@ -67,7 +64,7 @@
 {
     
     glBindVertexArrayOES(0);
-    printError();
+//    printError();
 }
 
 @end

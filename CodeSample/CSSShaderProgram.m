@@ -14,6 +14,7 @@
 @property (readwrite) GLuint glESName;
 @property (strong, readwrite) NSDictionary* uniforms;
 @property (strong, readwrite) NSDictionary* attributes;
+@property (strong, readwrite) EAGLContext* context;
 
 @end
 
@@ -24,7 +25,9 @@
     if (self = [super init]) {
      
         [EAGLContext setCurrentContext: context];
-        [self loadGLProgramWithVertexShader: vertexShader fragmentShader: fragShader];
+        self.context = context;
+        [self loadGLProgramWithVertexShader: vertexShader
+                             fragmentShader: fragShader];
     }
     
     return self;
@@ -33,7 +36,9 @@
 -(id) initWithName: (NSString*) name context:(EAGLContext *)context;
 {
 
-    self = [self initWithVertexShader: name fragShader: name context: context];
+    self = [self initWithVertexShader: name
+                           fragShader: name
+                              context: context];
     
     return self;
 }
@@ -123,7 +128,7 @@
     NSMutableDictionary* uniforms = [NSMutableDictionary dictionary];
     GLint numUniforms = 0;
     glGetProgramiv(self.glESName, GL_ACTIVE_UNIFORMS, &numUniforms);
-    
+//    NSLog(@"%d", numUniforms);
     for (GLint i = 0; i < numUniforms; i++) {
         
         GLsizei length = 0;
@@ -154,7 +159,7 @@
     GLint numAttributes = 0;
     
     glGetProgramiv(self.glESName, GL_ACTIVE_ATTRIBUTES, &numAttributes);
-    
+//    NSLog(@"%d", numAttributes);
     for (GLint i = 0; i < numAttributes; i++) {
         
         GLsizei length = 0;
