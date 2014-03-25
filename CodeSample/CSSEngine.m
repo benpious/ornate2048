@@ -15,7 +15,7 @@ const NSUInteger winningTotal = 2048;
 
 @interface CSSEngine()
 
-@property NSArray* cellColumns;
+@property NSMutableArray* cellColumns;
 
 @end
 
@@ -54,15 +54,15 @@ const NSUInteger winningTotal = 2048;
 -(void) makeNewGame
 {
     
-    NSArray* emptyRow = @[[NSNumber numberWithInteger: emptyValue],
-                          [NSNumber numberWithInteger: emptyValue],
-                          [NSNumber numberWithInteger: emptyValue],
-                          [NSNumber numberWithInteger: emptyValue]];
+    NSMutableArray* emptyRow = [NSMutableArray arrayWithArray: @[[NSNumber numberWithInteger: emptyValue],
+                                                                 [NSNumber numberWithInteger: emptyValue],
+                                                                 [NSNumber numberWithInteger: emptyValue],
+                                                                 [NSNumber numberWithInteger: emptyValue]]];
     
-    self.cellColumns = @[ [emptyRow copy],
-                          [emptyRow copy],
-                          [emptyRow copy],
-                          [emptyRow copy]];
+    self.cellColumns = [NSMutableArray arrayWithArray: @[ [emptyRow mutableCopy],
+                                                          [emptyRow mutableCopy],
+                                                          [emptyRow mutableCopy],
+                                                          [emptyRow mutableCopy]]];
     
     NSUInteger firstCellToFillX =  getRandomCoordComponent();
     NSUInteger firstCellToFillY = getRandomCoordComponent();
@@ -88,7 +88,11 @@ const NSUInteger winningTotal = 2048;
     
     [self enumerateCellsWithBlock:^(NSUInteger xIndex, NSUInteger yIndex, NSNumber *currNumber) {
         
-        [emptyCells addObject: [[___Point alloc] initWithX: xIndex y: yIndex ]];
+        
+        if (currNumber.integerValue != emptyValue) {
+            
+            [emptyCells addObject: [[___Point alloc] initWithX: xIndex y: yIndex ]];
+        }
     }];
     
     ___Point* pointToPlaceAt = emptyCells[arc4random_uniform((uint32_t)emptyCells.count)];
@@ -133,11 +137,7 @@ NSUInteger randomNewValue() {
 -(void) placeCellWithValue: (NSUInteger) value x: (NSUInteger) x y: (NSUInteger) y
 {
     
-    NSMutableArray* mutableCellColumns = [NSMutableArray arrayWithArray: self.cellColumns];
-    NSMutableArray* mutableRow = [NSMutableArray arrayWithArray: self.cellColumns[x]];
-    mutableRow[y] = [NSNumber numberWithInteger: value];
-    mutableCellColumns[x] = mutableRow;
-    self.cellColumns = [NSArray arrayWithArray: mutableCellColumns];
+    self.cellColumns[x][y] = [NSNumber numberWithInteger: value];
 }
 
 -(void) slideDown
@@ -189,13 +189,7 @@ NSUInteger randomNewValue() {
         }
     }
     
-    for (NSUInteger i = 0; i < transposedCells.count; i++) {
-        
-        NSArray* currRow = [NSArray arrayWithArray: transposedCells[i]];
-        transposedCells[i] = currRow;
-    }
-    
-    self.cellColumns = [NSArray arrayWithArray: transposedCells];
+    self.cellColumns = transposedCells;
 }
 
 
@@ -249,13 +243,7 @@ NSUInteger randomNewValue() {
         }
     }
     
-    for (NSUInteger i = 0; i < transposedCells.count; i++) {
-        
-        NSArray* currRow = [NSArray arrayWithArray: transposedCells[i]];
-        transposedCells[i] = currRow;
-    }
-    
-    self.cellColumns = [NSArray arrayWithArray: transposedCells];
+    self.cellColumns = transposedCells;
 }
 
 -(void) slideRight

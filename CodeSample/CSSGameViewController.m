@@ -113,9 +113,9 @@
             
         case UISwipeGestureRecognizerDirectionRight:
             
-            //slides down...
             [self.gameEngine slideRight];
             [self.gameEngine placeNewTile];
+            NSLog(@"swiping right");
             
             break;
             
@@ -123,6 +123,7 @@
             
             [self.gameEngine slideLeft];
             [self.gameEngine placeNewTile];
+            NSLog(@"swiping left");
             
             break;
             
@@ -130,6 +131,7 @@
             
             [self.gameEngine slideUp];
             [self.gameEngine placeNewTile];
+            NSLog(@"swiping up");
             
             break;
             
@@ -137,7 +139,7 @@
             
             [self.gameEngine slideDown];
             [self.gameEngine placeNewTile];
-            
+            NSLog(@"swiping down");
             break;
             
         default:

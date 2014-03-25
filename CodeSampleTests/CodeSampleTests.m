@@ -198,6 +198,25 @@
     XCTAssertTrue(result, @"Result Differs");
 }
 
+
+-(void) testSlides
+{
+    
+    CSSEngine* engine = [[CSSEngine alloc] initNewGame];
+    
+//    [engine slideLeft];
+    
+    [engine slideDown];
+    
+    [engine slideDown];
+    
+    [engine slideLeft];
+    
+    [engine slideDown];
+    
+    [engine slideLeft];
+}
+
 -(BOOL) slideUpWithTestArray: (NSMutableArray*) arrayToTest expectedResult: (NSMutableArray*) expectedResult
 {
     

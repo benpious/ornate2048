@@ -138,7 +138,7 @@ GLfloat* makeLattice(size_t height, size_t width) {
 {
     [super prepareToDraw];
     
-    wavePos.x += .05;
+    wavePos.x += .02;
     
     if (wavePos.x > 2.0) {
         
