@@ -40,10 +40,29 @@
         
         self.view = environmentView;
         
-        UISwipeGestureRecognizer* swipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget: self
+        UISwipeGestureRecognizer* rightSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget: self
                                                                                                      action: @selector(swiped:)];
         
-        [self.view addGestureRecognizer: swipeGestureRecognizer];
+        [self.view addGestureRecognizer: rightSwipeGestureRecognizer];
+        
+        UISwipeGestureRecognizer* leftSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget: self
+                                                                                                          action: @selector(swiped:)];
+        
+        leftSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+        
+        [self.view addGestureRecognizer: leftSwipeGestureRecognizer];
+        
+        UISwipeGestureRecognizer* upSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget: self
+                                                                                                          action: @selector(swiped:)];
+        upSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
+        [self.view addGestureRecognizer: rightSwipeGestureRecognizer];
+        
+        UISwipeGestureRecognizer* downSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget: self
+                                                                                                          action: @selector(swiped:)];
+        downSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
+        [self.view addGestureRecognizer: downSwipeGestureRecognizer];
+        
+        
     }
     
     return self;
@@ -89,11 +108,12 @@
 -(void) swiped: (UIGestureRecognizer*) recognizer
 {
     UISwipeGestureRecognizer* swipeGestureRecognizer = (UISwipeGestureRecognizer*) recognizer;
-    
+    NSLog(@"swiped");
     switch (swipeGestureRecognizer.direction) {
             
         case UISwipeGestureRecognizerDirectionRight:
             
+            //slides down...
             [self.gameEngine slideRight];
             [self.gameEngine placeNewTile];
             

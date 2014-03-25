@@ -29,18 +29,18 @@
         self.engine = engine;
         
         
-        self.numbersToColors = @{@0: [UIColor colorWithRed: .7 green:.7 blue:.7 alpha:1.0],
-                                          @2: [UIColor colorWithRed: .8 green:.6 blue:.6 alpha:1.0],
-                                          @4: [UIColor colorWithRed: .7 green:.5 blue:.5 alpha:1.0],
-                                          @8: [UIColor colorWithRed: .7 green:.7 blue:.7 alpha:1.0],
-                                          @16: [UIColor colorWithRed: .7 green:.7 blue:.7 alpha:1.0],
-                                          @32: [UIColor colorWithRed: .7 green:.7 blue:.7 alpha:1.0],
-                                          @64: [UIColor colorWithRed: .7 green:.7 blue:.7 alpha:1.0],
-                                          @128: [UIColor colorWithRed: .7 green:.7 blue:.7 alpha:1.0],
+        self.numbersToColors = @{@0: [UIColor whiteColor],
+                                          @2: [UIColor yellowColor],
+                                          @4: [UIColor greenColor],
+                                          @8: [UIColor blueColor],
+                                          @16: [UIColor purpleColor],
+                                          @32: [UIColor orangeColor],
+                                          @64: [UIColor redColor],
+                                          @128: [UIColor colorWithRed: .7 green:.65 blue:.65 alpha:1.0],
                                           @256: [UIColor colorWithRed: .7 green:.7 blue:.7 alpha:1.0],
-                                          @512: [UIColor colorWithRed: .7 green:.7 blue:.7 alpha:1.0],
-                                          @1024: [UIColor colorWithRed: .7 green:.7 blue:.7 alpha:1.0],
-                                          @2048: [UIColor colorWithRed: .7 green:.7 blue:.7 alpha:1.0],
+                                          @512: [UIColor colorWithRed: .8 green:.75 blue:.75 alpha:1.0],
+                                          @1024: [UIColor colorWithRed: .8 green:.8 blue:.8 alpha:1.0],
+                                          @2048: [UIColor colorWithRed: .9 green:.95 blue:.95 alpha:1.0],
                                           };
         
     }
