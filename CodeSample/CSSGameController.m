@@ -30,7 +30,7 @@
         
         
         self.numbersToColors = @{@0: [UIColor colorWithRed: .7 green:.7 blue:.7 alpha:1.0],
-                                 @2: [UIColor colorWithRed: .8 green:.6 blue:.6 alpha:1.0],
+                                          @2: [UIColor colorWithRed: .8 green:.6 blue:.6 alpha:1.0],
                                           @4: [UIColor colorWithRed: .7 green:.5 blue:.5 alpha:1.0],
                                           @8: [UIColor colorWithRed: .7 green:.7 blue:.7 alpha:1.0],
                                           @16: [UIColor colorWithRed: .7 green:.7 blue:.7 alpha:1.0],
@@ -53,9 +53,10 @@
     float offset = 0.2;
     [self.engine enumerateCellsWithBlock: ^(NSUInteger xIndex, NSUInteger yIndex, NSNumber *currNumber) {
        
-        GLKMatrix4 translation = GLKMatrix4MakeTranslation(xIndex  * (-tileStepSize - .1) - offset, yIndex * (-tileStepSize - .1) - offset, 0.0);
+        GLKMatrix4 translation = GLKMatrix4MakeTranslation(xIndex * -tileStepSize - offset, yIndex * -tileStepSize + offset, 0.0);
         
-        [self.tileAsset prepareToDrawWithTransformation: GLKMatrix4Multiply(modelViewProjectionMatrix , translation)
+        NSLog(@"%lu", (unsigned long)tileStepSize);
+        [self.tileAsset prepareToDrawWithTransformation: GLKMatrix4Multiply(modelViewProjectionMatrix, translation)
                                                 texture: texture
                                                 color: self.numbersToColors[currNumber]];
         

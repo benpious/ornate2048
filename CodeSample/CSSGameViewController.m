@@ -80,7 +80,6 @@
     
     GLKMatrix4 modelViewProjectionMatrix = environmentView.environmentVars.modelViewProjectionMatrix;
     
-    
     [self.gameController drawBoardWithmodelViewProjectionMatrix: modelViewProjectionMatrix
                                                         texture: [environmentView blurViewTextureName]];
     

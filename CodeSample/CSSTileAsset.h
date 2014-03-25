@@ -9,7 +9,7 @@
 #import "CSSAsset.h"
 #import <GLKit/GLKit.h>
 
-const NSUInteger tileStepSize;
+const float tileStepSize;
 
 @interface CSSTileAsset : CSSAsset
 
