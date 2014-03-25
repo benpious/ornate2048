@@ -25,6 +25,7 @@
     float waveAmplitude;
     float wavePeriod;
     GLKVector2 wavePos;
+    float direction;
 }
 
 
@@ -40,8 +41,9 @@
                     ShaderProgram: [[CSSShaderProgram alloc] initWithName: @"WaveShader"
                                                                   context: context]]) {
                         
+                        direction = .01;
                         waveAmplitude = 2.5;
-                        wavePeriod = .6;
+                        wavePeriod = 1.0;
                         wavePos = GLKVector2Make(-1.0, 0.0);
                         /*
                          attribute vec3 position;
@@ -160,11 +162,16 @@ GLfloat* makeLattice(size_t height, size_t width) {
 {
     [super prepareToDraw];
     
-    wavePos.x += .02;
+    wavePos.x += direction;
     
     if (wavePos.x > 2.0) {
         
-        wavePos.x = -1.0;
+        direction = -.01;
+    }
+    
+    if (wavePos.x < -2.0) {
+        
+        direction= .01;
     }
 
     glUniform2f(wavePosUniform, wavePos.x, wavePos.y);
