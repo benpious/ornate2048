@@ -55,7 +55,7 @@
         UISwipeGestureRecognizer* upSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget: self
                                                                                                           action: @selector(swiped:)];
         upSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
-        [self.view addGestureRecognizer: rightSwipeGestureRecognizer];
+        [self.view addGestureRecognizer: upSwipeGestureRecognizer];
         
         UISwipeGestureRecognizer* downSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget: self
                                                                                                           action: @selector(swiped:)];
@@ -108,12 +108,20 @@
 -(void) swiped: (UIGestureRecognizer*) recognizer
 {
     UISwipeGestureRecognizer* swipeGestureRecognizer = (UISwipeGestureRecognizer*) recognizer;
-    NSLog(@"swiped");
+    
+    
+    /*
+     
+     TODO: the directions given by CSSEngine do not actually match the directions given 
+     here. When I have more time I will fix the naming issues.
+     
+     */
+    
     switch (swipeGestureRecognizer.direction) {
             
         case UISwipeGestureRecognizerDirectionRight:
             
-            [self.gameEngine slideRight];
+            [self.gameEngine slideDown];
             [self.gameEngine placeNewTile];
             NSLog(@"swiping right");
             
@@ -121,7 +129,7 @@
             
         case UISwipeGestureRecognizerDirectionLeft:
             
-            [self.gameEngine slideLeft];
+            [self.gameEngine slideUp];
             [self.gameEngine placeNewTile];
             NSLog(@"swiping left");
             
@@ -129,7 +137,7 @@
             
         case UISwipeGestureRecognizerDirectionUp:
             
-            [self.gameEngine slideUp];
+            [self.gameEngine slideRight];
             [self.gameEngine placeNewTile];
             NSLog(@"swiping up");
             
@@ -137,7 +145,7 @@
             
         case UISwipeGestureRecognizerDirectionDown:
             
-            [self.gameEngine slideDown];
+            [self.gameEngine slideLeft];
             [self.gameEngine placeNewTile];
             NSLog(@"swiping down");
             break;
@@ -146,6 +154,34 @@
             break;
     }
     
+    if ([self.gameEngine hasWon]) {
+        
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle: @"You've won!"
+                                                            message: @"Congratulations! Press Continue to play again!"
+                                                           delegate: self
+                                                  cancelButtonTitle: @"Play Again"
+                                                  otherButtonTitles: nil];
+        
+        [alertView show];
+    }
+    
+    else if (![self.gameEngine validMoveStillExists]) {
+        
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle: @"Game Over!"
+                                                            message: @"Press Continue to play again!"
+                                                           delegate: self
+                                                  cancelButtonTitle: @"Play Again"
+                                                  otherButtonTitles: nil];
+
+        [alertView show];
+    }
+    
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    
+    [self.gameEngine makeNewGame];
 }
 
 @end

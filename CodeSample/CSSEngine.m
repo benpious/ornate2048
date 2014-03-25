@@ -322,7 +322,7 @@ NSUInteger randomNewValue() {
 {
     for (NSMutableArray* currRow in self.cellColumns) {
         
-        [self slideRowRight: currRow];
+        [self slideRowLeft: currRow];
     }
 }
 

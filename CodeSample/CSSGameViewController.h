@@ -10,6 +10,6 @@
 /**
  Displays the main game. 
  */
-@interface CSSGameViewController : UIViewController
+@interface CSSGameViewController : UIViewController <UIAlertViewDelegate>
 @property CADisplayLink* displayLink;
 @end
