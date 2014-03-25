@@ -50,12 +50,14 @@
 
 -(void) drawBoardWithmodelViewProjectionMatrix: (GLKMatrix4) modelViewProjectionMatrix texture: (GLuint) texture;
 {
-    float offset = 0.2;
+    
+    float xOffset = 0.5;
+    float yOffset = 0.5;
+    
     [self.engine enumerateCellsWithBlock: ^(NSUInteger xIndex, NSUInteger yIndex, NSNumber *currNumber) {
        
-        GLKMatrix4 translation = GLKMatrix4MakeTranslation(xIndex * -tileStepSize - offset, yIndex * -tileStepSize + offset, 0.0);
+        GLKMatrix4 translation = GLKMatrix4MakeTranslation(xIndex * tileStepSize - xOffset, yIndex * tileStepSize - yOffset, 0.0);
         
-        NSLog(@"%lu", (unsigned long)tileStepSize);
         [self.tileAsset prepareToDrawWithTransformation: GLKMatrix4Multiply(modelViewProjectionMatrix, translation)
                                                 texture: texture
                                                 color: self.numbersToColors[currNumber]];

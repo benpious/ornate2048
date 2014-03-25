@@ -11,7 +11,7 @@
 #import "CSSShaderProgramObject.h"
 #import "CSSAsset_internal.h"
 
-const float tileStepSize = .2;
+const float tileStepSize = .25;
 
 @interface CSSTileAsset()
 {
