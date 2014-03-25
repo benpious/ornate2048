@@ -8,7 +8,7 @@ varying vec3 fassetColor;
 void main()
 {
     
-    fvertPos = position.xyz;
+    fvertPos = (position.xyz + 1.0 )/2.0;
     fassetColor = assetColor;
     
     gl_Position =  modelViewProjectionMatrix * position;

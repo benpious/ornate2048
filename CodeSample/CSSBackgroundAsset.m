@@ -19,6 +19,8 @@
     GLuint modelViewProjectMatrixUniform;
     GLuint numVertices;
     GLuint wavePeriodUniform;
+    GLuint textureName;
+    GLuint textureUniform;
     
     float waveAmplitude;
     float wavePeriod;
@@ -69,6 +71,25 @@
                         
                         CSSShaderProgramObject* modelViewProjectionMatrixObject = self.shaderProgram.uniforms[@"modelViewProjectMatrix"];
                         modelViewProjectMatrixUniform = modelViewProjectionMatrixObject.glName;
+                        
+                        CSSShaderProgramObject* textureObject = self.shaderProgram.uniforms[@"backgroundTexture"];
+                        textureUniform = textureObject.glName;
+                        
+                        __autoreleasing NSError* error = nil;
+                        
+                        
+                        GLKTextureInfo* textureInfo = [GLKTextureLoader textureWithContentsOfFile: [[NSBundle mainBundle] pathForResource: @"aqua" ofType: @"png"]
+                                                                                            options: @{GLKTextureLoaderGenerateMipmaps: @NO}
+                                                                                            error: &error];
+                        
+                        
+                        textureName = textureInfo.name;
+                        
+                        if (error) {
+                            
+                            NSLog(@"%@", [error description]);
+                        }
+                        
                         glBindVertexArrayOES(0);
                     }
 
@@ -81,6 +102,7 @@
     
     [EAGLContext setCurrentContext: self.context];
     glDeleteBuffers(1, &vertices);
+    glDeleteTextures(1, &textureName);
 }
 
 GLfloat* makeLattice(size_t height, size_t width) {
@@ -110,24 +132,24 @@ GLfloat* makeLattice(size_t height, size_t width) {
             geometry[i * width * numFloatsPerLattice + j * numFloatsPerLattice + 5] = 0.0;
             
             //bottom right
-            geometry[i * width * numFloatsPerLattice + j * numFloatsPerLattice + 15] = latticeCellHeight * (i + 1) - xOffSet;
-            geometry[i * width * numFloatsPerLattice + j * numFloatsPerLattice + 16] = latticeCellWidth * ((j) % width + 1) - yOffset;
-            geometry[i * width * numFloatsPerLattice + j * numFloatsPerLattice + 17] = 0.0;
+            geometry[i * width * numFloatsPerLattice + j * numFloatsPerLattice + 6] = latticeCellHeight * (i + 1) - xOffSet;
+            geometry[i * width * numFloatsPerLattice + j * numFloatsPerLattice + 7] = latticeCellWidth * ((j) % width + 1) - yOffset;
+            geometry[i * width * numFloatsPerLattice + j * numFloatsPerLattice + 8] = 0.0;
 
             //top left
-            geometry[i * width * numFloatsPerLattice + j * numFloatsPerLattice + 6] = latticeCellHeight * i - xOffSet;
-            geometry[i * width * numFloatsPerLattice + j * numFloatsPerLattice + 7] = latticeCellWidth * (j % width) - yOffset;
-            geometry[i * width * numFloatsPerLattice + j * numFloatsPerLattice + 8] = 0.0;
-            
-            //bottom left
-            geometry[i * width * numFloatsPerLattice + j * numFloatsPerLattice + 9] = latticeCellHeight * (i + 1) - xOffSet;
+            geometry[i * width * numFloatsPerLattice + j * numFloatsPerLattice + 9] = latticeCellHeight * i - xOffSet;
             geometry[i * width * numFloatsPerLattice + j * numFloatsPerLattice + 10] = latticeCellWidth * (j % width) - yOffset;
             geometry[i * width * numFloatsPerLattice + j * numFloatsPerLattice + 11] = 0.0;
             
-            //top left
-            geometry[i * width * numFloatsPerLattice + j * numFloatsPerLattice + 12] = latticeCellHeight * i - xOffSet;
+            //bottom left
+            geometry[i * width * numFloatsPerLattice + j * numFloatsPerLattice + 12] = latticeCellHeight * (i + 1) - xOffSet;
             geometry[i * width * numFloatsPerLattice + j * numFloatsPerLattice + 13] = latticeCellWidth * (j % width) - yOffset;
             geometry[i * width * numFloatsPerLattice + j * numFloatsPerLattice + 14] = 0.0;
+            
+            //bottom right
+            geometry[i * width * numFloatsPerLattice + j * numFloatsPerLattice + 15] = latticeCellHeight * (i + 1) - xOffSet;
+            geometry[i * width * numFloatsPerLattice + j * numFloatsPerLattice + 16] = latticeCellWidth * ((j) % width + 1) - yOffset;
+            geometry[i * width * numFloatsPerLattice + j * numFloatsPerLattice + 17] = 0.0;
         }
     }
     
@@ -150,6 +172,9 @@ GLfloat* makeLattice(size_t height, size_t width) {
     glUniform1f(wavePeriodUniform, wavePeriod);
     GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(0.610865238, 1024/768, 0.01, 100);
     glUniformMatrix4fv(modelViewProjectMatrixUniform, 1, GL_FALSE, GLKMatrix4Multiply(projectionMatrix, GLKMatrix4MakeLookAt(0.0, 0.0, 2.0, 0.0,0.0, 0.0, 0.0, 1.0, 0.0)).m);
+    glBindTexture(GL_TEXTURE_2D, textureName);
+    glUniform1i(textureUniform, 0);
+    
 }
 
 -(void) draw

@@ -145,6 +145,9 @@
 
     [self.backgroundAsset prepareToDraw];
     [self.backgroundAsset draw];
+    
+    //to prevent the background from covering up foreground stuff
+    glClear(GL_DEPTH_BUFFER_BIT);
 }
 
 -(void) drawToMainView
