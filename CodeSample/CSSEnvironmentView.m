@@ -9,9 +9,7 @@
 #import "CSSEnvironmentView.h"
 #import "CSSAsset.h"
 #import "CSSEnvironmentVariables.h"
-//test
-#import "CSSTileAsset.h"
-//test
+
 @interface CSSEnvironmentView()
 {
     GLuint viewFrameBuffer;
@@ -117,49 +115,52 @@
     return self;
 }
 
--(void) drawFrame:(CADisplayLink *)displayLink
+-(void) makeBlurTextureCurrentTexture
+{
+    
+}
+
+-(void) drawBackground
 {
     
     [EAGLContext setCurrentContext: self.glESContext];
-    [super drawFrame: displayLink];
     //draw background asset to texture
     
     glBindFramebuffer(GL_FRAMEBUFFER, blurFrameBuffer);
-//    glBindRenderbuffer(GL_RENDERBUFFER, blurTexture);
     
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     [self.backgroundAsset prepareToDraw];
     [self.backgroundAsset draw];
-    
-    //blur background asset and set up texture access
-    
-    //draw background texture
-    
-    //draw tile textures
-    
-    const GLenum discards[1] = {GL_DEPTH_ATTACHMENT};
+}
+
+-(void) prepareToDrawMainView
+{
     
     glBindFramebuffer(GL_FRAMEBUFFER, viewFrameBuffer);
     
     glBindRenderbuffer(GL_RENDERBUFFER, colorRenderBuffer);
-    
+
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    [self.backgroundAsset prepareToDraw];
+    [self.backgroundAsset draw];
+}
+
+-(void) drawToMainView
+{
     
-    for (CSSAsset* currAsset in self.assets) {
-        
-        if ([currAsset isKindOfClass: [CSSTileAsset class]]) {
-            
-            [((CSSTileAsset*)currAsset) prepareToDrawWithTransformation: self.environmentVars.modelViewProjectionMatrix texture: blurTexture];
-        }
-        
-        [currAsset prepareToDraw];
-        [currAsset draw];
-    }
+    const GLenum discards[1] = {GL_DEPTH_ATTACHMENT};
     
     glDiscardFramebufferEXT(GL_FRAMEBUFFER, 1, discards);
     
     [self.glESContext presentRenderbuffer: GL_RENDERBUFFER];
+}
+
+-(GLuint) blurViewTextureName
+{
+    
+    return blurTexture;
 }
 
 @end

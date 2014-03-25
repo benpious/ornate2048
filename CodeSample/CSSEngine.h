@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-const NSUInteger emptyValue = 0;
-const NSUInteger boardSize = 4;
-const NSUInteger amountToMultiplyBy = 2;
-const NSUInteger winningTotal = 2048;
+const NSUInteger emptyValue;
+const NSUInteger boardSize;
+const NSUInteger amountToMultiplyBy;
+const NSUInteger winningTotal;
 /**
  Engine for running the game.
  */
@@ -58,5 +58,10 @@ const NSUInteger winningTotal = 2048;
  Checks if player has won
  */
 -(BOOL) hasWon;
-
+/**
+ Returns a representation of the game board in the following format: An NSArray
+ of NSArrays containing NSNumbers.
+ */
+-(NSArray*) getBoard;
+-(void) enumerateCellsWithBlock: (void(^)(NSUInteger xIndex, NSUInteger yIndex, NSNumber* currNumber)) block;
 @end

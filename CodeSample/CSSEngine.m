@@ -8,6 +8,11 @@
 
 #import "CSSEngine.h"
 
+const NSUInteger emptyValue = 0;
+const NSUInteger boardSize = 4;
+const NSUInteger amountToMultiplyBy = 2;
+const NSUInteger winningTotal = 2048;
+
 @interface CSSEngine()
 
 @property NSArray* cellColumns;
@@ -127,7 +132,12 @@ NSUInteger randomNewValue() {
 
 -(void) placeCellWithValue: (NSUInteger) value x: (NSUInteger) x y: (NSUInteger) y
 {
-    self.cellColumns[x][y] = [NSNumber numberWithInteger: value];
+    
+    NSMutableArray* mutableCellColumns = [NSMutableArray arrayWithArray: self.cellColumns];
+    NSMutableArray* mutableRow = [NSMutableArray arrayWithArray: self.cellColumns[x]];
+    mutableRow[y] = [NSNumber numberWithInteger: value];
+    mutableCellColumns[x] = mutableRow;
+    self.cellColumns = [NSArray arrayWithArray: mutableCellColumns];
 }
 
 -(void) slideDown
@@ -379,6 +389,12 @@ NSUInteger randomNewValue() {
     }];
     
     return validMoveExists;
+}
+
+-(NSArray*) getBoard
+{
+    
+    return [self.cellColumns copy];
 }
 
 @end

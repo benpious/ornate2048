@@ -14,6 +14,12 @@ void main()
     color += texture2D(texture, mutableVertPos - stepSize) * 0.0596;
     color += texture2D(texture, mutableVertPos - stepSize * 2.0) * 0.0133;
     color += texture2D(texture, mutableVertPos - stepSize * 3.0) * 0.003;
+    mutableVertPos.x+= stepSize;
+    color += texture2D(texture, mutableVertPos) * 0.0983;
+    mutableVertPos.x+= stepSize;
+    color += texture2D(texture, mutableVertPos) * 0.0219;
+    mutableVertPos.x+= stepSize;
+    color += texture2D(texture, mutableVertPos) * 0.003;
     
     gl_FragColor = color * vec4(fassetColor, 1.0);
 }

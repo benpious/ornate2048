@@ -11,7 +11,7 @@
 #import "CSSShaderProgramObject.h"
 #import "CSSAsset_internal.h"
 
-const NSUInteger tileStepSize = .4;
+const NSUInteger tileStepSize = .95;
 
 @interface CSSTileAsset()
 {
@@ -29,12 +29,13 @@ const NSUInteger tileStepSize = .4;
 
 -(id) initWithContext: (EAGLContext*) context
 {
-    GLfloat geometryArray[18] = {0.2, 0.0, 0.0,
-        0.2, 0.2, 0.0,
-        0.0, 0.2, 0.0,
-        0.2, 0.0, 0.0,
-        0.0, 0.2, 0.0,
-        0.2, 0.2, 0.0};
+    GLfloat geometryArray[18] = {
+                                    0.0, 0.2, 0.1,
+                                    0.2, 0.2, 0.1,
+                                    0.2, 0.0, 0.1,
+                                    0.2, 0.0, 0.1,
+                                    0.0, 0.0, 0.1,
+                                    0.0, 0.2, 0.1};
     
     GLfloat* geometry = &(geometryArray[0]);
     
@@ -48,7 +49,7 @@ const NSUInteger tileStepSize = .4;
                              attribute vec4 position;
                              attribute vec3 assetColor;
                              */
-                            self.numVertices = 18;
+                            self.numVertices = 6;
                             glBindVertexArrayOES(self.vaoID);
                             CSSShaderProgramObject* vertObject = self.shaderProgram.attributes[@"position"];
                             glGenBuffers(1, &vertices);
@@ -59,7 +60,7 @@ const NSUInteger tileStepSize = .4;
                             
                             CSSShaderProgramObject* colorObject = self.shaderProgram.attributes[@"assetColor"];
                             color = colorObject.glName;
-                            glVertexAttrib3f(color, 0.5, 0.5, 0.5);
+                            glVertexAttrib3f(color, 1.0, 1.0, 1.0);
                             
                             //get uniforms
                             /*
@@ -116,6 +117,16 @@ const NSUInteger tileStepSize = .4;
     glBindTexture(GL_TEXTURE_2D, texture);
     glUniform1i(textureUniform, 0);
     glUniformMatrix4fv(modelViewProjectionMatrixUniform, 1, GL_FALSE, transformation.m);
+}
+
+-(void) prepareToDrawWithTransformation: (GLKMatrix4) transformation texture: (GLuint) texture color: (UIColor*) colorObject
+{
+    
+    [self prepareToDrawWithTransformation: transformation texture: texture];
+    CGFloat colors[3];
+    [colorObject getRed: &colors[0] green: &colors[1] blue: &colors[2] alpha: NULL];
+    
+    glVertexAttrib3f(color, colors[0], colors[1], colors[2]);
 }
 
 -(void) draw

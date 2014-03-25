@@ -15,4 +15,6 @@ const NSUInteger tileStepSize;
 
 -(id) initWithContext: (EAGLContext*) context;
 -(void) prepareToDrawWithTransformation: (GLKMatrix4) transformation texture: (GLuint) texture;
+-(void) prepareToDrawWithTransformation: (GLKMatrix4) transformation texture: (GLuint) texture color: (UIColor*) colorObject;
+
 @end

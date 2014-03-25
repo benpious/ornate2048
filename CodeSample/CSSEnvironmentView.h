@@ -20,4 +20,24 @@
  */
 @property CSSEnvironmentVariables* environmentVars;
 
-@end
+/**
+ Draws the background to the texture
+ */
+-(void) drawBackground;
+/**
+ Binds the framebuffer and renderbuffer to draw to the view.
+ */
+-(void) prepareToDrawMainView;
+/**
+ Presents the renderbuffer. 
+ */
+-(void) drawToMainView;
+/**
+ Makes the blur texture the current active texture.
+ */
+-(void) makeBlurTextureCurrentTexture;
+/**
+ returns the openGL name of the blur texture
+ */
+-(GLuint) blurViewTextureName;
+ @end

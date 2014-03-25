@@ -39,6 +39,10 @@
 		3B2AFCDE18DCEA9F00B5E824 /* CSSRigidBodyTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B2AFCDD18DCEA9F00B5E824 /* CSSRigidBodyTransform.m */; };
 		3B2AFCE118DCEC6200B5E824 /* CSSShaderProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B2AFCE018DCEC6200B5E824 /* CSSShaderProgram.m */; };
 		3B2AFCE718DD16CA00B5E824 /* CSSEnvironmentVariables.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B2AFCE618DD16CA00B5E824 /* CSSEnvironmentVariables.m */; };
+		3B369D9C18E0F7F100A05622 /* CSSGameController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B369D9B18E0F7F100A05622 /* CSSGameController.m */; };
+		3B369DA018E0FA6F00A05622 /* CSSTileMove.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B369D9F18E0FA6F00A05622 /* CSSTileMove.m */; };
+		3B369DA318E0FAB100A05622 /* CSSPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B369DA218E0FAB100A05622 /* CSSPoint.m */; };
+		3B369DA618E1004500A05622 /* CSSTileAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B369DA518E1004500A05622 /* CSSTileAnimation.m */; };
 		3B6B5D2B18DE3F12000260DF /* CSSEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6B5D2A18DE3F12000260DF /* CSSEngine.m */; };
 		3BCC94EB18DFD9F900A2A7A5 /* CSSBasicAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCC94EA18DFD9F900A2A7A5 /* CSSBasicAsset.m */; };
 		3BCC94ED18DFDBF900A2A7A5 /* Basic.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3BCC94EC18DFDBF900A2A7A5 /* Basic.vsh */; };
@@ -104,6 +108,14 @@
 		3B2AFCE018DCEC6200B5E824 /* CSSShaderProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSShaderProgram.m; sourceTree = "<group>"; };
 		3B2AFCE518DD16CA00B5E824 /* CSSEnvironmentVariables.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSEnvironmentVariables.h; sourceTree = "<group>"; };
 		3B2AFCE618DD16CA00B5E824 /* CSSEnvironmentVariables.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSEnvironmentVariables.m; sourceTree = "<group>"; };
+		3B369D9A18E0F7F100A05622 /* CSSGameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSGameController.h; sourceTree = "<group>"; };
+		3B369D9B18E0F7F100A05622 /* CSSGameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSGameController.m; sourceTree = "<group>"; };
+		3B369D9E18E0FA6F00A05622 /* CSSTileMove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSTileMove.h; sourceTree = "<group>"; };
+		3B369D9F18E0FA6F00A05622 /* CSSTileMove.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSTileMove.m; sourceTree = "<group>"; };
+		3B369DA118E0FAB100A05622 /* CSSPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSPoint.h; sourceTree = "<group>"; };
+		3B369DA218E0FAB100A05622 /* CSSPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSPoint.m; sourceTree = "<group>"; };
+		3B369DA418E1004500A05622 /* CSSTileAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSTileAnimation.h; sourceTree = "<group>"; };
+		3B369DA518E1004500A05622 /* CSSTileAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSTileAnimation.m; sourceTree = "<group>"; };
 		3B6B5D2918DE3F12000260DF /* CSSEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSEngine.h; sourceTree = "<group>"; };
 		3B6B5D2A18DE3F12000260DF /* CSSEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSEngine.m; sourceTree = "<group>"; };
 		3B868DED18DE4DA90091DF25 /* CSSEngine_internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSSEngine_internal.h; sourceTree = "<group>"; };
@@ -209,6 +221,14 @@
 				3B868DEE18DE73B40091DF25 /* CSSEngineTileMovementDelegate.h */,
 				3B1DDBE018DF533800115C4B /* CSSMainViewController.h */,
 				3B1DDBE118DF533800115C4B /* CSSMainViewController.m */,
+				3B369D9A18E0F7F100A05622 /* CSSGameController.h */,
+				3B369D9B18E0F7F100A05622 /* CSSGameController.m */,
+				3B369DA118E0FAB100A05622 /* CSSPoint.h */,
+				3B369DA218E0FAB100A05622 /* CSSPoint.m */,
+				3B369D9E18E0FA6F00A05622 /* CSSTileMove.h */,
+				3B369D9F18E0FA6F00A05622 /* CSSTileMove.m */,
+				3B369DA418E1004500A05622 /* CSSTileAnimation.h */,
+				3B369DA518E1004500A05622 /* CSSTileAnimation.m */,
 				3B2AFCD418DCE9FE00B5E824 /* OpenGL */,
 				3B2AFCA918DCCA7800B5E824 /* Images.xcassets */,
 				3B2AFC9E18DCCA7800B5E824 /* Supporting Files */,
@@ -387,16 +407,20 @@
 				3B1DDBD518DF49D200115C4B /* CSSShaderProgramObject.m in Sources */,
 				3B1DDBDF18DF52FD00115C4B /* CSSGameViewController.m in Sources */,
 				3B1DDBF618DF6CC100115C4B /* CSSBackgroundAsset.m in Sources */,
+				3B369D9C18E0F7F100A05622 /* CSSGameController.m in Sources */,
 				3B2AFCDE18DCEA9F00B5E824 /* CSSRigidBodyTransform.m in Sources */,
 				3B2AFCE118DCEC6200B5E824 /* CSSShaderProgram.m in Sources */,
 				3B2AFCD318DCE54500B5E824 /* CSSAsset.m in Sources */,
 				3B6B5D2B18DE3F12000260DF /* CSSEngine.m in Sources */,
+				3B369DA318E0FAB100A05622 /* CSSPoint.m in Sources */,
+				3B369DA618E1004500A05622 /* CSSTileAnimation.m in Sources */,
 				3B2AFCE718DD16CA00B5E824 /* CSSEnvironmentVariables.m in Sources */,
 				3B1DDBD918DF51BE00115C4B /* CSSEnvironmentView.m in Sources */,
 				3B2AFCD018DCE41700B5E824 /* CSSGLESView.m in Sources */,
 				3BCC94EB18DFD9F900A2A7A5 /* CSSBasicAsset.m in Sources */,
 				3B1DDBE218DF533800115C4B /* CSSMainViewController.m in Sources */,
 				3B1DDBF218DF6AD000115C4B /* CSSTileAsset.m in Sources */,
+				3B369DA018E0FA6F00A05622 /* CSSTileMove.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

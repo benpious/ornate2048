@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-
 /**
  Displays the main game. 
  */
