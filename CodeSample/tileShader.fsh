@@ -35,6 +35,6 @@ void main()
     color += texture2D(texture, mutableVertPos) * 0.04;
     
     lowp vec4 letterColor = texture2D(letterTexture, ftexCoords);
-    lowp vec4 shapeColor = texture2D(backGroundTexture, ftexCoords);
-    gl_FragColor = (color * vec4(fassetColor + .4, 1.0) + letterColor) * shapeColor.w;
+    lowp float alpha = texture2D(backGroundTexture, ftexCoords).a;
+    gl_FragColor = vec4(vec3(color * vec4(fassetColor + .4, 1.0) + letterColor), alpha);
 }

@@ -125,7 +125,8 @@ const float tileStepSize = .25;
                                 
                                 GLKTextureInfo* textureInfo = [GLKTextureLoader textureWithContentsOfFile: [[NSBundle mainBundle] pathForResource: [NSString stringWithFormat: @"%ld", (long)i]
                                                                                                                                            ofType: @"png"]
-                                                                                                  options: @{GLKTextureLoaderGenerateMipmaps: @NO}
+                                                                                                  options: @{GLKTextureLoaderGenerateMipmaps: @NO,
+                                                                                                             GLKTextureLoaderApplyPremultiplication: @NO}
                                                                                                     error: &error];
                                 letterTextureNames[index++] = textureInfo.name;
                                 
