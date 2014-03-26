@@ -21,6 +21,7 @@
 		3B1DDBF618DF6CC100115C4B /* CSSBackgroundAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B1DDBF518DF6CC100115C4B /* CSSBackgroundAsset.m */; };
 		3B1DDBFA18DF918100115C4B /* WaveShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B1DDBF818DF918100115C4B /* WaveShader.fsh */; };
 		3B1DDBFB18DF918100115C4B /* WaveShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B1DDBF918DF918100115C4B /* WaveShader.vsh */; };
+		3B1E790218E1EDEE00636207 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 3B1E790118E1EDEE00636207 /* README */; };
 		3B2AFC9818DCCA7800B5E824 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2AFC9718DCCA7800B5E824 /* Foundation.framework */; };
 		3B2AFC9A18DCCA7800B5E824 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2AFC9918DCCA7800B5E824 /* CoreGraphics.framework */; };
 		3B2AFC9C18DCCA7800B5E824 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2AFC9B18DCCA7800B5E824 /* UIKit.framework */; };
@@ -42,8 +43,18 @@
 		3B369DA018E0FA6F00A05622 /* CSSTileMove.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B369D9F18E0FA6F00A05622 /* CSSTileMove.m */; };
 		3B369DA318E0FAB100A05622 /* CSSPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B369DA218E0FAB100A05622 /* CSSPoint.m */; };
 		3B369DA618E1004500A05622 /* CSSTileAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B369DA518E1004500A05622 /* CSSTileAnimation.m */; };
-		3B369DA818E13D8B00A05622 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B369DA718E13D8B00A05622 /* background.png */; };
 		3B369DAA18E1408A00A05622 /* aqua.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B369DA918E1408A00A05622 /* aqua.png */; };
+		3B5AE54318E1E7F600BF3DD8 /* 8.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B5AE53918E1E7F600BF3DD8 /* 8.png */; };
+		3B5AE54418E1E7F600BF3DD8 /* 2048.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B5AE53A18E1E7F600BF3DD8 /* 2048.png */; };
+		3B5AE54518E1E7F600BF3DD8 /* 512.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B5AE53B18E1E7F600BF3DD8 /* 512.png */; };
+		3B5AE54618E1E7F600BF3DD8 /* 1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B5AE53C18E1E7F600BF3DD8 /* 1024.png */; };
+		3B5AE54718E1E7F600BF3DD8 /* 128.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B5AE53D18E1E7F600BF3DD8 /* 128.png */; };
+		3B5AE54818E1E7F600BF3DD8 /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B5AE53E18E1E7F600BF3DD8 /* 2.png */; };
+		3B5AE54918E1E7F600BF3DD8 /* 16.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B5AE53F18E1E7F600BF3DD8 /* 16.png */; };
+		3B5AE54A18E1E7F600BF3DD8 /* 32.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B5AE54018E1E7F600BF3DD8 /* 32.png */; };
+		3B5AE54B18E1E7F600BF3DD8 /* 4.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B5AE54118E1E7F600BF3DD8 /* 4.png */; };
+		3B5AE54C18E1E7F600BF3DD8 /* 64.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B5AE54218E1E7F600BF3DD8 /* 64.png */; };
+		3B5AE54F18E1EA6100BF3DD8 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B5AE54E18E1EA6100BF3DD8 /* 1.png */; };
 		3B6B5D2B18DE3F12000260DF /* CSSEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6B5D2A18DE3F12000260DF /* CSSEngine.m */; };
 		3BCC94EB18DFD9F900A2A7A5 /* CSSBasicAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCC94EA18DFD9F900A2A7A5 /* CSSBasicAsset.m */; };
 		3BCC94ED18DFDBF900A2A7A5 /* Basic.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3BCC94EC18DFDBF900A2A7A5 /* Basic.vsh */; };
@@ -82,6 +93,7 @@
 		3B1DDBF718DF8C7C00115C4B /* CSSAsset_internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSSAsset_internal.h; sourceTree = "<group>"; };
 		3B1DDBF818DF918100115C4B /* WaveShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = WaveShader.fsh; sourceTree = "<group>"; };
 		3B1DDBF918DF918100115C4B /* WaveShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = WaveShader.vsh; sourceTree = "<group>"; };
+		3B1E790118E1EDEE00636207 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		3B2AFC9418DCCA7800B5E824 /* CodeSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodeSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B2AFC9718DCCA7800B5E824 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3B2AFC9918DCCA7800B5E824 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -115,8 +127,18 @@
 		3B369DA218E0FAB100A05622 /* CSSPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSPoint.m; sourceTree = "<group>"; };
 		3B369DA418E1004500A05622 /* CSSTileAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSTileAnimation.h; sourceTree = "<group>"; };
 		3B369DA518E1004500A05622 /* CSSTileAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSTileAnimation.m; sourceTree = "<group>"; };
-		3B369DA718E13D8B00A05622 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		3B369DA918E1408A00A05622 /* aqua.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aqua.png; sourceTree = "<group>"; };
+		3B5AE53918E1E7F600BF3DD8 /* 8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 8.png; sourceTree = "<group>"; };
+		3B5AE53A18E1E7F600BF3DD8 /* 2048.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2048.png; sourceTree = "<group>"; };
+		3B5AE53B18E1E7F600BF3DD8 /* 512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 512.png; sourceTree = "<group>"; };
+		3B5AE53C18E1E7F600BF3DD8 /* 1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1024.png; sourceTree = "<group>"; };
+		3B5AE53D18E1E7F600BF3DD8 /* 128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 128.png; sourceTree = "<group>"; };
+		3B5AE53E18E1E7F600BF3DD8 /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
+		3B5AE53F18E1E7F600BF3DD8 /* 16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 16.png; sourceTree = "<group>"; };
+		3B5AE54018E1E7F600BF3DD8 /* 32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 32.png; sourceTree = "<group>"; };
+		3B5AE54118E1E7F600BF3DD8 /* 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4.png; sourceTree = "<group>"; };
+		3B5AE54218E1E7F600BF3DD8 /* 64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 64.png; sourceTree = "<group>"; };
+		3B5AE54E18E1EA6100BF3DD8 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
 		3B6B5D2918DE3F12000260DF /* CSSEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSEngine.h; sourceTree = "<group>"; };
 		3B6B5D2A18DE3F12000260DF /* CSSEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSEngine.m; sourceTree = "<group>"; };
 		3B868DED18DE4DA90091DF25 /* CSSEngine_internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSSEngine_internal.h; sourceTree = "<group>"; };
@@ -215,6 +237,7 @@
 		3B2AFC9D18DCCA7800B5E824 /* CodeSample */ = {
 			isa = PBXGroup;
 			children = (
+				3B1E790118E1EDEE00636207 /* README */,
 				3B2AFCA618DCCA7800B5E824 /* CSSAppDelegate.h */,
 				3B2AFCA718DCCA7800B5E824 /* CSSAppDelegate.m */,
 				3B6B5D2918DE3F12000260DF /* CSSEngine.h */,
@@ -270,8 +293,7 @@
 		3B2AFCD418DCE9FE00B5E824 /* OpenGL */ = {
 			isa = PBXGroup;
 			children = (
-				3B369DA718E13D8B00A05622 /* background.png */,
-				3B369DA918E1408A00A05622 /* aqua.png */,
+				3B5AE54D18E1E7FA00BF3DD8 /* textures */,
 				3B1DDBDD18DF52FD00115C4B /* CSSGameViewController.h */,
 				3B1DDBDE18DF52FD00115C4B /* CSSGameViewController.m */,
 				3B2AFCCE18DCE41700B5E824 /* CSSGLESView.h */,
@@ -292,6 +314,25 @@
 				3B1DDBE318DF539E00115C4B /* Shaders */,
 			);
 			name = OpenGL;
+			sourceTree = "<group>";
+		};
+		3B5AE54D18E1E7FA00BF3DD8 /* textures */ = {
+			isa = PBXGroup;
+			children = (
+				3B5AE54E18E1EA6100BF3DD8 /* 1.png */,
+				3B369DA918E1408A00A05622 /* aqua.png */,
+				3B5AE53918E1E7F600BF3DD8 /* 8.png */,
+				3B5AE53A18E1E7F600BF3DD8 /* 2048.png */,
+				3B5AE53B18E1E7F600BF3DD8 /* 512.png */,
+				3B5AE53C18E1E7F600BF3DD8 /* 1024.png */,
+				3B5AE53D18E1E7F600BF3DD8 /* 128.png */,
+				3B5AE53E18E1E7F600BF3DD8 /* 2.png */,
+				3B5AE53F18E1E7F600BF3DD8 /* 16.png */,
+				3B5AE54018E1E7F600BF3DD8 /* 32.png */,
+				3B5AE54118E1E7F600BF3DD8 /* 4.png */,
+				3B5AE54218E1E7F600BF3DD8 /* 64.png */,
+			);
+			name = textures;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -373,18 +414,29 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B5AE54F18E1EA6100BF3DD8 /* 1.png in Resources */,
+				3B5AE54B18E1E7F600BF3DD8 /* 4.png in Resources */,
+				3B5AE54918E1E7F600BF3DD8 /* 16.png in Resources */,
 				3BCC94ED18DFDBF900A2A7A5 /* Basic.vsh in Resources */,
 				3B2AFCA218DCCA7800B5E824 /* InfoPlist.strings in Resources */,
-				3B369DA818E13D8B00A05622 /* background.png in Resources */,
+				3B5AE54518E1E7F600BF3DD8 /* 512.png in Resources */,
 				3B369DAA18E1408A00A05622 /* aqua.png in Resources */,
 				3B1DDBEF18DF53FD00115C4B /* blurshader.fsh in Resources */,
 				3B2AFCAA18DCCA7800B5E824 /* Images.xcassets in Resources */,
+				3B5AE54C18E1E7F600BF3DD8 /* 64.png in Resources */,
 				3B1DDBEB18DF53CE00115C4B /* backgroundFragmentShader.fsh in Resources */,
+				3B5AE54318E1E7F600BF3DD8 /* 8.png in Resources */,
 				3B1DDBE718DF53B800115C4B /* tileShader.fsh in Resources */,
+				3B5AE54718E1E7F600BF3DD8 /* 128.png in Resources */,
+				3B5AE54618E1E7F600BF3DD8 /* 1024.png in Resources */,
 				3B1DDBFB18DF918100115C4B /* WaveShader.vsh in Resources */,
 				3B1DDBE918DF53C400115C4B /* backgroundVertexShader.vsh in Resources */,
+				3B5AE54A18E1E7F600BF3DD8 /* 32.png in Resources */,
 				3B1DDBE518DF53B100115C4B /* tileShader.vsh in Resources */,
 				3B1DDBFA18DF918100115C4B /* WaveShader.fsh in Resources */,
+				3B1E790218E1EDEE00636207 /* README in Resources */,
+				3B5AE54418E1E7F600BF3DD8 /* 2048.png in Resources */,
+				3B5AE54818E1E7F600BF3DD8 /* 2.png in Resources */,
 				3BCC94EF18DFDC0100A2A7A5 /* Basic.fsh in Resources */,
 				3B1DDBED18DF53F500115C4B /* blurShader.vsh in Resources */,
 			);

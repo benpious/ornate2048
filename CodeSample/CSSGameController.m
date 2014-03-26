@@ -9,6 +9,12 @@
 #import "CSSGameController.h"
 #import "CSSTileAsset.h"
 #import "CSSEngine.h"
+#import "CSSTileMove.h"
+#import "CSSTileAnimation.h"
+#import "CSSPoint.h"
+
+const float xOffset = 0.5;
+const float yOffset = 0.5;
 
 @interface CSSGameController()
 
@@ -16,6 +22,7 @@
 @property NSDictionary* tilesToColors;
 @property CSSEngine* engine;
 @property NSDictionary* numbersToColors;
+@property NSMutableDictionary* currAnimations;
 
 @end
 
@@ -43,6 +50,8 @@
                                           @2048: [UIColor blueColor]
                                           };
         
+        self.currAnimations = [NSMutableDictionary dictionary];
+        
     }
     
     return self;
@@ -51,25 +60,71 @@
 -(void) drawBoardWithmodelViewProjectionMatrix: (GLKMatrix4) modelViewProjectionMatrix texture: (GLuint) texture;
 {
     
-    float xOffset = 0.5;
-    float yOffset = 0.5;
-    
     [self.engine enumerateCellsWithBlock: ^(NSUInteger xIndex, NSUInteger yIndex, NSNumber *currNumber) {
        
-        GLKMatrix4 translation = GLKMatrix4MakeTranslation(xIndex * tileStepSize - xOffset, yIndex * tileStepSize - yOffset, 0.0);
+        /*
+        GLKMatrix4 translation;
+        CSSPoint* destinationPoint = [[CSSPoint alloc] initWithX: yIndex
+                                                               y: xIndex];
+        
+        CSSTileAnimation* animationForPoint = self.currAnimations[destinationPoint];
+        if (animationForPoint) {
+            
+            translation = animationForPoint.currentTransformation;
+            
+            animationForPoint.animationTime += .1;
+            if (animationForPoint.animationTime > animationForPoint.totalAnimationTime) {
+                
+                [self.currAnimations removeObjectForKey: destinationPoint];
+            }
+        }
+        
+        else {
+            
+            translation = GLKMatrix4MakeTranslation(xIndex * tileStepSize - xOffset, yIndex * tileStepSize - yOffset, currNumber.integerValue ? 0.0 : -0.01);
+        }
         
         [self.tileAsset prepareToDrawWithTransformation: GLKMatrix4Multiply(modelViewProjectionMatrix, translation)
                                                 texture: texture
-                                                color: self.numbersToColors[currNumber]];
+                                                  color: self.numbersToColors[currNumber]
+                                           integerValue: currNumber.integerValue ];
+        
+        */
+        
+        GLKMatrix4 translation = GLKMatrix4MakeTranslation(xIndex * tileStepSize - xOffset, yIndex * tileStepSize - yOffset, currNumber.integerValue ? 0.0 : -0.01);
+        [self.tileAsset prepareToDrawWithTransformation: GLKMatrix4Multiply(modelViewProjectionMatrix, translation)
+                                                texture: texture
+                                                  color: self.numbersToColors[currNumber]
+                                           integerValue: currNumber.integerValue ];
         
         [self.tileAsset draw];
-        
     }];
 }
 
--(void) tilesNeedRedraw: (NSArray *)tileUpdates
+-(void) addTileMoves: (NSArray*) tileMoves;
 {
     
+    //convert each tile move into an animation
+    for (CSSTileMove* currMove in tileMoves) {
+        
+        CSSTileAnimation* tileAnimation = [[CSSTileAnimation alloc] init];
+        tileAnimation.beginningTransform = GLKMatrix4MakeTranslation(currMove.start.x * tileStepSize - xOffset, currMove.start.y * tileStepSize - yOffset, 0.0);
+        tileAnimation.endingTransformation = GLKMatrix4MakeTranslation(currMove.destination.x * tileStepSize - xOffset, currMove.destination.y * tileStepSize - yOffset, 0.0);
+        
+        
+        [self.currAnimations setObject: tileAnimation forKey: currMove.destination];
+    }
+}
+
+-(BOOL) currentlyAnimating
+{
+    
+    if (self.currAnimations.count) {
+        
+        return YES;
+    }
+    
+    return NO;
 }
 
 @end

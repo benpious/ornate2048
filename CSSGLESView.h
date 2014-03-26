@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 /**
-    A view with an OpenGL context.
+    A view with an OpenGL context. Should be subclassed -- does notthing of value on its own. 
  */
 @interface CSSGLESView : UIView
 

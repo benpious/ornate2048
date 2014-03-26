@@ -19,6 +19,9 @@ const float tileStepSize = .25;
     GLuint color;
     GLuint modelViewProjectionMatrixUniform;
     GLuint textureUniform;
+    //GLuint letterTextureUniform;
+    
+    //GLuint* letterTextureNames;
 }
 
 @property (assign) GLsizei numVertices;
@@ -73,6 +76,29 @@ const float tileStepSize = .25;
                             
                             CSSShaderProgramObject* textureObject = self.shaderProgram.uniforms[@"texture"];
                             textureUniform = textureObject.glName;
+                            
+                            /*
+                            CSSShaderProgramObject* letterTextureObject = self.shaderProgram.uniforms[@"letterTexture"];
+                            textureUniform = textureObject.glName;
+                            
+                            letterTextureNames = malloc(sizeof(GLuint) * 11);
+                            
+                            __autoreleasing NSError* error = nil;
+                            
+                            
+                            for (NSInteger i = 1; i < 12; i++) {
+                            
+                                NSString* test = [NSString stringWithFormat: @"%ld", (long)i];
+                                
+                                GLKTextureInfo* textureInfo = [GLKTextureLoader textureWithContentsOfFile: [[NSBundle mainBundle] pathForResource: [NSString stringWithFormat: @"%ld", (long)i]
+                                                                                                                                           ofType: @"png"]
+                                                                                                  options: @{GLKTextureLoaderGenerateMipmaps: @NO}
+                                                                                                    error: &error];
+                                letterTextureNames[i - 1] = textureInfo.name;
+                            }
+                            */
+                            
+                            
                             glBindVertexArrayOES(0);
                         }
     
@@ -88,7 +114,6 @@ const float tileStepSize = .25;
         self.modelViewMatrix = GLKMatrix4MakeTranslation(x * tileStepSize, y * tileStepSize, 0);
         glUniformMatrix4fv(modelViewProjectionMatrixUniform, 1, GL_FALSE, self.modelViewMatrix.m);
         glVertexAttrib3fv(color, colorValues);
-        glBindVertexArrayOES(0);
     }
     
     return self;
@@ -96,6 +121,10 @@ const float tileStepSize = .25;
 
 -(void)  dealloc
 {
+    
+//    free(letterTextureNames);
+    
+    
     [EAGLContext setCurrentContext: self.context];
     glDeleteBuffers(1, &vertices);
 }
@@ -119,14 +148,17 @@ const float tileStepSize = .25;
     glUniformMatrix4fv(modelViewProjectionMatrixUniform, 1, GL_FALSE, transformation.m);
 }
 
--(void) prepareToDrawWithTransformation: (GLKMatrix4) transformation texture: (GLuint) texture color: (UIColor*) colorObject
+-(void) prepareToDrawWithTransformation: (GLKMatrix4) transformation texture: (GLuint) texture color: (UIColor*) colorObject integerValue: (NSUInteger) integerValue
 {
     
     [self prepareToDrawWithTransformation: transformation texture: texture];
     CGFloat colors[3];
     [colorObject getRed: &colors[0] green: &colors[1] blue: &colors[2] alpha: NULL];
     
+//    glUniform1i(letterTextureUniform, 1);
+//    glBindTexture(GL_TEXTURE1, letterTextureNames[integerValue]);
     glVertexAttrib3f(color, colors[0], colors[1], colors[2]);
+    
 }
 
 -(void) draw

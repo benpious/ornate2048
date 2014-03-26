@@ -12,6 +12,7 @@ const NSUInteger emptyValue;
 const NSUInteger boardSize;
 const NSUInteger amountToMultiplyBy;
 const NSUInteger winningTotal;
+
 /**
  Engine for running the game.
  */
@@ -22,34 +23,34 @@ const NSUInteger winningTotal;
  */
 -(id) initNewGame;
 /**
- Clears the board and make a new game.
+ Clears the board and make a new game. Unanimated.
  */
 -(void) makeNewGame;
 /**
- Places a new random tile, a '2' with 90% probability and a 4 with 10%
+ Places a new random tile, a '2' with 90% probability and a 4 with 10%. Returns an array containing a game move object
  */
--(void) placeNewTile;
+-(NSArray*) placeNewTile;
 /**
  
  Returns YES if the player can still move, NO if not.
  */
 -(BOOL) validMoveStillExists;
 /**
- Slides the board's contents up.
+ Slides the board's contents up. Returns an array of game move objects -- this array can be empty.
  */
--(void) slideUp;
+-(NSArray*) slideUp;
 /**
- Slides the board's contents down.
+ Slides the board's contents down. Returns an array of game move objects -- this array can be empty.
  */
--(void) slideDown;
+-(NSArray*) slideDown;
 /**
- Slides the board's contents left.
+ Slides the board's contents left. Returns an array of game move objects -- this array can be empty.
  */
--(void) slideLeft;
+-(NSArray*) slideLeft;
 /**
- Slides the board's contents right.
+ Slides the board's contents right. Returns an array of game move objects -- this array can be empty.
  */
--(void) slideRight;
+-(NSArray*) slideRight;
 /**
  Return the number contained by the current square
  */
@@ -63,5 +64,9 @@ const NSUInteger winningTotal;
  of NSArrays containing NSNumbers.
  */
 -(NSArray*) getBoard;
+/**
+ enumerates the cells with a block. The xIndex and yIndex arguements are the coords of the current square, and currNumber
+ is the value contained in that square. 
+ */
 -(void) enumerateCellsWithBlock: (void(^)(NSUInteger xIndex, NSUInteger yIndex, NSNumber* currNumber)) block;
 @end

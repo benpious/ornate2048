@@ -109,6 +109,12 @@
 {
     UISwipeGestureRecognizer* swipeGestureRecognizer = (UISwipeGestureRecognizer*) recognizer;
     
+    /*
+    if ([self.gameController currentlyAnimating]) {
+        
+        return;
+    }
+    */
     
     /*
      
@@ -117,42 +123,49 @@
      
      */
     
+    NSArray* tileAnimations;
+    NSArray* placementAnimation;
+    
     switch (swipeGestureRecognizer.direction) {
             
         case UISwipeGestureRecognizerDirectionRight:
             
-            [self.gameEngine slideDown];
-            [self.gameEngine placeNewTile];
+            tileAnimations = [self.gameEngine slideDown];
+            placementAnimation =  [self.gameEngine placeNewTile];
             NSLog(@"swiping right");
             
             break;
             
         case UISwipeGestureRecognizerDirectionLeft:
             
-            [self.gameEngine slideUp];
-            [self.gameEngine placeNewTile];
+            tileAnimations = [self.gameEngine slideUp];
+            placementAnimation = [self.gameEngine placeNewTile];
             NSLog(@"swiping left");
             
             break;
             
         case UISwipeGestureRecognizerDirectionUp:
             
-            [self.gameEngine slideRight];
-            [self.gameEngine placeNewTile];
+            tileAnimations = [self.gameEngine slideRight];
+            placementAnimation = [self.gameEngine placeNewTile];
             NSLog(@"swiping up");
             
             break;
             
         case UISwipeGestureRecognizerDirectionDown:
             
-            [self.gameEngine slideLeft];
-            [self.gameEngine placeNewTile];
+            tileAnimations =  [self.gameEngine slideLeft];
+            placementAnimation = [self.gameEngine placeNewTile];
             NSLog(@"swiping down");
             break;
             
         default:
             break;
     }
+    
+    tileAnimations = [tileAnimations arrayByAddingObjectsFromArray: placementAnimation];
+    
+    [self.gameController addTileMoves: tileAnimations];
     
     if ([self.gameEngine hasWon]) {
         

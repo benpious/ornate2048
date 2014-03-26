@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <GLKit/GLKit.h>
 
+const float defaultMovementAnimationTime;
 /**
  Contains information about an individual animation to be applied to a tile
  */

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CSSPoint : NSObject
+@interface CSSPoint : NSObject <NSCopying>
 
 @property NSUInteger x;
 @property NSUInteger y;

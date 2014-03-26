@@ -15,6 +15,15 @@
 
 -(id) initWithContext: (EAGLContext*) context engine: (CSSEngine*) engine;
 -(void) drawBoardWithmodelViewProjectionMatrix: (GLKMatrix4) modelViewProjectionMatrix texture: (GLuint) texture;
--(void) tilesNeedRedraw: (NSArray*) tileUpdates;
 
+/**
+ 
+ Adds an array of animations. The animations parameter should be a list of tileMvoes
+ */
+-(void) addTileMoves: (NSArray*) tileMoves;
+
+/**
+ Returns yes if animations currently being executed, no if otherwise.
+ */
+-(BOOL) currentlyAnimating;
 @end

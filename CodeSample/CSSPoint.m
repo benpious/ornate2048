@@ -21,4 +21,27 @@
     return self;
 }
 
+-(id) copyWithZone:(NSZone *)zone
+{
+    CSSPoint* newPoint = [[CSSPoint alloc] init];
+    newPoint.x = self.x;
+    newPoint.y = self.y;
+    
+    return newPoint;
+}
+
+-(BOOL) isEqual:(id)object
+{
+    
+    if ([object isKindOfClass: [CSSPoint class]]) {
+        
+        CSSPoint* other = (CSSPoint*) object;
+        if (other.x == self.x && other.y == self.y) {
+            
+            return YES;
+        }
+    }
+    
+    return NO;
+}
 @end

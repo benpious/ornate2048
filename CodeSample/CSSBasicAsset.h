@@ -8,6 +8,9 @@
 
 #import "CSSAsset.h"
 
+/**
+ Draws a triangle in the corner of the screen. 
+ */
 @interface CSSBasicAsset : CSSAsset
 -(id) initWithContext:(EAGLContext *)context;
 @end

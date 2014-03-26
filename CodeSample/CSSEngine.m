@@ -7,6 +7,8 @@
 //
 
 #import "CSSEngine.h"
+#import "CSSTileMove.h"
+#import "CSSPoint.h"
 
 const NSUInteger emptyValue = 0;
 const NSUInteger boardSize = 4;
@@ -17,14 +19,6 @@ const NSUInteger winningTotal = 2048;
 
 @property NSMutableArray* cellColumns;
 
-@end
-
-
-@interface ___Point : NSObject
-
-@property NSUInteger x;
-@property NSUInteger y;
--(id) initWithX:(NSUInteger) x y: (NSUInteger) y;
 @end
 
 @implementation CSSEngine
@@ -81,29 +75,44 @@ const NSUInteger winningTotal = 2048;
     
 }
 
--(void) placeNewTile
+-(NSArray*) placeNewTile
 {
     
     NSMutableArray* emptyCells = [NSMutableArray array];
+    
     
     [self enumerateCellsWithBlock:^(NSUInteger xIndex, NSUInteger yIndex, NSNumber *currNumber) {
         
         
         if (currNumber.integerValue == emptyValue) {
             
-            [emptyCells addObject: [[___Point alloc] initWithX: xIndex y: yIndex ]];
+            [emptyCells addObject: [[CSSPoint alloc] initWithX: xIndex y: yIndex ]];
         }
     }];
     
     if (emptyCells.count) {
         
-        ___Point* pointToPlaceAt = emptyCells[arc4random_uniform((uint32_t)emptyCells.count)];
-        [self placeCellWithValue: randomNewValue()
+    
+        NSUInteger valueToInsert = randomNewValue();
+        
+        CSSPoint* pointToPlaceAt = emptyCells[arc4random_uniform((uint32_t)emptyCells.count)];
+        [self placeCellWithValue: valueToInsert
                                x: pointToPlaceAt.x
                                y: pointToPlaceAt.y];
+        
+        CSSTileMove* placementMove = [[CSSTileMove alloc] init];
+        
+        placementMove.start = pointToPlaceAt;
+        placementMove.destination = pointToPlaceAt;
+        placementMove.postAnimationAction = noAction;
+        
+        return @[placementMove];
     }
+    
+    return nil;
 }
 
+//TDOO: get rid of this
 -(NSArray*) getEmptyTiles
 {
     
@@ -143,8 +152,10 @@ NSUInteger randomNewValue() {
     self.cellColumns[x][y] = [NSNumber numberWithInteger: value];
 }
 
--(void) slideDown
+-(NSArray*) slideDown
 {
+    
+    NSMutableArray* result = [NSMutableArray array];
     //transpose cells to the right
     __block NSMutableArray* transposedCells = [NSMutableArray arrayWithArray:@[[NSMutableArray array],
                                                                                [NSMutableArray array],
@@ -192,13 +203,31 @@ NSUInteger randomNewValue() {
         }
     }
     
+    //transpose result x and y values
+    for (CSSTileMove* tileMove in result) {
+        
+        
+        NSUInteger temp =  tileMove.destination.x;
+        tileMove.destination.x = tileMove.destination.y ;
+        tileMove.destination.y = temp;
+        
+        temp = tileMove.start.x;
+        tileMove.start.x = tileMove.start.y;
+        tileMove.start.y = temp;
+    }
+    
     self.cellColumns = transposedCells;
+    
+    return [NSArray arrayWithArray: result];
 }
 
 
 
--(void) slideUp
+-(NSArray*) slideUp
 {
+    
+    NSMutableArray* result = [NSMutableArray array];
+    
     //transpose cells to the right
     __block NSMutableArray* transposedCells = [NSMutableArray arrayWithArray:@[[NSMutableArray array],
                                                                                [NSMutableArray array],
@@ -247,33 +276,72 @@ NSUInteger randomNewValue() {
     }
     
     self.cellColumns = transposedCells;
+    
+    //transpose result x and y values
+    for (CSSTileMove* tileMove in result) {
+        
+        
+        NSUInteger temp =  tileMove.destination.x;
+        tileMove.destination.x = tileMove.destination.y ;
+        tileMove.destination.y = temp;
+        
+        temp = tileMove.start.x;
+        tileMove.start.x = tileMove.start.y;
+        tileMove.start.y = temp;
+    }
+    
+    
+    return [NSArray arrayWithArray: result];;
 }
 
--(void) slideRight
+-(NSArray*) slideRight
 {
+ 
+    NSMutableArray* animationsToAdd = [NSMutableArray array];
     
+    NSUInteger currRowIndex = 0;
     for (NSMutableArray* currRow in self.cellColumns) {
         
-        [self slideRowRight: currRow];
+        NSArray* result = [self slideRowRight: currRow];
+        
+        for (CSSTileMove* tileMove in result) {
+            
+            tileMove.start.x = currRowIndex;
+            tileMove.destination.x = currRowIndex;
+        }
+        
+        [animationsToAdd addObjectsFromArray: result];
+        
+        currRowIndex++;
     }
+    
+    return animationsToAdd;
 }
 
--(void) slideRowRight: (NSMutableArray*) row
+-(NSArray*) slideRowRight: (NSMutableArray*) row
 {
-    
+    NSMutableArray* rowMoveResults = [NSMutableArray array];
     for (NSUInteger i = row.count - 1; i < row.count; i--) {
         
-        [self slideCellAtIndex: i withIncrement: 1 row: row];
+        CSSTileMove* result = [self slideCellAtIndex: i withIncrement: 1 row: row];
+        [rowMoveResults addObject: result];
     }
+    
+    return [NSArray arrayWithArray: rowMoveResults];
 }
 
--(void) slideCellAtIndex: (NSUInteger) index withIncrement: (NSInteger) increment row: (NSMutableArray*) row
+-(CSSTileMove*) slideCellAtIndex: (NSUInteger) index withIncrement: (NSInteger) increment row: (NSMutableArray*) row
 {
+    
+    CSSTileMove* result = [[CSSTileMove alloc] init];
+    result.start.y = index;
+    
     NSUInteger cellToMoveIntegerValue = [row[index] integerValue];
     
     if (cellToMoveIntegerValue == emptyValue) {
         
-        return;
+        result.destination.y = index;
+        return result;
     }
     
     NSUInteger lastValidSquare = index;
@@ -291,6 +359,8 @@ NSUInteger randomNewValue() {
                 
                 row[index] = [NSNumber numberWithInteger: emptyValue];
                 row[lastValidSquare + increment] = [NSNumber numberWithInteger: cellToMoveIntegerValue];
+                result.destination.y = lastValidSquare + increment;
+                
                 break;
             }
             
@@ -301,6 +371,8 @@ NSUInteger randomNewValue() {
             
             row[index] = [NSNumber numberWithInteger: emptyValue];
             row[i] = [NSNumber numberWithInteger: cellToMoveIntegerValue * amountToMultiplyBy];
+            result.destination.y = i;
+            
             break;
         }
         
@@ -308,9 +380,13 @@ NSUInteger randomNewValue() {
             
             row[index] = [NSNumber numberWithInteger: emptyValue];
             row[lastValidSquare] = [NSNumber numberWithInteger: cellToMoveIntegerValue];
+            result.destination.y = lastValidSquare;
+            
             break;
         }
     }
+    
+    return result;
 }
 
 -(NSUInteger) valueForSquareAtX:(NSUInteger)x y:(NSUInteger)y
@@ -318,20 +394,42 @@ NSUInteger randomNewValue() {
     return [self.cellColumns[x][y] integerValue];
 }
 
--(void) slideLeft
+-(NSArray*) slideLeft
 {
+    
+    NSMutableArray* animationsToAdd = [NSMutableArray array];
+    
+    NSUInteger currRowIndex = 0;
+
     for (NSMutableArray* currRow in self.cellColumns) {
         
-        [self slideRowLeft: currRow];
+        NSArray* slidRow = [self slideRowLeft: currRow];
+        
+        for (CSSTileMove* currTileMove in slidRow) {
+            
+            currTileMove.destination.x = currRowIndex;
+            currTileMove.start.x = currRowIndex;
+        }
+        
+        currRowIndex++;
     }
+    
+    return [NSArray arrayWithArray: animationsToAdd];
 }
 
--(void) slideRowLeft: (NSMutableArray*) row
+-(NSArray*) slideRowLeft: (NSMutableArray*) row
 {
+    
+    NSMutableArray* result = [NSMutableArray array];
+    
     for (NSUInteger i = 0; i < row.count; i++) {
         
-        [self slideCellAtIndex: i withIncrement: -1 row: row];
+        CSSTileMove* currMove = [self slideCellAtIndex: i withIncrement: -1 row: row];
+        
+        [result addObject: currMove];
     }
+    
+    return result;
 }
 
 
@@ -386,21 +484,6 @@ NSUInteger randomNewValue() {
 {
     
     return [self.cellColumns copy];
-}
-
-@end
-
-@implementation ___Point
-
--(id) initWithX:(NSUInteger) x y: (NSUInteger) y
-{
-    if (self = [super init]) {
-        
-        _x = x;
-        _y = y;
-    }
-    
-    return self;
 }
 
 @end

@@ -8,27 +8,39 @@
 
 #import "CSSTileAnimation.h"
 
-@implementation CSSTileAnimation
+const float defaultMovementAnimationTime = 1.0;
 
+@implementation CSSTileAnimation
+-(id) init
+{
+    if (self = [super init]) {
+        
+        
+        self.totalAnimationTime = defaultMovementAnimationTime;
+        self.animationTime = 0.0;
+    }
+    
+    return self;
+}
 -(GLKMatrix4) currentTransformation
 {
     
-    return GLKMatrix4Make((self.currentTransformation.m00 + self.endingTransformation.m00)/2.0,
-                          (self.currentTransformation.m01 + self.endingTransformation.m01)/2.0,
-                          (self.currentTransformation.m02 + self.endingTransformation.m02)/2.0,
-                          (self.currentTransformation.m03 + self.endingTransformation.m03)/2.0,
-                          (self.currentTransformation.m10 + self.endingTransformation.m10)/2.0,
-                          (self.currentTransformation.m11 + self.endingTransformation.m11)/2.0,
-                          (self.currentTransformation.m12 + self.endingTransformation.m12)/2.0,
-                          (self.currentTransformation.m13 + self.endingTransformation.m13)/2.0,
-                          (self.currentTransformation.m20 + self.endingTransformation.m20)/2.0,
-                          (self.currentTransformation.m21 + self.endingTransformation.m21)/2.0,
-                          (self.currentTransformation.m22 + self.endingTransformation.m22)/2.0,
-                          (self.currentTransformation.m33 + self.endingTransformation.m33)/2.0,
-                          (self.currentTransformation.m30 + self.endingTransformation.m30)/2.0,
-                          (self.currentTransformation.m31 + self.endingTransformation.m31)/2.0,
-                          (self.currentTransformation.m32 + self.endingTransformation.m32)/2.0,
-                          (self.currentTransformation.m33 + self.endingTransformation.m33)/2.0);
+    return GLKMatrix4Make(self.beginningTransform.m00 * (1.0 - self.animationTime/self.totalAnimationTime) + self.endingTransformation.m00 * self.animationTime/self.totalAnimationTime,
+                          self.beginningTransform.m01 * (1.0 - self.animationTime/self.totalAnimationTime) + self.endingTransformation.m01 * self.animationTime/self.totalAnimationTime,
+                          self.beginningTransform.m02 * (1.0 - self.animationTime/self.totalAnimationTime) + self.endingTransformation.m02 * self.animationTime/self.totalAnimationTime,
+                          self.beginningTransform.m03 * (1.0 - self.animationTime/self.totalAnimationTime) + self.endingTransformation.m03 * self.animationTime/self.totalAnimationTime,
+                          self.beginningTransform.m10 * (1.0 - self.animationTime/self.totalAnimationTime) + self.endingTransformation.m10 * self.animationTime/self.totalAnimationTime,
+                          self.beginningTransform.m11 * (1.0 - self.animationTime/self.totalAnimationTime) + self.endingTransformation.m11 * self.animationTime/self.totalAnimationTime,
+                          self.beginningTransform.m12 * (1.0 - self.animationTime/self.totalAnimationTime) + self.endingTransformation.m12 * self.animationTime/self.totalAnimationTime,
+                          self.beginningTransform.m13 * (1.0 - self.animationTime/self.totalAnimationTime) + self.endingTransformation.m13 * self.animationTime/self.totalAnimationTime,
+                          self.beginningTransform.m20 * (1.0 - self.animationTime/self.totalAnimationTime) + self.endingTransformation.m20 * self.animationTime/self.totalAnimationTime,
+                          self.beginningTransform.m21 * (1.0 - self.animationTime/self.totalAnimationTime) + self.endingTransformation.m21 * self.animationTime/self.totalAnimationTime,
+                          self.beginningTransform.m22 * (1.0 - self.animationTime/self.totalAnimationTime) + self.endingTransformation.m22 * self.animationTime/self.totalAnimationTime,
+                          self.beginningTransform.m33 * (1.0 - self.animationTime/self.totalAnimationTime) + self.endingTransformation.m33 * self.animationTime/self.totalAnimationTime,
+                          self.beginningTransform.m30 * (1.0 - self.animationTime/self.totalAnimationTime) + self.endingTransformation.m30 * self.animationTime/self.totalAnimationTime,
+                          self.beginningTransform.m31 * (1.0 - self.animationTime/self.totalAnimationTime) + self.endingTransformation.m31 * self.animationTime/self.totalAnimationTime,
+                          self.beginningTransform.m32 * (1.0 - self.animationTime/self.totalAnimationTime) + self.endingTransformation.m32 * self.animationTime/self.totalAnimationTime,
+                          self.beginningTransform.m33 * (1.0 - self.animationTime/self.totalAnimationTime) + self.endingTransformation.m33 * self.animationTime/self.totalAnimationTime);
 }
 
 @end

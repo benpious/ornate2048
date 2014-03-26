@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 /**
- Displays the main game. 
+ Controls display of the game, handles swipe gestures. 
  */
 @interface CSSGameViewController : UIViewController <UIAlertViewDelegate>
 @property CADisplayLink* displayLink;
