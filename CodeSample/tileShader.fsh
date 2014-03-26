@@ -1,8 +1,9 @@
 uniform sampler2D texture;
-//uniform sampler2D letterTexture;
+uniform sampler2D letterTexture;
+uniform sampler2D backGroundTexture;
 varying mediump vec3 fvertPos;
 varying lowp vec3 fassetColor;
-varying lowp vec2 texCoords;
+varying lowp vec2 ftexCoords;
 
 void main()
 {
@@ -32,7 +33,8 @@ void main()
     color += texture2D(texture, mutableVertPos) * 0.04;
     mutableVertPos.y-= stepSize;
     color += texture2D(texture, mutableVertPos) * 0.04;
-
-//    vec4 letterColor = texture2D(letterTexture, texCoords);
-    gl_FragColor = color * vec4(fassetColor + .4, 1.0);
+    
+    lowp vec4 letterColor = texture2D(letterTexture, ftexCoords);
+    lowp vec4 shapeColor = texture2D(backGroundTexture, ftexCoords);
+    gl_FragColor = (color * vec4(fassetColor + .4, 1.0) + letterColor) * shapeColor.w;
 }

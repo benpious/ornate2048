@@ -13,10 +13,6 @@
 		3B1DDBE218DF533800115C4B /* CSSMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B1DDBE118DF533800115C4B /* CSSMainViewController.m */; };
 		3B1DDBE518DF53B100115C4B /* tileShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B1DDBE418DF53B100115C4B /* tileShader.vsh */; };
 		3B1DDBE718DF53B800115C4B /* tileShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B1DDBE618DF53B800115C4B /* tileShader.fsh */; };
-		3B1DDBE918DF53C400115C4B /* backgroundVertexShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B1DDBE818DF53C400115C4B /* backgroundVertexShader.vsh */; };
-		3B1DDBEB18DF53CE00115C4B /* backgroundFragmentShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B1DDBEA18DF53CE00115C4B /* backgroundFragmentShader.fsh */; };
-		3B1DDBED18DF53F500115C4B /* blurShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B1DDBEC18DF53F500115C4B /* blurShader.vsh */; };
-		3B1DDBEF18DF53FD00115C4B /* blurshader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B1DDBEE18DF53FD00115C4B /* blurshader.fsh */; };
 		3B1DDBF218DF6AD000115C4B /* CSSTileAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B1DDBF118DF6AD000115C4B /* CSSTileAsset.m */; };
 		3B1DDBF618DF6CC100115C4B /* CSSBackgroundAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B1DDBF518DF6CC100115C4B /* CSSBackgroundAsset.m */; };
 		3B1DDBFA18DF918100115C4B /* WaveShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B1DDBF818DF918100115C4B /* WaveShader.fsh */; };
@@ -54,7 +50,9 @@
 		3B5AE54A18E1E7F600BF3DD8 /* 32.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B5AE54018E1E7F600BF3DD8 /* 32.png */; };
 		3B5AE54B18E1E7F600BF3DD8 /* 4.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B5AE54118E1E7F600BF3DD8 /* 4.png */; };
 		3B5AE54C18E1E7F600BF3DD8 /* 64.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B5AE54218E1E7F600BF3DD8 /* 64.png */; };
-		3B5AE54F18E1EA6100BF3DD8 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B5AE54E18E1EA6100BF3DD8 /* 1.png */; };
+		3B5CB48918E31D7E006F25F0 /* 256.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B5CB48818E31D7E006F25F0 /* 256.png */; };
+		3B5CB49318E3314F006F25F0 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B5CB49218E3314F006F25F0 /* 1.png */; };
+		3B5CB49518E33AA9006F25F0 /* tileBackGround.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B5CB49418E33AA9006F25F0 /* tileBackGround.png */; };
 		3B6B5D2B18DE3F12000260DF /* CSSEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6B5D2A18DE3F12000260DF /* CSSEngine.m */; };
 		3BCC94EB18DFD9F900A2A7A5 /* CSSBasicAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCC94EA18DFD9F900A2A7A5 /* CSSBasicAsset.m */; };
 		3BCC94ED18DFDBF900A2A7A5 /* Basic.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3BCC94EC18DFDBF900A2A7A5 /* Basic.vsh */; };
@@ -82,10 +80,6 @@
 		3B1DDBE118DF533800115C4B /* CSSMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSMainViewController.m; sourceTree = "<group>"; };
 		3B1DDBE418DF53B100115C4B /* tileShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = tileShader.vsh; sourceTree = "<group>"; };
 		3B1DDBE618DF53B800115C4B /* tileShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = tileShader.fsh; sourceTree = "<group>"; };
-		3B1DDBE818DF53C400115C4B /* backgroundVertexShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = backgroundVertexShader.vsh; sourceTree = "<group>"; };
-		3B1DDBEA18DF53CE00115C4B /* backgroundFragmentShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = backgroundFragmentShader.fsh; sourceTree = "<group>"; };
-		3B1DDBEC18DF53F500115C4B /* blurShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = blurShader.vsh; sourceTree = "<group>"; };
-		3B1DDBEE18DF53FD00115C4B /* blurshader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = blurshader.fsh; sourceTree = "<group>"; };
 		3B1DDBF018DF6AD000115C4B /* CSSTileAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSTileAsset.h; sourceTree = "<group>"; };
 		3B1DDBF118DF6AD000115C4B /* CSSTileAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSTileAsset.m; sourceTree = "<group>"; };
 		3B1DDBF418DF6CC100115C4B /* CSSBackgroundAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSBackgroundAsset.h; sourceTree = "<group>"; };
@@ -138,7 +132,9 @@
 		3B5AE54018E1E7F600BF3DD8 /* 32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 32.png; sourceTree = "<group>"; };
 		3B5AE54118E1E7F600BF3DD8 /* 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4.png; sourceTree = "<group>"; };
 		3B5AE54218E1E7F600BF3DD8 /* 64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 64.png; sourceTree = "<group>"; };
-		3B5AE54E18E1EA6100BF3DD8 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
+		3B5CB48818E31D7E006F25F0 /* 256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 256.png; sourceTree = "<group>"; };
+		3B5CB49218E3314F006F25F0 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
+		3B5CB49418E33AA9006F25F0 /* tileBackGround.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tileBackGround.png; sourceTree = "<group>"; };
 		3B6B5D2918DE3F12000260DF /* CSSEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSEngine.h; sourceTree = "<group>"; };
 		3B6B5D2A18DE3F12000260DF /* CSSEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSEngine.m; sourceTree = "<group>"; };
 		3B868DED18DE4DA90091DF25 /* CSSEngine_internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSSEngine_internal.h; sourceTree = "<group>"; };
@@ -183,10 +179,6 @@
 				3B1DDBF818DF918100115C4B /* WaveShader.fsh */,
 				3B1DDBE418DF53B100115C4B /* tileShader.vsh */,
 				3B1DDBE618DF53B800115C4B /* tileShader.fsh */,
-				3B1DDBE818DF53C400115C4B /* backgroundVertexShader.vsh */,
-				3B1DDBEA18DF53CE00115C4B /* backgroundFragmentShader.fsh */,
-				3B1DDBEC18DF53F500115C4B /* blurShader.vsh */,
-				3B1DDBEE18DF53FD00115C4B /* blurshader.fsh */,
 			);
 			name = Shaders;
 			sourceTree = "<group>";
@@ -319,13 +311,15 @@
 		3B5AE54D18E1E7FA00BF3DD8 /* textures */ = {
 			isa = PBXGroup;
 			children = (
-				3B5AE54E18E1EA6100BF3DD8 /* 1.png */,
 				3B369DA918E1408A00A05622 /* aqua.png */,
+				3B5CB49418E33AA9006F25F0 /* tileBackGround.png */,
+				3B5CB48818E31D7E006F25F0 /* 256.png */,
 				3B5AE53918E1E7F600BF3DD8 /* 8.png */,
 				3B5AE53A18E1E7F600BF3DD8 /* 2048.png */,
 				3B5AE53B18E1E7F600BF3DD8 /* 512.png */,
 				3B5AE53C18E1E7F600BF3DD8 /* 1024.png */,
 				3B5AE53D18E1E7F600BF3DD8 /* 128.png */,
+				3B5CB49218E3314F006F25F0 /* 1.png */,
 				3B5AE53E18E1E7F600BF3DD8 /* 2.png */,
 				3B5AE53F18E1E7F600BF3DD8 /* 16.png */,
 				3B5AE54018E1E7F600BF3DD8 /* 32.png */,
@@ -414,31 +408,29 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3B5AE54F18E1EA6100BF3DD8 /* 1.png in Resources */,
 				3B5AE54B18E1E7F600BF3DD8 /* 4.png in Resources */,
 				3B5AE54918E1E7F600BF3DD8 /* 16.png in Resources */,
+				3B5CB48918E31D7E006F25F0 /* 256.png in Resources */,
 				3BCC94ED18DFDBF900A2A7A5 /* Basic.vsh in Resources */,
 				3B2AFCA218DCCA7800B5E824 /* InfoPlist.strings in Resources */,
 				3B5AE54518E1E7F600BF3DD8 /* 512.png in Resources */,
 				3B369DAA18E1408A00A05622 /* aqua.png in Resources */,
-				3B1DDBEF18DF53FD00115C4B /* blurshader.fsh in Resources */,
 				3B2AFCAA18DCCA7800B5E824 /* Images.xcassets in Resources */,
 				3B5AE54C18E1E7F600BF3DD8 /* 64.png in Resources */,
-				3B1DDBEB18DF53CE00115C4B /* backgroundFragmentShader.fsh in Resources */,
 				3B5AE54318E1E7F600BF3DD8 /* 8.png in Resources */,
 				3B1DDBE718DF53B800115C4B /* tileShader.fsh in Resources */,
+				3B5CB49318E3314F006F25F0 /* 1.png in Resources */,
 				3B5AE54718E1E7F600BF3DD8 /* 128.png in Resources */,
 				3B5AE54618E1E7F600BF3DD8 /* 1024.png in Resources */,
 				3B1DDBFB18DF918100115C4B /* WaveShader.vsh in Resources */,
-				3B1DDBE918DF53C400115C4B /* backgroundVertexShader.vsh in Resources */,
 				3B5AE54A18E1E7F600BF3DD8 /* 32.png in Resources */,
 				3B1DDBE518DF53B100115C4B /* tileShader.vsh in Resources */,
 				3B1DDBFA18DF918100115C4B /* WaveShader.fsh in Resources */,
 				3B1E790218E1EDEE00636207 /* README in Resources */,
+				3B5CB49518E33AA9006F25F0 /* tileBackGround.png in Resources */,
 				3B5AE54418E1E7F600BF3DD8 /* 2048.png in Resources */,
 				3B5AE54818E1E7F600BF3DD8 /* 2.png in Resources */,
 				3BCC94EF18DFDC0100A2A7A5 /* Basic.fsh in Resources */,
-				3B1DDBED18DF53F500115C4B /* blurShader.vsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

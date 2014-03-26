@@ -55,7 +55,7 @@
 
 -(void) prepareToDraw
 {
-    [EAGLContext setCurrentContext: self.context];
+//    [EAGLContext setCurrentContext: self.context];
     [self.shaderProgram makeShaderActive];
     glBindVertexArrayOES(self.vaoID);
 }

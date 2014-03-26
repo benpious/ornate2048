@@ -29,7 +29,7 @@
         [self loadGLProgramWithVertexShader: vertexShader
                              fragmentShader: fragShader];
     }
-    
+
     return self;
 }
 

@@ -5,7 +5,7 @@ uniform float wavePeriod;
 uniform mat4 modelViewProjectMatrix;
 uniform sampler2D backgroundTexture;
 
-varying float colorValue;
+//varying float colorValue;
 varying vec2 texCoords;
 
 highp float dist(vec2 a, vec2 b) {
@@ -21,6 +21,6 @@ void main() {
     texCoords = vec2((position.x + 1.0)/2.0, (position.y + 1.0)/2.0);
     
     newPosition.z = 0.1 * ((wavePeriod - dist(position.xy, wavePos))/wavePeriod) * waveAmplitude;
-    colorValue = newPosition.z;
+//    colorValue = newPosition.z;
     gl_Position = modelViewProjectMatrix * vec4(newPosition, 1.0);
 }

@@ -118,6 +118,17 @@
 }
 
 
+-(void) testMultiplication
+{
+    CSSEngine* engine = [[CSSEngine alloc] init];
+    
+    BOOL result = [self compare: [NSMutableArray arrayWithArray: @[@4, @4, @0, @0]]
+                        toArray:  [NSMutableArray arrayWithArray: @[@0, @0, @0,@8]]
+                     withEngine: engine];
+    
+    XCTAssert(result ,  @"multipication incorrect");
+}
+
 -(void) testSlideDown
 {
     

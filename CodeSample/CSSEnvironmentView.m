@@ -71,13 +71,6 @@
         glGenFramebuffers(1, &blurFrameBuffer);
         glBindFramebuffer(GL_FRAMEBUFFER, blurFrameBuffer);
         
-        /*
-        glGenRenderbuffers(1, &blurRenderBuffer);
-        glBindRenderbuffer(GL_RENDERBUFFER, blurRenderBuffer);
-        glRenderbufferStorage(GL_RENDERBUFFER, GL_RGBA4, width, height);
-        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, blurRenderBuffer);
-        */
-        
         GLuint depthRenderbuffer;
         glGenRenderbuffers(1, &depthRenderbuffer);
         glBindRenderbuffer(GL_RENDERBUFFER, depthRenderbuffer);
@@ -101,7 +94,7 @@
             NSLog(@"failed to make complete framebuffer object %x", status);
         }
         
-        
+        glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glEnable(GL_DEPTH_TEST);
         glViewport(0.0, 0.0, width, height);
         glClearColor(0.5f, 0.75f, 0.75f, 1.0f);
@@ -109,7 +102,6 @@
         self.environmentVars = [[CSSEnvironmentVariables alloc] init];
         self.environmentVars.transformationMatrix = GLKMatrix4MakeLookAt(0.0, 0.0, 2.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
         self.environmentVars.projectionMatrix = GLKMatrix4MakePerspective(0.610865238, 1024/768, 0.01, 100);
-        
     }
     
     return self;

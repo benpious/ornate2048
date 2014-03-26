@@ -179,6 +179,7 @@ GLfloat* makeLattice(size_t height, size_t width) {
     glUniform1f(wavePeriodUniform, wavePeriod);
     GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(0.610865238, 1024/768, 0.01, 100);
     glUniformMatrix4fv(modelViewProjectMatrixUniform, 1, GL_FALSE, GLKMatrix4Multiply(projectionMatrix, GLKMatrix4MakeLookAt(0.0, 0.0, 2.0, 0.0,0.0, 0.0, 0.0, 1.0, 0.0)).m);
+    glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, textureName);
     glUniform1i(textureUniform, 0);
     

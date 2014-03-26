@@ -1,4 +1,4 @@
-varying lowp float colorValue;
+//varying lowp float colorValue;
 varying lowp vec2 texCoords;
 
 uniform sampler2D backgroundTexture;
