@@ -34,7 +34,7 @@ const NSUInteger winningTotal = 2048;
 }
 
 /**
- for internal use only. State *must* be in the valid format -- 4x4 mutable array of NSNumbers.
+ for internal use only. State *must* be in the valid format -- boardSizexboardSize mutable array of NSNumbers.
  */
 -(id) initWithExistingState: (NSMutableArray*) state
 {
@@ -86,7 +86,7 @@ const NSUInteger winningTotal = 2048;
         
         if (currNumber.integerValue == emptyValue) {
             
-            [emptyCells addObject: [[CSSPoint alloc] initWithX: xIndex y: yIndex ]];
+            [emptyCells addObject: [[CSSPoint alloc] initWithX: xIndex y: yIndex]];
         }
     }];
     
@@ -104,17 +104,10 @@ const NSUInteger winningTotal = 2048;
         
         placementMove.start = pointToPlaceAt;
         placementMove.destination = pointToPlaceAt;
-        placementMove.postAnimationAction = noAction;
+        placementMove.postAnimationAction = placeTile;
         
         return @[placementMove];
     }
-    
-    return nil;
-}
-
-//TDOO: get rid of this
--(NSArray*) getEmptyTiles
-{
     
     return nil;
 }
@@ -169,9 +162,19 @@ NSUInteger randomNewValue() {
     }];
     
     //slide to the right
+    NSUInteger currRowIndex = 0;
     for (NSMutableArray* currRow in transposedCells) {
         
-        [self slideRowRight: currRow];
+       NSArray* rowAnimations = [self slideRowRight: currRow];
+        
+        for (CSSTileMove* currMove in rowAnimations) {
+            
+            currMove.destination.x = currRowIndex;
+            currMove.start.x = currRowIndex;
+        }
+        
+        currRowIndex++;
+        [result addObjectsFromArray: rowAnimations];
     }
     
     //transpose back
@@ -234,16 +237,25 @@ NSUInteger randomNewValue() {
                                                                                [NSMutableArray array],
                                                                                [NSMutableArray array]]];
     
-    
     [self enumerateCellsWithBlock:^(NSUInteger xIndex, NSUInteger yIndex, NSNumber *currNumber) {
         
         transposedCells[yIndex][xIndex] = currNumber;
     }];
     
     //slide to the right
+    NSUInteger currRowIndex = 0;
     for (NSMutableArray* currRow in transposedCells) {
         
-        [self slideRowLeft: currRow];
+        NSArray* movementResults = [self slideRowLeft: currRow];
+        
+        for (CSSTileMove* tileMove in movementResults) {
+            
+            tileMove.start.x = currRowIndex;
+            tileMove.destination.x = currRowIndex;
+            currRowIndex++;
+        }
+
+        [result addObjectsFromArray: movementResults];
     }
     
     //transpose back
@@ -280,8 +292,7 @@ NSUInteger randomNewValue() {
     //transpose result x and y values
     for (CSSTileMove* tileMove in result) {
         
-        
-        NSUInteger temp =  tileMove.destination.x;
+        NSUInteger temp = tileMove.destination.x;
         tileMove.destination.x = tileMove.destination.y ;
         tileMove.destination.y = temp;
         
@@ -324,7 +335,11 @@ NSUInteger randomNewValue() {
     for (NSUInteger i = row.count - 1; i < row.count; i--) {
         
         CSSTileMove* result = [self slideCellAtIndex: i withIncrement: 1 row: row];
-        [rowMoveResults addObject: result];
+        
+        if (result.start.y != result.destination.y && [row[result.destination.y] integerValue] != emptyValue) {
+            
+                [rowMoveResults addObject: result];
+        }
     }
     
     return [NSArray arrayWithArray: rowMoveResults];
@@ -412,6 +427,8 @@ NSUInteger randomNewValue() {
         }
         
         currRowIndex++;
+        
+        [animationsToAdd addObjectsFromArray: slidRow];
     }
     
     return [NSArray arrayWithArray: animationsToAdd];
@@ -426,7 +443,10 @@ NSUInteger randomNewValue() {
         
         CSSTileMove* currMove = [self slideCellAtIndex: i withIncrement: -1 row: row];
         
-        [result addObject: currMove];
+        if (currMove.start.y != currMove.destination.y && [row[currMove.destination.y] integerValue] != emptyValue) {
+            
+            [result addObject: currMove];
+        }
     }
     
     return result;

@@ -1,4 +1,4 @@
-//
+    //
 //  CSSPoint.m
 //  CodeSample
 //
@@ -30,18 +30,50 @@
     return newPoint;
 }
 
+
 -(BOOL) isEqual:(id)object
 {
     
     if ([object isKindOfClass: [CSSPoint class]]) {
         
         CSSPoint* other = (CSSPoint*) object;
-        if (other.x == self.x && other.y == self.y) {
-            
-            return YES;
-        }
+        
+        return [self isEqualTo__ClassName__: other];
     }
     
-    return NO;
+    else {
+        
+       return NO;
+    }
 }
+
+-(BOOL) isEqualTo__ClassName__: (CSSPoint*) other
+{
+    
+    if (other.x == self.x && other.y == self.y) {
+        
+        return YES;
+    }
+    
+    else {
+        
+        return NO;
+    }
+}
+
+-(NSUInteger) hash
+{
+    
+    return self.x ^ self.y;
+}
+
+-(NSString*) description
+{
+    NSString* description = [super description];
+    
+    description = [description stringByAppendingFormat: @"(%ld,%ld)", self.x, self.y];
+    
+    return description;
+}
+
 @end

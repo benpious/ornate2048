@@ -24,23 +24,27 @@ const float defaultMovementAnimationTime = 1.0;
 }
 -(GLKMatrix4) currentTransformation
 {
+ 
+    float proportionalTime = self.animationTime/self.totalAnimationTime;
+    float proportionalTimeFromEnd = 1.0 - proportionalTime;
     
-    return GLKMatrix4Make(self.beginningTransform.m00 * (1.0 - self.animationTime/self.totalAnimationTime) + self.endingTransformation.m00 * self.animationTime/self.totalAnimationTime,
-                          self.beginningTransform.m01 * (1.0 - self.animationTime/self.totalAnimationTime) + self.endingTransformation.m01 * self.animationTime/self.totalAnimationTime,
-                          self.beginningTransform.m02 * (1.0 - self.animationTime/self.totalAnimationTime) + self.endingTransformation.m02 * self.animationTime/self.totalAnimationTime,
-                          self.beginningTransform.m03 * (1.0 - self.animationTime/self.totalAnimationTime) + self.endingTransformation.m03 * self.animationTime/self.totalAnimationTime,
-                          self.beginningTransform.m10 * (1.0 - self.animationTime/self.totalAnimationTime) + self.endingTransformation.m10 * self.animationTime/self.totalAnimationTime,
-                          self.beginningTransform.m11 * (1.0 - self.animationTime/self.totalAnimationTime) + self.endingTransformation.m11 * self.animationTime/self.totalAnimationTime,
-                          self.beginningTransform.m12 * (1.0 - self.animationTime/self.totalAnimationTime) + self.endingTransformation.m12 * self.animationTime/self.totalAnimationTime,
-                          self.beginningTransform.m13 * (1.0 - self.animationTime/self.totalAnimationTime) + self.endingTransformation.m13 * self.animationTime/self.totalAnimationTime,
-                          self.beginningTransform.m20 * (1.0 - self.animationTime/self.totalAnimationTime) + self.endingTransformation.m20 * self.animationTime/self.totalAnimationTime,
-                          self.beginningTransform.m21 * (1.0 - self.animationTime/self.totalAnimationTime) + self.endingTransformation.m21 * self.animationTime/self.totalAnimationTime,
-                          self.beginningTransform.m22 * (1.0 - self.animationTime/self.totalAnimationTime) + self.endingTransformation.m22 * self.animationTime/self.totalAnimationTime,
-                          self.beginningTransform.m33 * (1.0 - self.animationTime/self.totalAnimationTime) + self.endingTransformation.m33 * self.animationTime/self.totalAnimationTime,
-                          self.beginningTransform.m30 * (1.0 - self.animationTime/self.totalAnimationTime) + self.endingTransformation.m30 * self.animationTime/self.totalAnimationTime,
-                          self.beginningTransform.m31 * (1.0 - self.animationTime/self.totalAnimationTime) + self.endingTransformation.m31 * self.animationTime/self.totalAnimationTime,
-                          self.beginningTransform.m32 * (1.0 - self.animationTime/self.totalAnimationTime) + self.endingTransformation.m32 * self.animationTime/self.totalAnimationTime,
-                          self.beginningTransform.m33 * (1.0 - self.animationTime/self.totalAnimationTime) + self.endingTransformation.m33 * self.animationTime/self.totalAnimationTime);
+    
+    return GLKMatrix4Make(self.beginningTransform.m00 * proportionalTimeFromEnd + self.endingTransformation.m00 * proportionalTime,
+                          self.beginningTransform.m01 * proportionalTimeFromEnd + self.endingTransformation.m01 * proportionalTime,
+                          self.beginningTransform.m02 * proportionalTimeFromEnd + self.endingTransformation.m02 * proportionalTime,
+                          self.beginningTransform.m03 * proportionalTimeFromEnd + self.endingTransformation.m03 * proportionalTime,
+                          self.beginningTransform.m10 * proportionalTimeFromEnd + self.endingTransformation.m10 * proportionalTime,
+                          self.beginningTransform.m11 * proportionalTimeFromEnd + self.endingTransformation.m11 * proportionalTime,
+                          self.beginningTransform.m12 * proportionalTimeFromEnd + self.endingTransformation.m12 * proportionalTime,
+                          self.beginningTransform.m13 * proportionalTimeFromEnd + self.endingTransformation.m13 * proportionalTime,
+                          self.beginningTransform.m20 * proportionalTimeFromEnd + self.endingTransformation.m20 * proportionalTime,
+                          self.beginningTransform.m21 * proportionalTimeFromEnd + self.endingTransformation.m21 * proportionalTime,
+                          self.beginningTransform.m22 * proportionalTimeFromEnd + self.endingTransformation.m22 * proportionalTime,
+                          self.beginningTransform.m23 * proportionalTimeFromEnd + self.endingTransformation.m23 * proportionalTime,
+                          self.beginningTransform.m30 * proportionalTimeFromEnd + self.endingTransformation.m30 * proportionalTime,
+                          self.beginningTransform.m31 * proportionalTimeFromEnd + self.endingTransformation.m31 * proportionalTime,
+                          self.beginningTransform.m32 * proportionalTimeFromEnd + self.endingTransformation.m32 * proportionalTime,
+                          self.beginningTransform.m33 * proportionalTimeFromEnd + self.endingTransformation.m33 * proportionalTime);
 }
 
 @end

@@ -23,4 +23,14 @@
     return self;
 }
 
+-(NSString*) description
+{
+    NSString* description = [super description];
+    
+    description =  [description stringByAppendingString: [self.start description]];
+    description =  [description stringByAppendingString: [self.destination description]];
+    
+    return description;
+}
+
 @end

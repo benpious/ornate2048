@@ -9,6 +9,8 @@
 #import <XCTest/XCTest.h>
 #import "CSSEngine.h"
 #import "CSSEngine_internal.h"
+#import "CSSPoint.h"
+
 @interface CodeSampleTests : XCTestCase
 
 @end
@@ -243,6 +245,26 @@
     }
     
     return result;
+}
+
+-(void) testCopiedPointEquality
+{
+    
+    CSSEngine* engine = [[CSSEngine alloc] initNewGame];
+    
+    __block NSUInteger i = 0;
+    [engine enumerateCellsWithBlock: ^(NSUInteger xIndex, NSUInteger yIndex, NSNumber *currNumber) {
+        
+        CSSPoint* point = [[CSSPoint alloc] initWithX:xIndex y:yIndex];
+        
+        CSSPoint* point2 = [point copy];
+        
+        XCTAssertTrue([point isEqual: point2], @"Point (%ld,%ld) is not equal to its copy", point.x, point.y);
+        i++;
+    }];
+    
+    //this also tests whether we actually enumerated all the points, assuming that we are using a 4x4 grid
+    XCTAssertTrue(i == 16, @"did not enumerate all objects");
 }
 
 @end

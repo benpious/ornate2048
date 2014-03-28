@@ -13,7 +13,6 @@ Known bugs/issues
     that the GLKTextureLoader throws an exception when trying to load them, and there are no texture coordinates to pass into the shaders). I kept in the 
     code that I have presently to implement these features.
 
-
     Some of the slide functions in the CSSEngine don't return correct CSSTileMove Objects.
     
     The animations created by CSSEngineController don't *seem* to be correct.
@@ -22,9 +21,6 @@ Known bugs/issues
 
     The slide functions in CSSEngine are misnamed, that is, a slide up will actually slide to the right on the screen.
 
-    The color choices of the tiles make them hard to tell apart. A number label should solve this problem, but just so you know, it's not
-    how it should be.
-
 Attribution: 
 
-The image aqua.png used as a background was made by an artist called Bjango, you can find his Dribbble.com gallery pretty easily by Googling.
+The image aqua.png used as a background was made by an artist called Bjango (http://dribbble.com/bjango)

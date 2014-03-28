@@ -51,7 +51,6 @@ const float yOffset = 0.5;
                                           };
         
         self.currAnimations = [NSMutableDictionary dictionary];
-        
     }
     
     return self;
@@ -62,12 +61,13 @@ const float yOffset = 0.5;
     
     [self.engine enumerateCellsWithBlock: ^(NSUInteger xIndex, NSUInteger yIndex, NSNumber *currNumber) {
        
-        /*
         GLKMatrix4 translation;
-        CSSPoint* destinationPoint = [[CSSPoint alloc] initWithX: yIndex
-                                                               y: xIndex];
+        
+        CSSPoint* destinationPoint = [[CSSPoint alloc] initWithX: xIndex
+                                                               y: yIndex];
         
         CSSTileAnimation* animationForPoint = self.currAnimations[destinationPoint];
+        
         if (animationForPoint) {
             
             translation = animationForPoint.currentTransformation;
@@ -81,24 +81,20 @@ const float yOffset = 0.5;
         
         else {
             
-            translation = GLKMatrix4MakeTranslation(xIndex * tileStepSize - xOffset, yIndex * tileStepSize - yOffset, currNumber.integerValue ? 0.0 : -0.01);
+            translation = GLKMatrix4MakeTranslation(xIndex * tileStepSize - xOffset,
+                                                    yIndex * tileStepSize - yOffset,
+                                                    currNumber.integerValue ? 0.0 : -0.01);
         }
         
-        [self.tileAsset prepareToDrawWithTransformation: GLKMatrix4Multiply(modelViewProjectionMatrix, translation)
-                                                texture: texture
-                                                  color: self.numbersToColors[currNumber]
-                                           integerValue: currNumber.integerValue ];
+//        GLKMatrix4 translation = GLKMatrix4MakeTranslation(xIndex * tileStepSize - xOffset, yIndex * tileStepSize - yOffset, currNumber.integerValue ? 0.0 : -0.01);
         
-        */
-        
-        GLKMatrix4 translation = GLKMatrix4MakeTranslation(xIndex * tileStepSize - xOffset, yIndex * tileStepSize - yOffset, currNumber.integerValue ? 0.0 : -0.01);
         [self.tileAsset prepareToDrawWithTransformation: GLKMatrix4Multiply(modelViewProjectionMatrix, translation)
                                                 texture: texture
                                                   color: self.numbersToColors[currNumber]
                                            integerValue: currNumber.integerValue ];
         
         [self.tileAsset draw];
-    }];
+    }];    
 }
 
 -(void) addTileMoves: (NSArray*) tileMoves;
@@ -108,11 +104,23 @@ const float yOffset = 0.5;
     for (CSSTileMove* currMove in tileMoves) {
         
         CSSTileAnimation* tileAnimation = [[CSSTileAnimation alloc] init];
-        tileAnimation.beginningTransform = GLKMatrix4MakeTranslation(currMove.start.x * tileStepSize - xOffset, currMove.start.y * tileStepSize - yOffset, 0.0);
-        tileAnimation.endingTransformation = GLKMatrix4MakeTranslation(currMove.destination.x * tileStepSize - xOffset, currMove.destination.y * tileStepSize - yOffset, 0.0);
+        
+        if (currMove.postAnimationAction == placeTile) {
+            
+            tileAnimation.beginningTransform = GLKMatrix4MakeTranslation(currMove.start.x * tileStepSize - xOffset, currMove.start.y * tileStepSize - yOffset, 1.0);
+            tileAnimation.endingTransformation = GLKMatrix4MakeTranslation(currMove.destination.x * tileStepSize - xOffset, currMove.destination.y * tileStepSize - yOffset, 0.0);
+        }
+        
+        else {
+        
+            tileAnimation.beginningTransform = GLKMatrix4MakeTranslation(currMove.start.x * tileStepSize - xOffset, currMove.start.y * tileStepSize - yOffset, 0.0);
+            tileAnimation.endingTransformation = GLKMatrix4MakeTranslation(currMove.destination.x * tileStepSize - xOffset, currMove.destination.y * tileStepSize - yOffset, 0.0);
+        }
         
         
-        [self.currAnimations setObject: tileAnimation forKey: currMove.destination];
+        
+        [self.currAnimations setObject: tileAnimation
+                                forKey: currMove.destination];
     }
 }
 

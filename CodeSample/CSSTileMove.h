@@ -22,7 +22,8 @@ typedef enum {
 
     noAction = 0,
     removeTile = 1,
-    multiplyTile = 2
+    multiplyTile = 2,
+    placeTile = 3
 
 } animationAction;
 

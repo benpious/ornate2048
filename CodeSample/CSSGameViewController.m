@@ -9,8 +9,6 @@
 #import "CSSGameViewController.h"
 #import "CSSEnvironmentView.h"
 #import "CSSBackgroundAsset.h"
-#import "CSSTileAsset.h"
-#import "CSSBasicAsset.h"
 #import "CSSEngine.h"
 #import "CSSGameController.h"
 #import "CSSEnvironmentVariables.h"
@@ -108,7 +106,6 @@
 -(void) swiped: (UIGestureRecognizer*) recognizer
 {
     UISwipeGestureRecognizer* swipeGestureRecognizer = (UISwipeGestureRecognizer*) recognizer;
-    
     /*
     if ([self.gameController currentlyAnimating]) {
         
