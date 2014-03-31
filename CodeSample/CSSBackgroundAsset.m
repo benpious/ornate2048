@@ -80,7 +80,7 @@
                         __autoreleasing NSError* error = nil;
                         
                         
-                        GLKTextureInfo* textureInfo = [GLKTextureLoader textureWithContentsOfFile: [[NSBundle mainBundle] pathForResource: @"aqua" ofType: @"png"]
+                        GLKTextureInfo* textureInfo = [GLKTextureLoader textureWithContentsOfFile: [[NSBundle mainBundle] pathForResource: @"wavebackground" ofType: @"png"]
                                                                                             options: @{GLKTextureLoaderGenerateMipmaps: @NO}
                                                                                             error: &error];
                         

@@ -247,12 +247,37 @@
     return result;
 }
 
-/*
+
 -(void) testMoveReturns
 {
+
+    CSSEngine* engine = [[CSSEngine alloc] init];
     
+    NSArray* testResult = [engine slideRowUp: [NSMutableArray arrayWithArray: @[@2,@4, @2, @4]]];
+    
+    XCTAssertTrue(testResult.count == 0,  @"test result should be equal to zero");
+    
+    testResult = [engine slideRowUp: [NSMutableArray arrayWithArray: @[@0,@4, @2, @4]]];
+    
+    XCTAssertTrue(testResult.count == 0,  @"test result should be equal to zero");
+    
+    testResult = [engine slideRowDown: [NSMutableArray arrayWithArray: @[@2,@4, @2, @0]]];
+    
+    XCTAssertTrue(testResult.count == 0,  @"test result should be equal to zero");
+    
+    testResult = [engine slideRowDown: [NSMutableArray arrayWithArray: @[@2,@4,@8,@16]]];
+    
+    XCTAssertTrue(testResult.count == 0,  @"test result should be equal to zero");
+    
+    testResult = [engine slideRowUp: [NSMutableArray arrayWithArray: @[@2,@4,@8,@16]]];
+    
+    XCTAssertTrue(testResult.count == 0, @"test result should be equal to zero");
+    
+    testResult = [engine slideRowUp: [NSMutableArray arrayWithArray: @[@16,@32,@2,@4]]];
+    
+    XCTAssertTrue(testResult.count == 0, @"test result should be equal to zero");    
 }
-*/
+
 -(void) testCopiedPointEquality
 {
     
