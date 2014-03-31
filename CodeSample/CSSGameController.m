@@ -36,7 +36,7 @@ const float yOffset = 0.5;
         self.engine = engine;
         
         
-        self.numbersToColors = @{@0: [UIColor whiteColor],
+        self.numbersToColors = @{         @0: [UIColor whiteColor],
                                           @2: [UIColor colorWithRed: 255.0/256.0 green: 116.0/256.0 blue: 0.0 alpha:1.0],
                                           @4: [UIColor colorWithRed: 191.0/256.0 green: 113.0/256.0 blue: 48.0/256.0 alpha:1.0],
                                           @8: [UIColor colorWithRed: 166.0/256.0 green: 75.0/256.0 blue: 0.0 alpha:1.0],
@@ -48,7 +48,7 @@ const float yOffset = 0.5;
                                           @512: [UIColor colorWithRed: 92.0/256.0 green: 204.0/256.0 blue: 204.0/256.0 alpha:1.0],
                                           @1024: [UIColor redColor],
                                           @2048: [UIColor blueColor]
-                                          };
+                                };
         
         self.currAnimations = [NSMutableDictionary dictionary];
     }

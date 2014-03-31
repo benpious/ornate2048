@@ -350,12 +350,12 @@ NSUInteger randomNewValue() {
     
     CSSTileMove* result = [[CSSTileMove alloc] init];
     result.start.y = index;
+    result.destination.y = index;
     
     NSUInteger cellToMoveIntegerValue = [row[index] integerValue];
     
     if (cellToMoveIntegerValue == emptyValue) {
         
-        result.destination.y = index;
         return result;
     }
     

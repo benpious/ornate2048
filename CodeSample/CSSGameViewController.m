@@ -128,7 +128,6 @@
         case UISwipeGestureRecognizerDirectionRight:
             
             tileAnimations = [self.gameEngine slideDown];
-            placementAnimation =  [self.gameEngine placeNewTile];
             NSLog(@"swiping right");
             
             break;
@@ -136,7 +135,6 @@
         case UISwipeGestureRecognizerDirectionLeft:
             
             tileAnimations = [self.gameEngine slideUp];
-            placementAnimation = [self.gameEngine placeNewTile];
             NSLog(@"swiping left");
             
             break;
@@ -144,7 +142,6 @@
         case UISwipeGestureRecognizerDirectionUp:
             
             tileAnimations = [self.gameEngine slideRight];
-            placementAnimation = [self.gameEngine placeNewTile];
             NSLog(@"swiping up");
             
             break;
@@ -152,7 +149,6 @@
         case UISwipeGestureRecognizerDirectionDown:
             
             tileAnimations =  [self.gameEngine slideLeft];
-            placementAnimation = [self.gameEngine placeNewTile];
             NSLog(@"swiping down");
             break;
             
@@ -160,7 +156,11 @@
             break;
     }
     
-    tileAnimations = [tileAnimations arrayByAddingObjectsFromArray: placementAnimation];
+    if (tileAnimations.count) {
+        
+        placementAnimation =  [self.gameEngine placeNewTile];
+        tileAnimations = [tileAnimations arrayByAddingObjectsFromArray: placementAnimation];
+    }
     
     [self.gameController addTileMoves: tileAnimations];
     

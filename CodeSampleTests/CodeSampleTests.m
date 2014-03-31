@@ -247,6 +247,12 @@
     return result;
 }
 
+/*
+-(void) testMoveReturns
+{
+    
+}
+*/
 -(void) testCopiedPointEquality
 {
     
