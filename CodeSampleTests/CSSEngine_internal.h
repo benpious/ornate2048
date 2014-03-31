@@ -9,8 +9,8 @@
 #import "CSSEngine.h"
 
 @interface CSSEngine ()
--(void) slideRowRight: (NSMutableArray*) row;
--(void) slideRowLeft: (NSMutableArray*) row;
+-(void) slideRowUp: (NSMutableArray*) row;
+-(void) slideRowDown: (NSMutableArray*) row;
 -(id) initWithExistingState: (NSMutableArray*) state;
 @property NSArray* cellColumns;
 @end

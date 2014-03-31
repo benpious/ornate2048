@@ -127,29 +127,22 @@
             
         case UISwipeGestureRecognizerDirectionRight:
             
-            tileAnimations = [self.gameEngine slideDown];
-            NSLog(@"swiping right");
-            
+            tileAnimations = [self.gameEngine slideRight];
             break;
             
         case UISwipeGestureRecognizerDirectionLeft:
             
-            tileAnimations = [self.gameEngine slideUp];
-            NSLog(@"swiping left");
-            
+            tileAnimations = [self.gameEngine slideLeft];
             break;
             
         case UISwipeGestureRecognizerDirectionUp:
             
-            tileAnimations = [self.gameEngine slideRight];
-            NSLog(@"swiping up");
-            
+            tileAnimations = [self.gameEngine slideUp];
             break;
             
         case UISwipeGestureRecognizerDirectionDown:
             
-            tileAnimations =  [self.gameEngine slideLeft];
-            NSLog(@"swiping down");
+            tileAnimations =  [self.gameEngine slideDown];
             break;
             
         default:

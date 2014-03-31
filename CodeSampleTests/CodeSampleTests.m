@@ -29,7 +29,7 @@
     [super tearDown];
 }
 
--(void) testSlideRight
+-(void) testSlideUp
 {
     CSSEngine* engine = [[CSSEngine alloc] init];
     
@@ -62,7 +62,7 @@
 
 -(BOOL) compare: (NSMutableArray*) toTest toArray: (NSArray*) expectedResult withEngine: (CSSEngine*) engine
 {
-    [engine slideRowRight: toTest];
+    [engine slideRowUp: toTest];
     
     BOOL result = [toTest isEqual: expectedResult];
     
@@ -74,40 +74,40 @@
     return  result;
 }
 
--(void) testSlideLeft
+-(void) testSlideDown
 {
     CSSEngine* engine = [[CSSEngine alloc] init];
     
-    BOOL result = [self compareSlideLeft: [NSMutableArray arrayWithArray: @[@2, @2, @0, @0]]
+    BOOL result = [self compareSlideDown: [NSMutableArray arrayWithArray: @[@2, @2, @0, @0]]
                         toArray: [NSMutableArray arrayWithArray: @[@4,@0, @0, @0]]
                      withEngine: engine];
     XCTAssertTrue(result, @"Result is not as expected");
     
-    result = [self compareSlideLeft: [NSMutableArray arrayWithArray: @[@0,@0,@0,@0]]
+    result = [self compareSlideDown: [NSMutableArray arrayWithArray: @[@0,@0,@0,@0]]
                    toArray: @[@0,@0,@0,@0]
                 withEngine:engine];
     XCTAssertTrue(result, @"Result is not as expected");
     
     
-    result = [self compareSlideLeft: [NSMutableArray arrayWithArray: @[@2, @0,@0,@2]]
+    result = [self compareSlideDown: [NSMutableArray arrayWithArray: @[@2, @0,@0,@2]]
                    toArray: @[@4,@0,@0,@0]
                 withEngine: engine];
     XCTAssertTrue(result, @"Result is not as expected");
     
-    result =  [self compareSlideLeft: [NSMutableArray arrayWithArray: @[@0,@0,@2,@4]]
+    result =  [self compareSlideDown: [NSMutableArray arrayWithArray: @[@0,@0,@2,@4]]
                     toArray: @[@2,@4, @0, @0]
                  withEngine: engine];
     XCTAssertTrue(result, @"Result is not as expected");
     
-    result = [self compareSlideLeft: [NSMutableArray arrayWithArray: @[@2, @2, @2, @2]]
+    result = [self compareSlideDown: [NSMutableArray arrayWithArray: @[@2, @2, @2, @2]]
                    toArray: [NSMutableArray arrayWithArray: @[@4,@4, @0, @0]]
                 withEngine: engine];
     XCTAssertTrue(result , @"Result is not as expected");
 }
 
--(BOOL) compareSlideLeft: (NSMutableArray*) toTest toArray: (NSArray*) expectedResult withEngine: (CSSEngine*) engine
+-(BOOL) compareSlideDown: (NSMutableArray*) toTest toArray: (NSArray*) expectedResult withEngine: (CSSEngine*) engine
 {
-    [engine slideRowLeft: toTest];
+    [engine slideRowDown: toTest];
     
     BOOL result = [toTest isEqual: expectedResult];
     
@@ -131,12 +131,12 @@
     XCTAssert(result ,  @"multipication incorrect");
 }
 
--(void) testSlideDown
+-(void) testSlideRight
 {
     
     BOOL result;
     
-    result = [self slideDownWithTestArray: [NSMutableArray arrayWithArray: @[@[@0,@0,@0,@0],
+    result = [self slideRightWithTestArray: [NSMutableArray arrayWithArray: @[@[@0,@0,@0,@0],
                                                                              @[@0,@0,@0,@0],
                                                                              @[@0,@0,@0,@0],
                                                                              @[@2,@2,@0,@4],
@@ -149,7 +149,7 @@
     
     XCTAssertTrue(result, @"Result Differs");
     
-    result = [self slideDownWithTestArray: [NSMutableArray arrayWithArray: @[@[@0,@0,@0,@0],
+    result = [self slideRightWithTestArray: [NSMutableArray arrayWithArray: @[@[@0,@0,@0,@0],
                                                                              @[@0,@2,@2,@0],
                                                                              @[@0,@0,@0,@0],
                                                                              @[@2,@2,@0,@4],
@@ -164,12 +164,12 @@
 }
 
 
--(BOOL) slideDownWithTestArray: (NSMutableArray*) arrayToTest expectedResult: (NSMutableArray*) expectedResult
+-(BOOL) slideRightWithTestArray: (NSMutableArray*) arrayToTest expectedResult: (NSMutableArray*) expectedResult
 {
     
     CSSEngine* engine = [[CSSEngine alloc] initWithExistingState: arrayToTest];
     
-    [engine slideDown];
+    [engine slideRight];
     
     BOOL result = [engine.cellColumns isEqual: expectedResult];
     
@@ -182,7 +182,7 @@
 }
 
 
--(void) testSlideUp
+-(void) testSlideLeft
 {
     NSMutableArray* arrayToTest = [NSMutableArray arrayWithArray: @[@[@0,@0,@0,@0],
                                                                     @[@0,@0,@0,@0],
@@ -199,7 +199,7 @@
     
     CSSEngine* engine = [[CSSEngine alloc] initWithExistingState: arrayToTest];
     
-    [engine slideUp];
+    [engine slideLeft];
     
     BOOL result = [engine.cellColumns isEqual: expectedResult];
     

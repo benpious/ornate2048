@@ -145,7 +145,7 @@ NSUInteger randomNewValue() {
     self.cellColumns[x][y] = [NSNumber numberWithInteger: value];
 }
 
--(NSArray*) slideDown
+-(NSArray*) slideRight
 {
     
     NSMutableArray* result = [NSMutableArray array];
@@ -165,7 +165,7 @@ NSUInteger randomNewValue() {
     NSUInteger currRowIndex = 0;
     for (NSMutableArray* currRow in transposedCells) {
         
-       NSArray* rowAnimations = [self slideRowRight: currRow];
+       NSArray* rowAnimations = [self slideRowUp: currRow];
         
         for (CSSTileMove* currMove in rowAnimations) {
             
@@ -226,7 +226,7 @@ NSUInteger randomNewValue() {
 
 
 
--(NSArray*) slideUp
+-(NSArray*) slideLeft
 {
     
     NSMutableArray* result = [NSMutableArray array];
@@ -246,7 +246,7 @@ NSUInteger randomNewValue() {
     NSUInteger currRowIndex = 0;
     for (NSMutableArray* currRow in transposedCells) {
         
-        NSArray* movementResults = [self slideRowLeft: currRow];
+        NSArray* movementResults = [self slideRowDown: currRow];
         
         for (CSSTileMove* tileMove in movementResults) {
             
@@ -305,7 +305,7 @@ NSUInteger randomNewValue() {
     return [NSArray arrayWithArray: result];;
 }
 
--(NSArray*) slideRight
+-(NSArray*) slideUp
 {
  
     NSMutableArray* animationsToAdd = [NSMutableArray array];
@@ -313,7 +313,7 @@ NSUInteger randomNewValue() {
     NSUInteger currRowIndex = 0;
     for (NSMutableArray* currRow in self.cellColumns) {
         
-        NSArray* result = [self slideRowRight: currRow];
+        NSArray* result = [self slideRowUp: currRow];
         
         for (CSSTileMove* tileMove in result) {
             
@@ -329,7 +329,7 @@ NSUInteger randomNewValue() {
     return animationsToAdd;
 }
 
--(NSArray*) slideRowRight: (NSMutableArray*) row
+-(NSArray*) slideRowUp: (NSMutableArray*) row
 {
     NSMutableArray* rowMoveResults = [NSMutableArray array];
     for (NSUInteger i = row.count - 1; i < row.count; i--) {
@@ -409,7 +409,7 @@ NSUInteger randomNewValue() {
     return [self.cellColumns[x][y] integerValue];
 }
 
--(NSArray*) slideLeft
+-(NSArray*) slideDown
 {
     
     NSMutableArray* animationsToAdd = [NSMutableArray array];
@@ -418,7 +418,7 @@ NSUInteger randomNewValue() {
 
     for (NSMutableArray* currRow in self.cellColumns) {
         
-        NSArray* slidRow = [self slideRowLeft: currRow];
+        NSArray* slidRow = [self slideRowDown: currRow];
         
         for (CSSTileMove* currTileMove in slidRow) {
             
@@ -434,7 +434,7 @@ NSUInteger randomNewValue() {
     return [NSArray arrayWithArray: animationsToAdd];
 }
 
--(NSArray*) slideRowLeft: (NSMutableArray*) row
+-(NSArray*) slideRowDown: (NSMutableArray*) row
 {
     
     NSMutableArray* result = [NSMutableArray array];

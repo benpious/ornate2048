@@ -7,16 +7,6 @@ Swipe up, down, right, and to the left to move the pieces.
 
 Known bugs/issues
 
-
-    Half implemented features: the intention was for the tiles to animate their slide to the next position, for reasons enumerated below,
-    this is not happening. They should also have a number on them making them easier to identify, this also isn't happening (the current issue with it is
-    that the GLKTextureLoader throws an exception when trying to load them, and there are no texture coordinates to pass into the shaders). I kept in the 
-    code that I have presently to implement these features.
-
-    Some of the slide functions in the CSSEngine don't return correct CSSTileMove Objects.
-    
-    The animations created by CSSEngineController don't *seem* to be correct.
-
     The tiles should be blurred, the blur function doens't look very good.
 
     The slide functions in CSSEngine are misnamed, that is, a slide up will actually slide to the right on the screen.
