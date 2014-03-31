@@ -150,11 +150,12 @@ NSUInteger randomNewValue() {
     
     NSMutableArray* result = [NSMutableArray array];
     //transpose cells to the right
-    __block NSMutableArray* transposedCells = [NSMutableArray arrayWithArray:@[[NSMutableArray array],
-                                                                               [NSMutableArray array],
-                                                                               [NSMutableArray array],
-                                                                               [NSMutableArray array]]];
+    __block NSMutableArray* transposedCells = [NSMutableArray array];
     
+    for (NSUInteger i = 0; i < boardSize; i++) {
+        
+        [transposedCells addObject: [NSMutableArray array]];
+    }
     
     [self enumerateCellsWithBlock:^(NSUInteger xIndex, NSUInteger yIndex, NSNumber *currNumber) {
         
@@ -232,10 +233,12 @@ NSUInteger randomNewValue() {
     NSMutableArray* result = [NSMutableArray array];
     
     //transpose cells to the right
-    __block NSMutableArray* transposedCells = [NSMutableArray arrayWithArray:@[[NSMutableArray array],
-                                                                               [NSMutableArray array],
-                                                                               [NSMutableArray array],
-                                                                               [NSMutableArray array]]];
+    __block NSMutableArray* transposedCells = [NSMutableArray array];
+    
+    for (NSUInteger i = 0; i < boardSize; i++) {
+        
+        [transposedCells addObject: [NSMutableArray array]];
+    }
     
     [self enumerateCellsWithBlock:^(NSUInteger xIndex, NSUInteger yIndex, NSNumber *currNumber) {
         
@@ -252,9 +255,9 @@ NSUInteger randomNewValue() {
             
             tileMove.start.x = currRowIndex;
             tileMove.destination.x = currRowIndex;
-            currRowIndex++;
         }
-
+        
+        currRowIndex++;
         [result addObjectsFromArray: movementResults];
     }
     
@@ -332,9 +335,18 @@ NSUInteger randomNewValue() {
 -(NSArray*) slideRowUp: (NSMutableArray*) row
 {
     NSMutableArray* rowMoveResults = [NSMutableArray array];
+    NSMutableArray* alreadyMultipliedIndices = [NSMutableArray array];
     for (NSUInteger i = row.count - 1; i < row.count; i--) {
         
-        CSSTileMove* result = [self slideCellAtIndex: i withIncrement: 1 row: row];
+        CSSTileMove* result = [self slideCellAtIndex: i
+                                       withIncrement: 1
+                                                 row: row
+                            alreadyMultipliedIndices: alreadyMultipliedIndices];
+        
+        if (result.postAnimationAction == multiplyTile) {
+            
+            [alreadyMultipliedIndices addObject: [NSNumber numberWithInteger: result.destination.y]];
+        }
         
         if (result.start.y != result.destination.y && [row[result.destination.y] integerValue] != emptyValue) {
             
@@ -345,7 +357,7 @@ NSUInteger randomNewValue() {
     return [NSArray arrayWithArray: rowMoveResults];
 }
 
--(CSSTileMove*) slideCellAtIndex: (NSUInteger) index withIncrement: (NSInteger) increment row: (NSMutableArray*) row
+-(CSSTileMove*) slideCellAtIndex: (NSUInteger) index withIncrement: (NSInteger) increment row: (NSMutableArray*) row alreadyMultipliedIndices: (NSArray*) alreadyMultiplidIndices
 {
     
     CSSTileMove* result = [[CSSTileMove alloc] init];
@@ -382,11 +394,12 @@ NSUInteger randomNewValue() {
             lastValidSquare += increment;
         }
         
-        else if (currCellIntegerValue == cellToMoveIntegerValue) {
+        else if (currCellIntegerValue == cellToMoveIntegerValue &&  ![alreadyMultiplidIndices containsObject: [NSNumber numberWithInteger:i]]) {
             
             row[index] = [NSNumber numberWithInteger: emptyValue];
             row[i] = [NSNumber numberWithInteger: cellToMoveIntegerValue * amountToMultiplyBy];
             result.destination.y = i;
+            result.postAnimationAction = multiplyTile;
             
             break;
         }
@@ -438,10 +451,19 @@ NSUInteger randomNewValue() {
 {
     
     NSMutableArray* result = [NSMutableArray array];
+    NSMutableArray* alreadyMultipliedIndices = [NSMutableArray array];
     
     for (NSUInteger i = 0; i < row.count; i++) {
         
-        CSSTileMove* currMove = [self slideCellAtIndex: i withIncrement: -1 row: row];
+        CSSTileMove* currMove = [self slideCellAtIndex: i
+                                         withIncrement: -1
+                                                   row: row
+                              alreadyMultipliedIndices: alreadyMultipliedIndices];
+        
+        if (currMove.postAnimationAction == multiplyTile) {
+            
+            [alreadyMultipliedIndices addObject: [NSNumber numberWithInteger: currMove.destination.y]];
+        }
         
         if (currMove.start.y != currMove.destination.y && [row[currMove.destination.y] integerValue] != emptyValue) {
             

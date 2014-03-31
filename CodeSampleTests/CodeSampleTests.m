@@ -58,6 +58,12 @@
                    toArray: [NSMutableArray arrayWithArray: @[@0,@0, @4, @4]]
                 withEngine: engine];
     XCTAssertTrue(result , @"Result is not as expected");
+    
+    result = [self compare: [NSMutableArray arrayWithArray: @[@0, @2, @2, @4]]
+                   toArray: [NSMutableArray arrayWithArray: @[@0,@0, @4, @4]]
+                withEngine: engine];
+    XCTAssertTrue(result , @"Result is not as expected");
+
 }
 
 -(BOOL) compare: (NSMutableArray*) toTest toArray: (NSArray*) expectedResult withEngine: (CSSEngine*) engine
@@ -102,6 +108,11 @@
     result = [self compareSlideDown: [NSMutableArray arrayWithArray: @[@2, @2, @2, @2]]
                    toArray: [NSMutableArray arrayWithArray: @[@4,@4, @0, @0]]
                 withEngine: engine];
+    XCTAssertTrue(result , @"Result is not as expected");
+    
+    result = [self compareSlideDown: [NSMutableArray arrayWithArray: @[@4, @2, @2, @0]]
+                            toArray: [NSMutableArray arrayWithArray: @[@4,@4, @0, @0]]
+                         withEngine: engine];
     XCTAssertTrue(result , @"Result is not as expected");
 }
 
@@ -275,7 +286,11 @@
     
     testResult = [engine slideRowUp: [NSMutableArray arrayWithArray: @[@16,@32,@2,@4]]];
     
-    XCTAssertTrue(testResult.count == 0, @"test result should be equal to zero");    
+    XCTAssertTrue(testResult.count == 0, @"test result should be equal to zero");
+    
+    testResult = [engine slideRowDown: [NSMutableArray arrayWithArray: @[@16,@32,@2,@4]]];
+    
+    XCTAssertTrue(testResult.count == 0, @"test result should be equal to zero");
 }
 
 -(void) testCopiedPointEquality
