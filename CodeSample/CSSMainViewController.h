@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CSSMenuViewDelegate.h"
 /**
  Root view controller for this project, parent to the game view controller and the menu. Manages the menu view and swipe gestures for the game itself.
  */
-@interface CSSMainViewController : UIViewController
+@interface CSSMainViewController : UIViewController<CSSMenuViewDelegate>
 
 @end

@@ -21,6 +21,7 @@
 @end
 
 @implementation CSSGameViewController
+
 -(id) init
 {
     if (self = [super init]) {
@@ -86,6 +87,11 @@
     return YES;
 }
 
+-(void) startNewGame
+{
+    
+    [self.gameEngine makeNewGame];
+}
 
 -(void) drawFrame:(CADisplayLink *)displayLink
 {
@@ -106,19 +112,14 @@
 -(void) swiped: (UIGestureRecognizer*) recognizer
 {
     UISwipeGestureRecognizer* swipeGestureRecognizer = (UISwipeGestureRecognizer*) recognizer;
+    
+    //still considering whether it is better UX to have this or not
     /*
     if ([self.gameController currentlyAnimating]) {
         
         return;
     }
     */
-    
-    /*
-     
-     TODO: the directions given by CSSEngine do not actually match the directions given 
-     here. When I have more time I will fix the naming issues.
-     
-     */
     
     NSArray* tileAnimations;
     NSArray* placementAnimation;

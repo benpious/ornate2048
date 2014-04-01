@@ -7,19 +7,18 @@
 //
 
 #import "CSSAppDelegate.h"
-#import "CSSGameViewController.h"
-
+#import "CSSMainViewController.h"
 @implementation CSSAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    CSSGameViewController* gameViewController = [[CSSGameViewController alloc] init];
-    self.window.rootViewController = gameViewController;
+    CSSMainViewController* mainViewController = [[CSSMainViewController alloc] init];
+    self.window.rootViewController = mainViewController;
+    
     return YES;
 }
 

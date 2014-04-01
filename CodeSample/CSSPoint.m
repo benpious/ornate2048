@@ -71,7 +71,7 @@
 {
     NSString* description = [super description];
     
-    description = [description stringByAppendingFormat: @"(%ld,%ld)", self.x, self.y];
+    description = [description stringByAppendingFormat: @"(%ld,%ld)", (unsigned long)self.x, (unsigned long)self.y];
     
     return description;
 }
