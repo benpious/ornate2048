@@ -63,6 +63,11 @@
                    toArray: [NSMutableArray arrayWithArray: @[@0,@0, @4, @4]]
                 withEngine: engine];
     XCTAssertTrue(result , @"Result is not as expected");
+    
+    result = [self compare: [NSMutableArray arrayWithArray: @[@8, @8, @16, @0]]
+                   toArray: [NSMutableArray arrayWithArray: @[@0,@0, @16, @16]]
+                withEngine: engine];
+    XCTAssertTrue(result , @"Result is not as expected");
 
 }
 
@@ -114,6 +119,12 @@
                             toArray: [NSMutableArray arrayWithArray: @[@4,@4, @0, @0]]
                          withEngine: engine];
     XCTAssertTrue(result , @"Result is not as expected");
+    
+    result = [self compareSlideDown: [NSMutableArray arrayWithArray: @[@0, @8, @8, @16]]
+                            toArray: [NSMutableArray arrayWithArray: @[@16,@16, @0, @0]]
+                         withEngine: engine];
+    XCTAssertTrue(result , @"Result is not as expected");
+
 }
 
 -(BOOL) compareSlideDown: (NSMutableArray*) toTest toArray: (NSArray*) expectedResult withEngine: (CSSEngine*) engine

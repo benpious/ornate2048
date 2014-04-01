@@ -357,7 +357,7 @@ NSUInteger randomNewValue() {
     return [NSArray arrayWithArray: rowMoveResults];
 }
 
--(CSSTileMove*) slideCellAtIndex: (NSUInteger) index withIncrement: (NSInteger) increment row: (NSMutableArray*) row alreadyMultipliedIndices: (NSArray*) alreadyMultiplidIndices
+-(CSSTileMove*) slideCellAtIndex: (NSUInteger) index withIncrement: (NSInteger) increment row: (NSMutableArray*) row alreadyMultipliedIndices: (NSArray*) alreadyMultipliedIndices
 {
     
     CSSTileMove* result = [[CSSTileMove alloc] init];
@@ -394,12 +394,32 @@ NSUInteger randomNewValue() {
             lastValidSquare += increment;
         }
         
-        else if (currCellIntegerValue == cellToMoveIntegerValue &&  ![alreadyMultiplidIndices containsObject: [NSNumber numberWithInteger:i]]) {
+        else if (currCellIntegerValue == cellToMoveIntegerValue) {
             
-            row[index] = [NSNumber numberWithInteger: emptyValue];
-            row[i] = [NSNumber numberWithInteger: cellToMoveIntegerValue * amountToMultiplyBy];
-            result.destination.y = i;
-            result.postAnimationAction = multiplyTile;
+            if ([alreadyMultipliedIndices containsObject: [NSNumber numberWithInteger: i]]) {
+                
+                row[index] = [NSNumber numberWithInteger: emptyValue];
+                
+                if (i - increment < row.count && i - increment > 0) {
+                    
+                    row[i - increment] = [NSNumber numberWithInteger: cellToMoveIntegerValue];
+                    result.destination.y = i - increment;
+                }
+                
+                else {
+                    
+                    row[i] = [NSNumber numberWithInteger: cellToMoveIntegerValue];
+                    result.destination.y = i;
+                }
+            }
+            
+            else {
+                
+                row[index] = [NSNumber numberWithInteger: emptyValue];
+                row[i] = [NSNumber numberWithInteger: cellToMoveIntegerValue * amountToMultiplyBy];
+                result.destination.y = i;
+                result.postAnimationAction = multiplyTile;
+            }
             
             break;
         }
@@ -459,6 +479,13 @@ NSUInteger randomNewValue() {
                                          withIncrement: -1
                                                    row: row
                               alreadyMultipliedIndices: alreadyMultipliedIndices];
+        
+        //we are moving an already multiplied move, need to change its index
+        if ([alreadyMultipliedIndices containsObject: [NSNumber numberWithInteger: currMove.start.y]]) {
+            
+            [alreadyMultipliedIndices removeObject: [NSNumber numberWithInteger: currMove.start.y]];
+            [alreadyMultipliedIndices addObject: [NSNumber numberWithInteger: currMove.destination.y]];
+        }
         
         if (currMove.postAnimationAction == multiplyTile) {
             
