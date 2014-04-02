@@ -56,6 +56,7 @@
 		3B6B5D2B18DE3F12000260DF /* CSSEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6B5D2A18DE3F12000260DF /* CSSEngine.m */; };
 		3B7B4ECF18EB3D32001A1B1C /* slideoutmenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B7B4ECE18EB3D32001A1B1C /* slideoutmenu.png */; };
 		3B7B4ED218EB3D6C001A1B1C /* CSSMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B7B4ED118EB3D6C001A1B1C /* CSSMenuView.m */; };
+		3BC1C36B18EC93D400C077A4 /* CSSArrowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC1C36A18EC93D400C077A4 /* CSSArrowView.m */; };
 		3BCC94EB18DFD9F900A2A7A5 /* CSSBasicAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCC94EA18DFD9F900A2A7A5 /* CSSBasicAsset.m */; };
 		3BCC94ED18DFDBF900A2A7A5 /* Basic.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3BCC94EC18DFDBF900A2A7A5 /* Basic.vsh */; };
 		3BCC94EF18DFDC0100A2A7A5 /* Basic.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3BCC94EE18DFDC0100A2A7A5 /* Basic.fsh */; };
@@ -145,6 +146,8 @@
 		3B7B4ED318EB3F3D001A1B1C /* CSSMenuViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSSMenuViewDelegate.h; sourceTree = "<group>"; };
 		3B868DED18DE4DA90091DF25 /* CSSEngine_internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSSEngine_internal.h; sourceTree = "<group>"; };
 		3B868DEE18DE73B40091DF25 /* CSSEngineTileMovementDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSSEngineTileMovementDelegate.h; sourceTree = "<group>"; };
+		3BC1C36918EC93D400C077A4 /* CSSArrowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSArrowView.h; sourceTree = "<group>"; };
+		3BC1C36A18EC93D400C077A4 /* CSSArrowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSArrowView.m; sourceTree = "<group>"; };
 		3BCC94E918DFD9F900A2A7A5 /* CSSBasicAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSBasicAsset.h; sourceTree = "<group>"; };
 		3BCC94EA18DFD9F900A2A7A5 /* CSSBasicAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSBasicAsset.m; sourceTree = "<group>"; };
 		3BCC94EC18DFDBF900A2A7A5 /* Basic.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Basic.vsh; sourceTree = "<group>"; };
@@ -254,6 +257,8 @@
 				3B7B4ED318EB3F3D001A1B1C /* CSSMenuViewDelegate.h */,
 				3B7B4ED018EB3D6C001A1B1C /* CSSMenuView.h */,
 				3B7B4ED118EB3D6C001A1B1C /* CSSMenuView.m */,
+				3BC1C36918EC93D400C077A4 /* CSSArrowView.h */,
+				3BC1C36A18EC93D400C077A4 /* CSSArrowView.m */,
 				3B2AFCD418DCE9FE00B5E824 /* OpenGL */,
 				3B2AFCA918DCCA7800B5E824 /* Images.xcassets */,
 				3B2AFC9E18DCCA7800B5E824 /* Supporting Files */,
@@ -464,6 +469,7 @@
 				3B2AFCA418DCCA7800B5E824 /* main.m in Sources */,
 				3B1DDBD518DF49D200115C4B /* CSSShaderProgramObject.m in Sources */,
 				3B1DDBDF18DF52FD00115C4B /* CSSGameViewController.m in Sources */,
+				3BC1C36B18EC93D400C077A4 /* CSSArrowView.m in Sources */,
 				3B1DDBF618DF6CC100115C4B /* CSSBackgroundAsset.m in Sources */,
 				3B369D9C18E0F7F100A05622 /* CSSGameController.m in Sources */,
 				3B2AFCE118DCEC6200B5E824 /* CSSShaderProgram.m in Sources */,

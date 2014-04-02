@@ -9,6 +9,7 @@
 #import "CSSMainViewController.h"
 #import "CSSGameViewController.h"
 #import "CSSMenuView.h"
+#import "CSSArrowView.h"
 
 @interface CSSMainViewController()
 
@@ -16,8 +17,10 @@
 @property BOOL showingMenu;
 @property CSSMenuView* menuView;
 @property UIView* menuSwipeView;
+@property CGFloat widthForSwipeView;
 @property UISwipeGestureRecognizer* edgeSwipeGestureRecognizer;
 @property UISwipeGestureRecognizer* menuSwipeGestureRecognizer;
+@property CSSArrowView* arrowView;
 
 @end
 
@@ -43,11 +46,14 @@
         
         self.menuView = [[CSSMenuView alloc] initWithFrame: mainMenuFrame];
         [self.view addSubview: self.menuView];
+        
         self.menuView.delegate = self;
         
+        
+        self.widthForSwipeView = screenRect.size.width/20.0 + 10.0;
         CGRect swipeViewFrame = CGRectMake(screenRect.origin.x,
                                            screenRect.origin.y,
-                                           screenRect.size.width/20.0,
+                                           self.widthForSwipeView,
                                            screenRect.size.height);
         
         self.menuSwipeView = [[UIView alloc] initWithFrame: swipeViewFrame];
@@ -68,6 +74,15 @@
         
         [self.view addSubview: self.menuSwipeView];
         self.showingMenu = NO;
+        
+        CGFloat arrowSize = screenRect.size.width/20.0;
+        self.arrowView = [[CSSArrowView alloc] initWithFrame: CGRectMake(10.0,
+                                                                         (screenRect.size.height - arrowSize)/2.0,
+                                                                         arrowSize,
+                                                                         arrowSize)];
+        
+        [self.menuSwipeView addSubview: self.arrowView];
+        
     }
     
     return self;
@@ -88,10 +103,20 @@
     CGFloat offsetForMenu = self.menuView.frame.size.width;
     
     CGAffineTransform transform;
+    //for applying to the arrow, to rotate it. doesn't need to be translated because its superview (menuSwipeView) gets the translate
+    CATransform3D arrowTransform;
     
     if (self.showingMenu) {
         
         transform = CGAffineTransformMakeTranslation(offsetForMenu, 0.0);
+        arrowTransform = CATransform3DMakeRotation(M_PI, 0.0, 1.0, 0.0);
+        
+        //so that a swipe anywhere on the screen will dismiss the menu
+        self.menuSwipeView.frame = CGRectMake(self.menuSwipeView.frame.origin.x,
+                                              self.menuSwipeView.frame.origin.y,
+                                              self.view.frame.size.width - offsetForMenu,
+                                              self.menuSwipeView.frame.size.height);
+        
         self.menuSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
         self.edgeSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
     }
@@ -99,6 +124,13 @@
     else {
         
         transform = CGAffineTransformIdentity;
+        arrowTransform = CATransform3DIdentity;
+        
+        self.menuSwipeView.frame = CGRectMake(self.menuSwipeView.frame.origin.x,
+                                              self.menuSwipeView.frame.origin.y,
+                                              self.widthForSwipeView,
+                                              self.menuSwipeView.frame.size.height);
+        
         self.menuSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
         self.edgeSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
     }
@@ -108,7 +140,15 @@
         self.menuView.transform = transform;
         self.gameViewController.view.transform = transform;
         self.menuSwipeView.transform = transform;
+        self.arrowView.layer.transform = arrowTransform;
     }];
+}
+
+
+-(UIStatusBarStyle)preferredStatusBarStyle
+{
+    
+    return UIStatusBarStyleLightContent;
 }
 
 @end

@@ -15,17 +15,30 @@
     if (self  = [super initWithFrame: frame]) {
         
         
-        UIFont* textFont = [UIFont fontWithName: @"HelveticaNeue-UltraLight" size: 40.0];
+        UIFont* textFont = [UIFont fontWithName: @"HelveticaNeue-UltraLight" size: 80.0];
         
         self.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed: @"slideoutmenu"]];
+        
+        
+        CGFloat margin;
+        if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+            
+            margin = 20.0;
+        }
+        
+        else {
+            
+            
+            margin = 5.0;
+        }
         
         CGRect bounds = self.bounds;
         CGPoint orign = bounds.origin;
         CGSize size = bounds.size;
-        CGRect titleLabelFrame = CGRectMake(orign.x + 20.0,
-                                            orign.y + 20.0,
-                                            size.width - 40.0,
-                                            (size.height - 10.0)/ 10.0);
+        CGRect titleLabelFrame = CGRectMake(orign.x + margin,
+                                            orign.y + margin,
+                                            size.width - (margin * 2),
+                                            textFont.pointSize);
         
         UILabel* titleLabel = [[UILabel alloc] initWithFrame: titleLabelFrame];
         titleLabel.font = textFont;
@@ -33,18 +46,24 @@
         [titleLabel setTextAlignment: NSTextAlignmentCenter];
         [titleLabel setTextColor: [UIColor whiteColor]];
         [self addSubview: titleLabel];
+        
+        CGFloat fontHeight =  titleLabel.font.pointSize;
         titleLabel.adjustsFontSizeToFitWidth = YES;
         
-        CGRect newGameButtonFrame = CGRectMake(orign.x + 20.0,
-                                               orign.y + 50.0,
-                                               size.width - 40.0,
-                                               (size.height - 10.0)/ 10.0);
+        
+        
+        CGRect newGameButtonFrame = CGRectMake(orign.x + margin,
+                                               orign.y + 50.0 + fontHeight,
+                                               size.width - (margin * 2),
+                                               fontHeight);
         
         UIButton* newGameButton = [UIButton buttonWithType: UIButtonTypeCustom];
         
         newGameButton.frame = newGameButtonFrame;
         
-        [newGameButton setTitle: @"New Game" forState: UIControlStateNormal];
+        [newGameButton setTitle: @"New Game"
+                       forState: UIControlStateNormal];
+        
         newGameButton.titleLabel.adjustsFontSizeToFitWidth = YES;
         newGameButton.titleLabel.font = textFont;
         
@@ -56,16 +75,6 @@
         
         [newGameButton setTitleColor: [UIColor whiteColor] forState: UIControlStateNormal];
         [self addSubview: newGameButton];
-        
-        /*
-        NSArray* buttonRelativeHeightConstraints = [NSLayoutConstraint constraintsWithVisualFormat: @"V:[topView]-40-[bottomView]"
-                                                                                            options: 0
-                                                                                            metrics: nil
-                                                                                            views: @{@"topView" : titleLabel,
-                                                                                                                @"bottomView" : newGameButton}];
-        
-        [self addConstraints: buttonRelativeHeightConstraints];
-         */
     }
     
     return self;
