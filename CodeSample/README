@@ -2,15 +2,3 @@ This is a clone of the game 2048 (http://gabrielecirulli.github.io/2048/). The g
 11 times. Every time the piece is matched its value changes, starting at 2 or 4 and increasing by a power of two until it arrives at 2048 ()
 The Intention is to clone the game in the style of iOS7's  springboard.
 Swipe up, down, right, and to the left to move the pieces.
-
-
-
-Known bugs/issues
-
-    The tiles should be blurred, the blur function doens't look very good.
-
-    The slide functions in CSSEngine are misnamed, that is, a slide up will actually slide to the right on the screen.
-
-Attribution: 
-
-The image aqua.png used as a background was made by an artist called Bjango (http://dribbble.com/bjango)

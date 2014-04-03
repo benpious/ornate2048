@@ -52,6 +52,19 @@
         
         
         
+        CAGradientLayer* gradientLayer = [[CAGradientLayer alloc] init];
+        
+        CGColorRef whiteRef = [UIColor colorWithRed: 1.0 green: 1.0 blue: 1.0 alpha: 1.0].CGColor;
+        CGColorRef transparentColorRef = [UIColor colorWithRed: 1.0 green: 1.0 blue: 1.0 alpha: 0.0].CGColor;
+        
+        gradientLayer.colors = @[(__bridge NSObject*)transparentColorRef, (__bridge NSObject*)whiteRef, (__bridge NSObject*)transparentColorRef];
+        gradientLayer.frame = CGRectMake(titleLabelFrame.origin.x, titleLabel.frame.origin.y + titleLabelFrame.size.height + 10, titleLabelFrame.size.width, 10);
+        
+        gradientLayer.startPoint = CGPointMake(0.0, 0.5);
+        gradientLayer.endPoint = CGPointMake(1.0, 0.5);
+        
+        [self.layer addSublayer: gradientLayer];
+        
         CGRect newGameButtonFrame = CGRectMake(orign.x + margin,
                                                orign.y + 50.0 + fontHeight,
                                                size.width - (margin * 2),
