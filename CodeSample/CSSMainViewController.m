@@ -49,8 +49,8 @@
         
         self.menuView.delegate = self;
         
-        
-        self.widthForSwipeView = screenRect.size.width/20.0 + 10.0;
+        CGFloat arrowOffset = screenRect.size.width/70.0;
+        self.widthForSwipeView = screenRect.size.width/20.0 + arrowOffset;
         CGRect swipeViewFrame = CGRectMake(screenRect.origin.x,
                                            screenRect.origin.y,
                                            self.widthForSwipeView,
@@ -76,7 +76,7 @@
         self.showingMenu = NO;
         
         CGFloat arrowSize = screenRect.size.width/20.0;
-        self.arrowView = [[CSSArrowView alloc] initWithFrame: CGRectMake(10.0,
+        self.arrowView = [[CSSArrowView alloc] initWithFrame: CGRectMake(arrowOffset,
                                                                          (screenRect.size.height - arrowSize)/2.0,
                                                                          arrowSize,
                                                                          arrowSize)];

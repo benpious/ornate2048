@@ -72,7 +72,7 @@
 {
     
     CGSize viewSize = self.frame.size;
-    CGFloat lineWidth = 10.0;
+    CGFloat lineWidth = self.frame.size.height/3.0;
     
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     

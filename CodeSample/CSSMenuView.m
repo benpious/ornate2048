@@ -63,6 +63,13 @@
         
         [newGameButton setTitle: @"New Game"
                        forState: UIControlStateNormal];
+
+        
+        if ([UIDevice currentDevice].userInterfaceIdiom != UIUserInterfaceIdiomPad) {
+            
+            newGameButton.titleLabel.numberOfLines = 2;
+        }
+
         
         newGameButton.titleLabel.adjustsFontSizeToFitWidth = YES;
         newGameButton.titleLabel.font = textFont;
