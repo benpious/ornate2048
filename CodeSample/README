@@ -1,4 +1,6 @@
 This is a clone of the game 2048 (http://gabrielecirulli.github.io/2048/). The goal is to match one piece with those that share its value 
-11 times. Every time the piece is matched its value changes, starting at 2 or 4 and increasing by a power of two until it arrives at 2048 ()
+11 times. Every time the piece is matched its value changes, starting at 2 or 4 and increasing by a power of two until it arrives at 2048
+
 The Intention is to clone the game in the style of iOS7's  springboard.
+
 Swipe up, down, right, and to the left to move the pieces.
