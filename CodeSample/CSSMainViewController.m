@@ -44,8 +44,16 @@
                                           mainMenuOffset,
                                           screenRect.size.height);
         
+        
+        self.gameViewController.view.layer.shadowOffset = CGSizeMake(-15.0, 0.0);
+        self.gameViewController.view.layer.shadowRadius = 10.0;
+        self.gameViewController.view.layer.shadowColor = [UIColor blackColor].CGColor;
+        self.gameViewController.view.layer.shadowOpacity = .5;
+
         self.menuView = [[CSSMenuView alloc] initWithFrame: mainMenuFrame];
         [self.view addSubview: self.menuView];
+        
+        [self.view bringSubviewToFront: self.gameViewController.view];
         
         self.menuView.delegate = self;
         
@@ -82,7 +90,6 @@
                                                                          arrowSize)];
         
         [self.menuSwipeView addSubview: self.arrowView];
-        
     }
     
     return self;
