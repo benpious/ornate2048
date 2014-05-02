@@ -187,7 +187,8 @@ const float tileStepSize = .25;
 -(void) prepareToDrawWithTransformation: (GLKMatrix4) transformation texture: (GLuint) texture color: (UIColor*) colorObject integerValue: (NSUInteger) integerValue
 {
     
-    [self prepareToDrawWithTransformation: transformation texture: texture];
+    [self prepareToDrawWithTransformation: transformation
+                                  texture: texture];
     CGFloat colors[3];
     [colorObject getRed: &colors[0] green: &colors[1] blue: &colors[2] alpha: NULL];
     
@@ -198,7 +199,7 @@ const float tileStepSize = .25;
     
     if (integerValue != 0) {
         
-        //should get amountToMultiplyByHere, replace 2 with it
+        //TODO: should get amountToMultiplyByHere, replace 2 with it
         while (((NSUInteger)pow(2, index)) != integerValue) {
             
             index++;

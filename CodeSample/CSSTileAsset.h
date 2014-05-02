@@ -11,6 +11,10 @@
 
 const float tileStepSize;
 
+/**
+ Overrides CSSAsset functionality with what's needed to draw a tile, and adds new functions which provide
+ greater control over drawing.
+ */
 @interface CSSTileAsset : CSSAsset
 
 -(id) initWithContext: (EAGLContext*) context;

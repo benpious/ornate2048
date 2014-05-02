@@ -8,6 +8,9 @@
 
 #import "CSSEngine.h"
 
+/*
+ Provides an interface to several private functions in CSSEngine for testing. 
+ */
 @interface CSSEngine ()
 -(NSArray*) slideRowUp: (NSMutableArray*) row;
 -(NSArray*) slideRowDown: (NSMutableArray*) row;

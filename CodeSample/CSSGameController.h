@@ -14,6 +14,11 @@
 @interface CSSGameController : NSObject
 
 -(id) initWithContext: (EAGLContext*) context engine: (CSSEngine*) engine;
+
+/**
+    Draws the board to the context. Note that it *does not* present the context -- it just draws the board tiles.
+    Intended to be called in a CADisplaylink animation loop. 
+ */
 -(void) drawBoardWithmodelViewProjectionMatrix: (GLKMatrix4) modelViewProjectionMatrix texture: (GLuint) texture;
 
 /**

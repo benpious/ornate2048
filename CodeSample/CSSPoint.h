@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ Exactly what it seems like -- holds a pair of x and y coordinates to
+ represent a position on the board. 
+ */
 @interface CSSPoint : NSObject <NSCopying>
 
 @property NSUInteger x;

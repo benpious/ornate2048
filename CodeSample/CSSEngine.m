@@ -17,6 +17,9 @@ const NSUInteger winningTotal = 2048;
 
 @interface CSSEngine()
 
+/**
+ An array of NSMutableArrays. Dimensions are boardSize * boardSize.
+ */
 @property NSMutableArray* cellColumns;
 
 @end
@@ -34,7 +37,7 @@ const NSUInteger winningTotal = 2048;
 }
 
 /**
- for internal use only. State *must* be in the valid format -- boardSizexboardSize mutable array of NSNumbers.
+ For internal testing use only. State *must* be in the valid format -- boardSizexboardSize mutable array of NSNumbers.
  */
 -(id) initWithExistingState: (NSMutableArray*) state
 {
@@ -45,6 +48,7 @@ const NSUInteger winningTotal = 2048;
     
     return self;
 }
+
 -(void) makeNewGame
 {
     
@@ -224,8 +228,6 @@ NSUInteger randomNewValue() {
     
     return [NSArray arrayWithArray: result];
 }
-
-
 
 -(NSArray*) slideLeft
 {

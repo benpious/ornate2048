@@ -8,6 +8,9 @@
 
 #import "CSSAsset.h"
 
+/**
+ Overrides CSSAsset methods with behaviour for the background asset.
+ */
 @interface CSSBackgroundAsset : CSSAsset
 
 -(id) initBackgroundAssetWithContext: (EAGLContext*) context;

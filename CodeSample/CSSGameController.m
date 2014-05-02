@@ -86,7 +86,6 @@ const float yOffset = 0.5;
                                                     currNumber.integerValue ? 0.0 : -0.01);
         }
         
-//        GLKMatrix4 translation = GLKMatrix4MakeTranslation(xIndex * tileStepSize - xOffset, yIndex * tileStepSize - yOffset, currNumber.integerValue ? 0.0 : -0.01);
         
         [self.tileAsset prepareToDrawWithTransformation: GLKMatrix4Multiply(modelViewProjectionMatrix, translation)
                                                 texture: texture

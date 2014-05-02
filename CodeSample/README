@@ -4,3 +4,11 @@ This is a clone of the game 2048 (http://gabrielecirulli.github.io/2048/). The g
 The Intention is to clone the game in the style of iOS7's  springboard.
 
 Swipe up, down, right, and to the left to move the pieces.
+
+Notes for the reader:
+
+The architecture of the app is as follows; CSSMainViewController is in charge of everything -- the app delegate literally just makes one of these and then stops. CSSMainMenuViewController then makes a gameViewController and adds it as a child view controller, and a menuView which it manages directly. 
+
+    Moving into CSSGameViewController, this instantiates and sets up a GameEngine and GameController, and handles swipe events. A Game Engine recieves swipe events and returns the resulting moves, which are then passed to the gameController. The GameController serves a bridge between the engine and the drawing code -- it draws tiles to the view based on the current board and whether there are any animations going on right now. 
+    
+    GameEngine is where all game logic is stored. Its unit tests are found in the file CodeSampleTests. 

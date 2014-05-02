@@ -13,6 +13,9 @@
 @interface CSSGameViewController : UIViewController <UIAlertViewDelegate>
 
 @property CADisplayLink* displayLink;
+/**
+ Resets the board for a new game.
+ */
 -(void) startNewGame;
 
 @end

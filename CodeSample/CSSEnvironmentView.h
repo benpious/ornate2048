@@ -10,6 +10,10 @@
 @class CSSEnvironmentVariables;
 
 @class CSSAsset;
+
+/**
+ Provides the custom drawing behavior necessary to draw the game. 
+ */
 @interface CSSEnvironmentView : CSSGLESView
 /**
  This asset is drawn before the others into a texture

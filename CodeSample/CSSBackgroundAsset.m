@@ -28,8 +28,6 @@
     float direction;
 }
 
-
-
 @end
 
 @implementation CSSBackgroundAsset
@@ -38,7 +36,7 @@
 {
 
     if (self = [super initWithContext: context
-                    ShaderProgram: [[CSSShaderProgram alloc] initWithName: @"WaveShader"
+                        ShaderProgram: [[CSSShaderProgram alloc] initWithName: @"WaveShader"
                                                                   context: context]]) {
                         
                         direction = .01;

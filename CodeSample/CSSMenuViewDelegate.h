@@ -10,6 +10,10 @@
 
 @class CSSMenuView;
 
+/**
+ Protocol for the menu view's delegate to adopt -- must implement the 
+ newGameButtonPressed: method.
+ */
 @protocol CSSMenuViewDelegate <NSObject>
 
 -(void) newGameButtonPressed: (CSSMenuView*) menuView;

@@ -12,6 +12,9 @@ typedef BOOL objectType;
 const BOOL attribute;
 const BOOL uniform;
 
+/**
+ A wrapper for a shader uniform or attribute. 
+ */
 @interface CSSShaderProgramObject : NSObject
 
 @property NSString* name;

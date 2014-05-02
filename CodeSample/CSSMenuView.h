@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "CSSMenuViewDelegate.h"
 
+/**
+ Slideout menu view. 
+ */
 @interface CSSMenuView : UIView
 
 @property NSObject<CSSMenuViewDelegate>* delegate;

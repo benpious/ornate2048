@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+/**
+ A view which draws an arrow in its bounds. 
+ */
 @interface CSSArrowView : UIView
 
 @end

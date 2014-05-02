@@ -7,7 +7,7 @@
 //
 
 #import "CSSArrowView.h"
-//#import <QuartzCore/QuartzCore.h>
+
 
 @interface CSSArrowView()
 
@@ -40,7 +40,8 @@
         
         self.backgroundColor = [UIColor clearColor];
         
-        NSTimer* gradientStopAnimationTimer = [NSTimer timerWithTimeInterval: .1 target: self
+        NSTimer* gradientStopAnimationTimer = [NSTimer timerWithTimeInterval: .1
+                                                                      target: self
                                                                     selector: @selector(moveGradient)
                                                                     userInfo: NULL
                                                                      repeats: YES];
@@ -102,7 +103,6 @@
     CGContextFillPath(ctx);
     CGContextRestoreGState(ctx);
     CGPathRelease(path);
-
 }
 
 

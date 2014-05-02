@@ -40,28 +40,26 @@
         self.view = environmentView;
         
         UISwipeGestureRecognizer* rightSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget: self
-                                                                                                     action: @selector(swiped:)];
+                                                                                                          action: @selector(swiped:)];
         
         [self.view addGestureRecognizer: rightSwipeGestureRecognizer];
         
         UISwipeGestureRecognizer* leftSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget: self
-                                                                                                          action: @selector(swiped:)];
+                                                                                                         action: @selector(swiped:)];
         
         leftSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
         
         [self.view addGestureRecognizer: leftSwipeGestureRecognizer];
         
         UISwipeGestureRecognizer* upSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget: self
-                                                                                                          action: @selector(swiped:)];
+                                                                                                       action: @selector(swiped:)];
         upSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
         [self.view addGestureRecognizer: upSwipeGestureRecognizer];
         
         UISwipeGestureRecognizer* downSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget: self
-                                                                                                          action: @selector(swiped:)];
+                                                                                                         action: @selector(swiped:)];
         downSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
         [self.view addGestureRecognizer: downSwipeGestureRecognizer];
-        
-        
     }
     
     return self;
@@ -70,8 +68,10 @@
 -(void) viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear: animated];
-    self.displayLink = [CADisplayLink displayLinkWithTarget: self selector: @selector(drawFrame:)];
-    [self.displayLink addToRunLoop: [NSRunLoop mainRunLoop] forMode: NSDefaultRunLoopMode];
+    self.displayLink = [CADisplayLink displayLinkWithTarget: self
+                                                   selector: @selector(drawFrame:)];
+    [self.displayLink addToRunLoop: [NSRunLoop mainRunLoop]
+                           forMode: NSDefaultRunLoopMode];
 }
 
 -(void) viewDidDisappear:(BOOL)animated
